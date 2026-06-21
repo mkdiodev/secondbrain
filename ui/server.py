@@ -92,6 +92,21 @@ def create_app() -> tuple[Flask, ChatRuntime]:
             return jsonify(result), 400
         return jsonify(result)
 
+    @app.post("/api/voice/transcribe")
+    def api_voice_transcribe():
+        audio = request.files.get("audio")
+        if audio is None:
+            return jsonify({"error": "Missing audio file"}), 400
+
+        language = request.form.get("language") or None
+        try:
+            from secondbrain.voice import transcribe_audio
+
+            return jsonify(transcribe_audio(audio, language=language))
+        except Exception:
+            logger.exception("Voice transcription failed")
+            return jsonify({"error": "Voice transcription failed"}), 500
+
     @app.post("/api/workspace")
     def api_workspace():
         payload = request.get_json(silent=True) or {}

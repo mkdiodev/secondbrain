@@ -100,7 +100,7 @@ python -m secondbrain.cli ui
 The web UI gives you a Codex-style chat surface with:
 
 - text chat with a local LLM from Ollama or LM Studio
-- voice dictation in browsers that support SpeechRecognition
+- local/offline voice dictation with faster-whisper
 - toggleable workspace file tree for files and folders
 - workspace commands like `/doc`, `/read`, `/write`, `/append`, `/ls`, and `/search`
   plus safe file moves/copies via `/copy` and `/move`
@@ -110,6 +110,35 @@ The web UI gives you a Codex-style chat surface with:
 
 Natural language tool use is intentionally read-only. File changes still require explicit slash
 commands such as `/write`, `/append`, `/copy`, or `/move`.
+
+### Local Voice Dictation
+
+SecondBrain Web UI supports local voice dictation using `faster-whisper`. Audio is recorded in
+the browser with `MediaRecorder`, sent to the local Flask server, transcribed locally, and inserted
+into the chat input so you can review or edit it before pressing Send.
+
+Environment:
+
+```bash
+SECONDBRAIN_STT_ENGINE=faster-whisper
+SECONDBRAIN_STT_MODEL=small
+SECONDBRAIN_STT_DEVICE=cpu
+SECONDBRAIN_STT_COMPUTE_TYPE=int8
+SECONDBRAIN_STT_LANGUAGE=id
+SECONDBRAIN_STT_MAX_SECONDS=60
+```
+
+Install/update dependencies with `pip install -r requirements.txt`.
+
+Recommended models:
+
+- CPU biasa: `small` + `int8`
+- CPU lemah: `base` + `int8`
+- GPU NVIDIA: `medium` or `large-v3`
+- Bahasa Indonesia: use multilingual models, not `.en` models
+
+The first transcription may download the selected model into the local model cache if it is not
+already available.
 
 ### SQL Server Query Skill
 

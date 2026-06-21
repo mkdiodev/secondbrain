@@ -607,6 +607,12 @@ h1 {
   background: rgba(255, 255, 255, 0.04);
 }
 
+.composer-icon.is-recording {
+  color: #ffc8c8;
+  background: rgba(238, 122, 122, 0.12);
+  box-shadow: 0 0 0 4px rgba(238, 122, 122, 0.08);
+}
+
 .send-button {
   display: inline-grid;
   place-items: center;

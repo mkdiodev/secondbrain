@@ -53,7 +53,13 @@
   ];
 
   let busy = false;
-  let recognition = null;
+  let voiceRecorder = null;
+  let voiceChunks = [];
+  let voiceStream = null;
+  let isRecording = false;
+  let isTranscribing = false;
+  let voiceStopTimer = null;
+  const voiceMaxMs = 60000;
   let fileTreeCollapsed = true;
   let dhConfig = null;
   let dhActiveTable = "COLLAR";
@@ -624,50 +630,135 @@
     } finally {
       busy = false;
       sendButton.disabled = false;
-      micButton.disabled = !recognition;
+      updateVoiceButtonState();
       inputEl.focus();
     }
   }
 
-  function setupRecognition() {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition) {
+  function setVoiceStatus(message) {
+    voiceStatus.textContent = message || "Idle";
+  }
+
+  function voiceSupported() {
+    return Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
+  }
+
+  function updateVoiceButtonState() {
+    micButton.disabled = busy || isTranscribing || !voiceSupported();
+    micButton.classList.toggle("is-recording", isRecording);
+    micButton.classList.toggle("active", isRecording);
+    micButton.title = isRecording ? "Stop voice recording" : "Use local voice dictation";
+  }
+
+  function cleanupVoiceRecording() {
+    if (voiceStream) {
+      voiceStream.getTracks().forEach((track) => track.stop());
+    }
+    voiceRecorder = null;
+    voiceStream = null;
+    voiceChunks = [];
+    if (voiceStopTimer) {
+      clearTimeout(voiceStopTimer);
+      voiceStopTimer = null;
+    }
+  }
+
+  function insertDictationText(text) {
+    const clean = String(text || "").trim();
+    if (!clean) return;
+    const current = inputEl.value.trim();
+    inputEl.value = current ? `${current} ${clean}` : clean;
+    inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+    inputEl.focus();
+  }
+
+  async function startVoiceDictation() {
+    if (busy || isTranscribing) return;
+    if (!voiceSupported()) {
       micButton.disabled = true;
-      voiceStatus.textContent = "Unavailable";
-      return null;
+      setVoiceStatus("Unavailable");
+      return;
     }
 
-    const rec = new SpeechRecognition();
-    rec.lang = "en-US";
-    rec.interimResults = false;
-    rec.continuous = false;
+    try {
+      voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      voiceChunks = [];
+      voiceRecorder = new MediaRecorder(voiceStream);
+      voiceRecorder.ondataavailable = (event) => {
+        if (event.data && event.data.size > 0) {
+          voiceChunks.push(event.data);
+        }
+      };
+      voiceRecorder.onstop = handleVoiceRecordingStop;
+      voiceRecorder.start();
+      isRecording = true;
+      setVoiceStatus("Recording...");
+      setConnection("Recording...", true);
+      updateVoiceButtonState();
+      voiceStopTimer = setTimeout(() => {
+        if (isRecording) stopVoiceDictation();
+      }, voiceMaxMs);
+    } catch (error) {
+      console.error(error);
+      setVoiceStatus("Error");
+      setConnection("Microphone error", false);
+      cleanupVoiceRecording();
+      updateVoiceButtonState();
+    }
+  }
 
-    rec.onstart = () => {
-      micButton.classList.add("active");
-      voiceStatus.textContent = "Listening...";
-      setConnection("Listening...", true);
-    };
-    rec.onend = () => {
-      micButton.classList.remove("active");
-      voiceStatus.textContent = "Idle";
-      if (!busy) setConnection("Ready", true);
-    };
-    rec.onerror = (event) => {
-      voiceStatus.textContent = `Voice input error: ${event.error}`;
-      setConnection("Voice error", false);
-    };
-    rec.onresult = (event) => {
-      const transcript = Array.from(event.results)
-        .map((result) => result[0].transcript)
-        .join(" ")
-        .trim();
-      if (transcript) {
-        inputEl.value = transcript;
-        autosize();
-        sendMessage();
+  function stopVoiceDictation() {
+    if (!voiceRecorder || voiceRecorder.state === "inactive") return;
+    if (voiceStopTimer) {
+      clearTimeout(voiceStopTimer);
+      voiceStopTimer = null;
+    }
+    isRecording = false;
+    setVoiceStatus("Transcribing locally...");
+    setConnection("Transcribing locally...", true);
+    updateVoiceButtonState();
+    voiceRecorder.stop();
+  }
+
+  async function handleVoiceRecordingStop() {
+    isTranscribing = true;
+    updateVoiceButtonState();
+
+    try {
+      const mimeType = voiceRecorder?.mimeType || "audio/webm";
+      const blob = new Blob(voiceChunks, { type: mimeType });
+      if (!blob.size) {
+        setVoiceStatus("No audio");
+        return;
       }
-    };
-    return rec;
+      const formData = new FormData();
+      formData.append("audio", blob, "dictation.webm");
+
+      const response = await fetch("/api/voice/transcribe", {
+        method: "POST",
+        body: formData,
+      });
+      const data = await response.json();
+      if (!response.ok || data.error) {
+        throw new Error(data.error || "Voice transcription failed");
+      }
+      if (data.text) {
+        insertDictationText(data.text);
+        setVoiceStatus("Done");
+        setConnection("Voice inserted", true);
+      } else {
+        setVoiceStatus("No speech detected");
+        setConnection("Ready", true);
+      }
+    } catch (error) {
+      console.error(error);
+      setVoiceStatus("Error");
+      setConnection("Voice error", false);
+    } finally {
+      isTranscribing = false;
+      cleanupVoiceRecording();
+      updateVoiceButtonState();
+    }
   }
 
   sendButton.addEventListener("click", sendMessage);
@@ -680,11 +771,10 @@
   });
 
   micButton.addEventListener("click", () => {
-    if (!recognition || busy) return;
-    try {
-      recognition.start();
-    } catch (error) {
-      voiceStatus.textContent = String(error.message || error);
+    if (isRecording) {
+      stopVoiceDictation();
+    } else {
+      startVoiceDictation();
     }
   });
 
@@ -895,7 +985,10 @@
     });
   });
 
-  recognition = setupRecognition();
+  if (!voiceSupported()) {
+    setVoiceStatus("Unavailable");
+  }
+  updateVoiceButtonState();
   renderState(state);
   loadHistory();
   autosize();

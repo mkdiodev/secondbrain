@@ -290,9 +290,24 @@ export LM_STUDIO_MODEL=your-loaded-model-id</code></pre>
               <section class="help-section" id="help-chat">
                 <h3>Natural language</h3>
                 <p>
-                  You can speak or type normal requests. The agent first decides whether a safe read-only tool is useful, then summarizes the
-                  result in chat. Voice input is only used to create user messages; the assistant does not replay responses with voice.
+                  You can speak or type normal requests. Voice dictation records audio in the browser, transcribes it on the local Flask server
+                  with faster-whisper, and inserts the text into the chat input so you can edit it before sending.
                 </p>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>Local voice dictation</h4>
+                    <p>Click the mic once to record, click again to stop. Status moves through <code>Recording</code>, <code>Transcribing locally</code>, and <code>Done</code>.</p>
+                    <p>No Web Speech API is used, and the assistant does not replay responses with voice.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>STT configuration</h4>
+                    <pre><code>SECONDBRAIN_STT_MODEL=small
+SECONDBRAIN_STT_DEVICE=cpu
+SECONDBRAIN_STT_COMPUTE_TYPE=int8
+SECONDBRAIN_STT_LANGUAGE=id
+SECONDBRAIN_STT_MAX_SECONDS=60</code></pre>
+                  </div>
+                </div>
                 <div class="example-list">
                   <code>list files in this workspace</code>
                   <code>baca file README.md</code>
