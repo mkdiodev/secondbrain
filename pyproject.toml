@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "secondbrain"
+version = "0.1.0"
+description = "Local markdown memory system with Ollama chat, workspace file tools, and a web UI."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "aiohttp>=3.8",
+  "Flask>=3.1",
+  "mssql-python>=1.0",
+  "openpyxl>=3.1",
+  "sqlglot>=26.0",
+]
+
+[project.optional-dependencies]
+bot = [
+  "python-dotenv>=1.0",
+  "python-telegram-bot[aiohttp]>=20.0",
+]
+dev = []
+
+[project.scripts]
+secondbrain = "secondbrain.cli:main"
+
+[tool.setuptools]
+packages = ["secondbrain", "secondbrain.skills", "ui"]
+
+[tool.setuptools.package-data]
+secondbrain = ["defaults/*.json"]
+ui = ["templates/*.html", "static/*.css", "static/*.js"]

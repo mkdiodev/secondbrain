@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title }}</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='app-icon.png') }}" />
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='app-icon.png') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script>
+      window.__SECOND_BRAIN__ = {{ initial_state | tojson }};
+    </script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">
+            <img src="{{ url_for('static', filename='app-icon.png') }}" alt="" aria-hidden="true" />
+          </div>
+          <div>
+            <div class="brand-title">SecondBrain</div>
+            <div class="brand-subtitle">Local AI workspace</div>
+          </div>
+        </div>
+
+        <section class="panel">
+          <div class="panel-row">
+            <span class="panel-label">Workspace</span>
+            <span class="surface-tag">Active</span>
+          </div>
+          <div class="workspace-switch">
+            <input
+              id="workspace-input"
+              type="text"
+              value="{{ initial_state.workspace }}"
+              spellcheck="false"
+              autocomplete="off"
+              autocapitalize="off"
+            />
+            <button class="icon-button compact" id="workspace-apply" type="button" title="Set workspace">Set</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-row">
+            <span class="panel-label">Model</span>
+            <span class="pill">{{ initial_state.llm_provider }}</span>
+          </div>
+          <div class="mono-line">{{ initial_state.model }}</div>
+          <div class="mono-line">{{ initial_state.base_url }}</div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-row">
+            <span class="panel-label">Voice</span>
+            <span class="surface-tag" id="voice-status">Idle</span>
+          </div>
+        </section>
+
+        <section class="panel grow">
+          <div class="panel-row">
+            <button class="tree-toggle" id="file-tree-toggle" type="button" aria-expanded="true" title="Toggle file tree">
+              <span class="tree-caret" aria-hidden="true">›</span>
+              <span class="panel-label">Files</span>
+            </button>
+            <button class="icon-button compact" id="refresh-state" type="button" title="Refresh files">Refresh</button>
+          </div>
+          <div class="file-tree" id="file-tree"></div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-actions">
+            <div class="view-tabs" role="tablist" aria-label="Main views">
+              <button class="view-tab active" id="chat-tab" type="button" role="tab" aria-selected="true" aria-controls="chat-view">Chat</button>
+              <button class="view-tab" id="dh-config-tab" type="button" role="tab" aria-selected="false" aria-controls="dh-config-panel">DH Config</button>
+              <button class="view-tab" id="help-tab" type="button" role="tab" aria-selected="false" aria-controls="help-panel">Help</button>
+            </div>
+            <div class="status-row">
+              <span class="status-dot" id="connection-dot"></span>
+              <span id="connection-text">Ready</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="chat-view" id="chat-view">
+          <section class="chat-pane">
+            <div class="messages" id="messages" aria-live="polite"></div>
+          </section>
+
+          <section class="composer">
+            <textarea id="message-input" rows="1" placeholder="Ask for follow-up changes"></textarea>
+            <div class="composer-toolbar">
+              <div class="composer-actions">
+                <button class="composer-icon" id="mic-button" type="button" title="Use voice input">Mic</button>
+                <button class="send-button" id="send-button" type="button" title="Send message">↑</button>
+              </div>
+            </div>
+          </section>
+
+          <div class="command-row">
+            <span class="command-label">Commands</span>
+            <button class="chip" data-fill="/workspace " type="button">/workspace</button>
+            <button class="chip" data-fill="/doc " type="button">/doc</button>
+            <button class="chip" data-fill="/read " type="button">/read</button>
+            <button class="chip" data-fill="/search " type="button">/search</button>
+            <button class="chip" data-fill="/dh " type="button">/dh</button>
+            <button class="chip" data-fill="/sql " type="button">/sql</button>
+            <button class="chip" data-fill="/copy " type="button">/copy</button>
+            <button class="chip" data-fill="/move " type="button">/move</button>
+            <button class="chip" id="clear-button" type="button">Clear</button>
+          </div>
+        </section>
+
+        <section class="dh-config-panel" id="dh-config-panel" hidden>
+          <div class="config-header">
+            <div>
+              <div class="eyebrow">Drillhole validation</div>
+              <h2>Config editor</h2>
+              <div class="config-path" id="dh-config-path">Embedded app userConfig.json</div>
+            </div>
+            <div class="config-actions">
+              <span class="config-status" id="dh-config-status">Not loaded</span>
+              <button class="icon-button compact" id="dh-config-reload" type="button">Reload</button>
+              <button class="icon-button compact primary" id="dh-config-save" type="button">Save</button>
+            </div>
+          </div>
+
+          <div class="config-layout">
+            <section class="config-card config-rules">
+              <div class="config-card-head">
+                <div>
+                  <h3>Validation rules</h3>
+                  <p>Configure columns, required fields, ranges, and lookup checks.</p>
+                </div>
+              </div>
+              <div class="table-tabs" id="dh-table-tabs"></div>
+              <div class="rule-table-wrap">
+                <table class="rule-table">
+                  <thead>
+                    <tr>
+                      <th>Column</th>
+                      <th>Header</th>
+                      <th>No nulls</th>
+                      <th>Type</th>
+                      <th>Validation</th>
+                      <th>Rule config</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="dh-rule-body"></tbody>
+                </table>
+              </div>
+              <div class="add-rule-row">
+                <input id="dh-new-column" type="text" placeholder="e.g. CU_PCT" spellcheck="false" />
+                <button class="icon-button compact" id="dh-add-column" type="button">Add column</button>
+              </div>
+            </section>
+
+            <section class="config-card config-libraries">
+              <div class="config-card-head">
+                <div>
+                  <h3>Library manager</h3>
+                  <p>Manage lookup libraries and valid code values.</p>
+                </div>
+              </div>
+              <div class="library-grid">
+                <div class="library-list-pane">
+                  <div class="add-library-row">
+                    <input id="dh-new-library" type="text" placeholder="New library name" />
+                    <button class="icon-button compact" id="dh-add-library" type="button">Add</button>
+                  </div>
+                  <div class="library-list" id="dh-library-list"></div>
+                </div>
+                <div class="library-detail">
+                  <div class="library-detail-head">
+                    <div>
+                      <h4 id="dh-library-title">Select a library</h4>
+                      <p id="dh-library-meta">No library selected.</p>
+                    </div>
+                    <button class="icon-button compact danger" id="dh-delete-library" type="button">Delete</button>
+                  </div>
+                  <div class="add-code-row">
+                    <input id="dh-new-code" type="text" placeholder="Code" />
+                    <input id="dh-new-desc" type="text" placeholder="Description" />
+                    <button class="icon-button compact" id="dh-add-code" type="button">Add code</button>
+                  </div>
+                  <div class="code-table-wrap">
+                    <table class="code-table">
+                      <thead>
+                        <tr>
+                          <th>Code</th>
+                          <th>Description</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody id="dh-code-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="help-panel" id="help-panel" hidden>
+          <div class="help-shell">
+            <aside class="help-nav" aria-label="Help sections">
+              <a href="#help-start">Start</a>
+              <a href="#help-workspace">Workspace</a>
+              <a href="#help-chat">Natural language</a>
+              <a href="#help-commands">Slash commands</a>
+              <a href="#help-dh">DH validation</a>
+              <a href="#help-sql">SQL Server</a>
+              <a href="#help-safety">Safety</a>
+              <a href="#help-troubleshooting">Troubleshooting</a>
+            </aside>
+
+            <div class="help-content">
+              <section class="help-hero" id="help-start">
+                <div class="eyebrow">Help</div>
+                <h2>SecondBrain assistant guide</h2>
+                <p>
+                  SecondBrain is a local AI assistant for chatting with your detected local LLM, reading and managing files inside an active workspace,
+                  validating drillhole data, editing DH validation config, and running guarded read-only SQL Server queries.
+                </p>
+                <div class="help-callouts">
+                  <div>
+                    <span class="help-kicker">Model</span>
+                    <strong>{{ initial_state.model }}</strong>
+                    <p>Responses come from the detected local provider: <code>{{ initial_state.llm_provider }}</code>.</p>
+                  </div>
+                  <div>
+                    <span class="help-kicker">Workspace</span>
+                    <strong>Workspace-bound files</strong>
+                    <p>File tools resolve paths inside the active workspace and reject path escapes.</p>
+                  </div>
+                  <div>
+                    <span class="help-kicker">Tools</span>
+                    <strong>Read-only by default</strong>
+                    <p>Natural-language tools can read, search, validate, or query; file writes require slash commands.</p>
+                  </div>
+                </div>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>Local LLM auto-detection</h4>
+                    <p>The app can use Ollama or LM Studio. By default it probes Ollama at <code>http://localhost:11434</code> and LM Studio at <code>http://localhost:1234/v1</code>, then picks an available model.</p>
+                    <pre><code>export SECONDBRAIN_LLM_PROVIDER=auto</code></pre>
+                  </div>
+                  <div class="help-card">
+                    <h4>Force a provider</h4>
+                    <pre><code># Ollama
+export SECONDBRAIN_LLM_PROVIDER=ollama
+export OLLAMA_BASE_URL=http://localhost:11434
+export OLLAMA_MODEL=gemma4:e2b
+
+# LM Studio
+export SECONDBRAIN_LLM_PROVIDER=lmstudio
+export LM_STUDIO_BASE_URL=http://localhost:1234/v1
+export LM_STUDIO_MODEL=your-loaded-model-id</code></pre>
+                  </div>
+                </div>
+              </section>
+
+              <section class="help-section" id="help-workspace">
+                <h3>Workspace and files</h3>
+                <p>
+                  The workspace is the root folder the assistant is allowed to inspect for file operations. The file tree in the sidebar shows
+                  folders and files from that active workspace, excluding dependency/cache folders such as virtual environments.
+                </p>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>Change workspace</h4>
+                    <p>Use the Workspace input in the sidebar, or send:</p>
+                    <pre><code>/workspace /absolute/path/to/project</code></pre>
+                    <p>After switching, chat history, file tree, memory search, and file tools use the new workspace.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>Path rules</h4>
+                    <p>Use workspace-relative paths for file commands:</p>
+                    <pre><code>/read notes/example.md
+/copy data/input.csv archive/input.csv</code></pre>
+                    <p>Paths such as <code>../outside.txt</code> are rejected for workspace safety.</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="help-section" id="help-chat">
+                <h3>Natural language</h3>
+                <p>
+                  You can speak or type normal requests. The agent first decides whether a safe read-only tool is useful, then summarizes the
+                  result in chat. Voice input is only used to create user messages; the assistant does not replay responses with voice.
+                </p>
+                <div class="example-list">
+                  <code>list files in this workspace</code>
+                  <code>baca file README.md</code>
+                  <code>search memory tentang drillhole config</code>
+                  <code>validate lithology.xlsx ini</code>
+                  <code>query database tampilkan 10 customer terbaru</code>
+                </div>
+                <p>
+                  Natural language is intentionally conservative. It can read/list/search/validate/query, but it will not write files,
+                  copy files, move files, or export reports unless you use an explicit slash command.
+                </p>
+              </section>
+
+              <section class="help-section" id="help-commands">
+                <h3>Slash commands</h3>
+                <p>Slash commands are explicit actions. Use them when you want deterministic behavior, file mutations, or report output.</p>
+                <div class="command-table-wrap">
+                  <table class="help-table">
+                    <thead>
+                      <tr>
+                        <th>Command</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>/workspace</code></td>
+                        <td>Switch the active workspace.</td>
+                        <td><code>/workspace /Users/me/project</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/doc</code></td>
+                        <td>Create a markdown document in the workspace documents folder.</td>
+                        <td><code>/doc ringkasan validasi drillhole</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/read</code></td>
+                        <td>Read a workspace file, optionally by line range.</td>
+                        <td><code>/read README.md 1 80</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/write</code></td>
+                        <td>Write content to a workspace file.</td>
+                        <td><code>/write notes/todo.md Review config</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/append</code></td>
+                        <td>Append content to a workspace file.</td>
+                        <td><code>/append notes/todo.md Add SQL profile</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/copy</code></td>
+                        <td>Copy a file inside the active workspace.</td>
+                        <td><code>/copy data/a.csv backup/a.csv</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/move</code></td>
+                        <td>Move a file inside the active workspace.</td>
+                        <td><code>/move draft.md notes/draft.md</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/ls</code></td>
+                        <td>List markdown files in a workspace path.</td>
+                        <td><code>/ls docs</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/search</code></td>
+                        <td>Search indexed memory content.</td>
+                        <td><code>/search userConfig</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/dh</code></td>
+                        <td>Run drillhole config and validation commands.</td>
+                        <td><code>/dh validate --collar collar.csv --lithology lithology.xlsx</code></td>
+                      </tr>
+                      <tr>
+                        <td><code>/sql</code></td>
+                        <td>Inspect SQL profiles, cache schema, explain, or run read-only SQL Server queries.</td>
+                        <td><code>/sql ask default show top customers</code></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section class="help-section" id="help-dh">
+                <h3>Drillhole validation skill</h3>
+                <p>
+                  The DH validation skill reads CSV/XLSX files from the active workspace and validates them against the embedded
+                  <code>secondbrain/defaults/userConfig.json</code>. The DH Config tab edits that embedded config directly, so rules are shared
+                  across workspace switches.
+                </p>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>Validate files</h4>
+                    <pre><code>/dh validate --collar collar.csv --survey survey.csv --lithology lithology.xlsx --assay assay.xlsx</code></pre>
+                    <p>Optional tables are allowed. Cross-table rules run only when the required tables are provided.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>Write a report</h4>
+                    <pre><code>/dh validate --collar collar.csv --lithology lithology.xlsx --out reports/dh-report.md</code></pre>
+                    <p>Report output requires the explicit <code>--out</code> slash command option.</p>
+                  </div>
+                </div>
+                <h4>Editing userConfig.json</h4>
+                <p>
+                  Open the <strong>DH Config</strong> tab. Choose a table type, edit column rules, mandatory flags, data types, numeric ranges,
+                  lookup libraries, and code descriptions. Changes stay local until you click <strong>Save</strong>. Reload discards unsaved edits.
+                </p>
+                <p>
+                  Important fields: <code>configs</code> stores per-table column rules, <code>libraries</code> stores valid lookup codes, and
+                  lookup validation must point to an existing library.
+                </p>
+              </section>
+
+              <section class="help-section" id="help-sql">
+                <h3>SQL Server skill</h3>
+                <p>
+                  SQL Server access is read-only and configured through environment variables. The app keeps credentials out of workspace files,
+                  UI state, LLM prompts, and chat responses.
+                </p>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>1. Create SQL Server login</h4>
+                    <p>Run this once as a database administrator. Use a dedicated assistant login, not your personal/admin login.</p>
+                    <pre><code>USE master;
+CREATE LOGIN secondbrain_app_user
+WITH PASSWORD = 'replace-with-a-strong-password',
+CHECK_POLICY = ON,
+CHECK_EXPIRATION = ON;
+
+USE YourDb;
+CREATE USER secondbrain_app_user FOR LOGIN secondbrain_app_user;</code></pre>
+                  </div>
+                  <div class="help-card">
+                    <h4>2. Create read-only role</h4>
+                    <p>Grant only the schema or views the assistant may inspect. Avoid <code>db_owner</code>, <code>db_datawriter</code>, and broad production use of <code>db_datareader</code>.</p>
+                    <pre><code>USE YourDb;
+CREATE ROLE secondbrain_reader;
+GRANT SELECT ON SCHEMA::reporting TO secondbrain_reader;
+GRANT VIEW DEFINITION ON SCHEMA::reporting TO secondbrain_reader;
+ALTER ROLE secondbrain_reader ADD MEMBER secondbrain_app_user;</code></pre>
+                    <p>Prefer curated reporting views over broad roles such as <code>db_datareader</code>.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>3. Configure app profile</h4>
+                    <p><code>SECOND_BRAIN_SQL_PROFILES</code> is non-secret metadata. It tells the app which env var contains the real connection string and which schemas/objects are allowed.</p>
+                    <pre><code>export SECOND_BRAIN_SQL_PROFILES='{
+  "default": {
+    "connection_env": "SECOND_BRAIN_SQL_DEFAULT_CONNECTION",
+    "schemas": ["reporting"],
+    "max_rows": 100,
+    "timeout_seconds": 20
+  },
+  "drillhole": {
+    "connection_env": "SECOND_BRAIN_SQL_DH_CONNECTION",
+    "objects": ["reporting.collar", "reporting.survey"],
+    "max_rows": 200,
+    "timeout_seconds": 20
+  }
+}'</code></pre>
+                  </div>
+                  <div class="help-card">
+                    <h4>4. Configure credentials</h4>
+                    <p>Put the actual SQL Server login/password only in the referenced connection env var. Restart the UI after changing env vars.</p>
+                    <pre><code>export SECOND_BRAIN_SQL_DEFAULT_CONNECTION='Server=tcp:localhost,1433;Database=YourDb;UID=secondbrain_app_user;PWD=your-password;Encrypt=yes;TrustServerCertificate=no'
+
+export SECOND_BRAIN_SQL_DH_CONNECTION='Server=tcp:localhost,1433;Database=YourDb;UID=secondbrain_app_user;PWD=your-password;Encrypt=yes;TrustServerCertificate=no'</code></pre>
+                  </div>
+                </div>
+                <h4>Profile fields</h4>
+                <div class="command-table-wrap">
+                  <table class="help-table">
+                    <thead>
+                      <tr>
+                        <th>Field</th>
+                        <th>Meaning</th>
+                        <th>Recommendation</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>connection_env</code></td>
+                        <td>Name of the env var containing the real connection string.</td>
+                        <td>Use one secret env var per profile.</td>
+                      </tr>
+                      <tr>
+                        <td><code>schemas</code></td>
+                        <td>Allowed SQL schemas for metadata cache and query validation.</td>
+                        <td>Use <code>["reporting"]</code> or another curated read-only schema.</td>
+                      </tr>
+                      <tr>
+                        <td><code>objects</code></td>
+                        <td>Optional stricter allowlist of exact <code>schema.table</code> or view names.</td>
+                        <td>Use this for sensitive databases.</td>
+                      </tr>
+                      <tr>
+                        <td><code>max_rows</code></td>
+                        <td>Maximum result rows the app will request.</td>
+                        <td>Keep 100-200 for chat; app caps high values.</td>
+                      </tr>
+                      <tr>
+                        <td><code>timeout_seconds</code></td>
+                        <td>Query timeout.</td>
+                        <td>Use 10-30 seconds for interactive chat.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <h4>SQL commands</h4>
+                <div class="example-list">
+                  <code>/sql profiles</code>
+                  <code>/sql schema default --refresh</code>
+                  <code>/sql explain default show top 10 customers</code>
+                  <code>/sql ask default show top 10 customers</code>
+                  <code>/sql run default SELECT TOP (10) id, name FROM reporting.customers</code>
+                </div>
+                <h4>Natural-language query examples</h4>
+                <div class="example-list">
+                  <code>query database tampilkan customer terbaru</code>
+                  <code>lihat 20 collar terakhir dari SQL Server</code>
+                  <code>berapa jumlah record survey per bulan?</code>
+                  <code>buatkan query SQL untuk melihat assay tertinggi</code>
+                </div>
+                <p>
+                  The SQL guard rejects destructive keywords, multiple statements, unknown tables/columns, and queries outside the cached schema.
+                  Generated queries are limited by <code>max_rows</code> and run with a timeout.
+                </p>
+                <p>
+                  First-time flow: export env vars, restart the UI, run <code>/sql profiles</code>, run <code>/sql schema default --refresh</code>,
+                  then use <code>/sql ask</code>, <code>/sql run</code>, or normal chat.
+                </p>
+              </section>
+
+              <section class="help-section" id="help-safety">
+                <h3>Safety model</h3>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>Natural language tools</h4>
+                    <p>Allowed: list files, read files, search memory, validate DH files, query SQL Server read-only.</p>
+                    <p>Blocked: file writes, append, copy, move, deletion, report writing, and destructive SQL.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>Explicit commands</h4>
+                    <p>Use slash commands when an operation changes files or writes reports. Paths are still checked by workspace safety rules.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>Credential handling</h4>
+                    <p>Use env vars for secrets. Do not put SQL passwords in workspace files, chat messages, notes, or userConfig.json.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>Schema grounding</h4>
+                    <p>For SQL, refresh schema cache before asking questions. The agent should only query tables and columns from that cache.</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="help-section" id="help-troubleshooting">
+                <h3>Troubleshooting</h3>
+                <div class="help-grid">
+                  <div class="help-card">
+                    <h4>Local LLM connection</h4>
+                    <p>For Ollama, make sure Ollama is running and a model is available:</p>
+                    <pre><code>ollama serve
+ollama pull gemma4:e2b</code></pre>
+                    <p>For LM Studio, open the Local Server tab, load a model, and start the server on port 1234.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>SQL profile missing</h4>
+                    <p>Run <code>/sql profiles</code>. If the profile is missing, export <code>SECOND_BRAIN_SQL_PROFILES</code> before starting the UI.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>SQL table not found</h4>
+                    <p>Run <code>/sql schema default --refresh</code> and confirm the table appears in the cached schema whitelist.</p>
+                  </div>
+                  <div class="help-card">
+                    <h4>DH validation mismatch</h4>
+                    <p>Check column names in the DH Config tab. Headers are normalized, but required columns still need matching rule names.</p>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

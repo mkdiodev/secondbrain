@@ -1,0 +1,11 @@
+# Core + web UI
+aiohttp>=3.8
+Flask>=3.1
+mssql-python>=1.0
+openpyxl>=3.1
+sqlglot>=26.0
+
+# --- Telegram Bot extras ---
+# Uncomment or install these to run the bot:
+# python-telegram-bot[aiohttp]>=20.0
+# python-dotenv>=1.0

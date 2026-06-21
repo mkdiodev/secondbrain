@@ -1,0 +1,7280 @@
+{
+  "timestamp": "2026-06-20T23:34:09.235Z",
+  "version": "1.0",
+  "libraries": [
+    {
+      "id": "alt_group_bb2q",
+      "name": "ALT_GROUP",
+      "items": [
+        {
+          "code": "AA",
+          "description": "Advanced Argilic (Qtz-Alu\u00b1Phy)"
+        },
+        {
+          "code": "ARG",
+          "description": "Argilic (Kao-Ill\u00b1Smc)"
+        },
+        {
+          "code": "CSKN",
+          "description": "Chlorite Skarn (Chl-Epd-Gar-Cpx)"
+        },
+        {
+          "code": "FELS",
+          "description": "Feldspar (Alb-Mic)"
+        },
+        {
+          "code": "FRESH",
+          "description": "Fresh"
+        },
+        {
+          "code": "GSKN",
+          "description": "Garnet Skarn (Gar-Chl-Epd)"
+        },
+        {
+          "code": "LOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "MGS",
+          "description": "Muscovite Greisen (Mus-Qtz-Tou-Flo)"
+        },
+        {
+          "code": "MSKN",
+          "description": "Magnetite Skarn (Mag-Cpx-Gar)"
+        },
+        {
+          "code": "PHY",
+          "description": "Phyllic (Qtz-Ser)"
+        },
+        {
+          "code": "PRO",
+          "description": "Propylitic (Qtz-Chl-Epd\u00b1Smc\u00b1Cal)"
+        },
+        {
+          "code": "PSKN",
+          "description": "Pyroxene Skarn (Cpx-Epd\u00b1Chl)"
+        },
+        {
+          "code": "QGS",
+          "description": "Quartz Greisen (Qtz-Mus\u00b1Chl-Tou-Flo)"
+        },
+        {
+          "code": "SIL",
+          "description": "Silicification (Sil/Qtz \u00b1 Ser\u00b1 Kao-Ill)"
+        },
+        {
+          "code": "TGS",
+          "description": "Tourmaline Greisen (Tou-Mus-Top)"
+        },
+        {
+          "code": "UA",
+          "description": "Unaltered Rock"
+        }
+      ]
+    },
+    {
+      "id": "alt_int_m4jx",
+      "name": "ALT_INT",
+      "items": [
+        {
+          "code": "1",
+          "description": "Alteration minerals are only a minors of the rock mass"
+        },
+        {
+          "code": "2",
+          "description": "Alteration is pervasive,some remnants of fresh minerals may be seen"
+        },
+        {
+          "code": "3",
+          "description": "Original texture is visble but all minerals are altered"
+        },
+        {
+          "code": "4",
+          "description": "Texture rock is completely destroyed"
+        }
+      ]
+    },
+    {
+      "id": "alt_min_y3r7",
+      "name": "ALT_MIN",
+      "items": [
+        {
+          "code": "ALB",
+          "description": "Albite"
+        },
+        {
+          "code": "ALU",
+          "description": "Alunite"
+        },
+        {
+          "code": "BT",
+          "description": "Sec. Biotite"
+        },
+        {
+          "code": "CAL",
+          "description": "Calcite"
+        },
+        {
+          "code": "CHL",
+          "description": "Chlorite"
+        },
+        {
+          "code": "COR",
+          "description": "Cordierite"
+        },
+        {
+          "code": "CPX",
+          "description": "Clinopyroxene"
+        },
+        {
+          "code": "DIC",
+          "description": "Dickite"
+        },
+        {
+          "code": "DIO",
+          "description": "Diopside"
+        },
+        {
+          "code": "EPD",
+          "description": "Epidote"
+        },
+        {
+          "code": "FLO",
+          "description": "Fluorite"
+        },
+        {
+          "code": "GAR",
+          "description": "Garnet"
+        },
+        {
+          "code": "HED",
+          "description": "Hedenbergite"
+        },
+        {
+          "code": "ILL",
+          "description": "Illite"
+        },
+        {
+          "code": "KAO",
+          "description": "Kaolinite"
+        },
+        {
+          "code": "KF",
+          "description": "K-Feldspar"
+        },
+        {
+          "code": "LEP",
+          "description": "Lepidolite"
+        },
+        {
+          "code": "MAG",
+          "description": "Magnetite"
+        },
+        {
+          "code": "MIC",
+          "description": "Microcline"
+        },
+        {
+          "code": "MUS",
+          "description": "Muscovite"
+        },
+        {
+          "code": "PHY",
+          "description": "Phyropyllite"
+        },
+        {
+          "code": "PLO",
+          "description": "Plogopite"
+        },
+        {
+          "code": "QTZ",
+          "description": "Quartz"
+        },
+        {
+          "code": "SER",
+          "description": "Sericite"
+        },
+        {
+          "code": "SIL",
+          "description": "Silica"
+        },
+        {
+          "code": "SIM",
+          "description": "Silimanite"
+        },
+        {
+          "code": "SMC",
+          "description": "Smectite"
+        },
+        {
+          "code": "TOP",
+          "description": "Topaz"
+        },
+        {
+          "code": "TOU",
+          "description": "Tourmaline"
+        },
+        {
+          "code": "WST",
+          "description": "Wollastonite"
+        }
+      ]
+    },
+    {
+      "id": "analysis_method_nq3d",
+      "name": "ANALYSIS METHOD",
+      "items": [
+        {
+          "code": "ASD",
+          "description": "Analysis Spectral Device"
+        },
+        {
+          "code": "GCA",
+          "description": "Grain Counting Analysis"
+        },
+        {
+          "code": "MIT",
+          "description": "MIT"
+        },
+        {
+          "code": "PS",
+          "description": "Polished Section"
+        },
+        {
+          "code": "TAKSASI",
+          "description": "Analisa Taksasi"
+        },
+        {
+          "code": "TS",
+          "description": "Thin Sections"
+        },
+        {
+          "code": "XRD",
+          "description": "X-Ray Diffraction"
+        },
+        {
+          "code": "XRF",
+          "description": "X-Ray Fluorescence"
+        }
+      ]
+    },
+    {
+      "id": "check_qc_type_saoi",
+      "name": "CHECK_QC_TYPE",
+      "items": [
+        {
+          "code": "CHECK",
+          "description": "Duplicate"
+        }
+      ]
+    },
+    {
+      "id": "colour_68c3",
+      "name": "COLOUR",
+      "items": [
+        {
+          "code": "Bk",
+          "description": "Black"
+        },
+        {
+          "code": "BkBn",
+          "description": "Blackish Brown"
+        },
+        {
+          "code": "BkBn-Bn",
+          "description": "Blackish Brown-Brown"
+        },
+        {
+          "code": "BkBn-RdBn",
+          "description": "Blackish Brown-Reddish Brown"
+        },
+        {
+          "code": "BkBn-RdBn-Bn",
+          "description": "Blackish Brown-Redish Brown-Brown"
+        },
+        {
+          "code": "BkBn-RdBn-YwBn",
+          "description": "Blackish Brown-Reddish Brown-Yellowish Brown"
+        },
+        {
+          "code": "BkBn-YwBn",
+          "description": "Blackish Brown-Yellowish Brown"
+        },
+        {
+          "code": "BkBn-YwBn-Bn",
+          "description": "Blackish Brown-Yellowish Brown-Brown"
+        },
+        {
+          "code": "BkBn-YwBn-RdBn",
+          "description": "Blackish Brown-Yellowish Brown-Redish Brown"
+        },
+        {
+          "code": "BkGn",
+          "description": "Blackish Green"
+        },
+        {
+          "code": "BkGy",
+          "description": "Blackish Grey"
+        },
+        {
+          "code": "BkRd",
+          "description": "Blackish Red"
+        },
+        {
+          "code": "BkWh",
+          "description": "Blackish White"
+        },
+        {
+          "code": "BkYw",
+          "description": "Blackish Yellow"
+        },
+        {
+          "code": "Bn",
+          "description": "Brown"
+        },
+        {
+          "code": "BnBk",
+          "description": "Brownish Black"
+        },
+        {
+          "code": "Bn-BkBn",
+          "description": "Brown-Blackish Brown"
+        },
+        {
+          "code": "Bn-BkBn-RdBn",
+          "description": "Brown-Blackish Brown-Redish Brown"
+        },
+        {
+          "code": "Bn-BkBn-YwBn",
+          "description": "Brown-Blackish Brown-Yellowish Brown"
+        },
+        {
+          "code": "BnGn",
+          "description": "brownish Green"
+        },
+        {
+          "code": "BnGy",
+          "description": "Brownish Grey"
+        },
+        {
+          "code": "BnOr",
+          "description": "Brownish Orange"
+        },
+        {
+          "code": "BnPp",
+          "description": "Brownish Purple"
+        },
+        {
+          "code": "BnRd",
+          "description": "Brownish Red"
+        },
+        {
+          "code": "Bn-RdBn",
+          "description": "Brown-Redish Brown"
+        },
+        {
+          "code": "Bn-RdBn-BkBn",
+          "description": "Brown-Redish Brown-Blackish Brown"
+        },
+        {
+          "code": "Bn-RdBn-YwBn",
+          "description": "Brown-Redish Brown-Yellowish Brown-Blackish Brown"
+        },
+        {
+          "code": "BnWh",
+          "description": "Brownish White"
+        },
+        {
+          "code": "BnYw",
+          "description": "Brownish Yellow"
+        },
+        {
+          "code": "Bn-YwBn",
+          "description": "Brown-Yellowish Brown"
+        },
+        {
+          "code": "Bn-YwBn-BkBn",
+          "description": "Brown-Yellowish Brown-Blackish Brown"
+        },
+        {
+          "code": "BR",
+          "description": "Biru"
+        },
+        {
+          "code": "CO",
+          "description": "Coklat"
+        },
+        {
+          "code": "COHI",
+          "description": "Coklat Hitam"
+        },
+        {
+          "code": "COHJ",
+          "description": "Coklat Hijau"
+        },
+        {
+          "code": "COKE",
+          "description": "Coklat Abu-Abu"
+        },
+        {
+          "code": "COKU",
+          "description": "Coklat Kuning"
+        },
+        {
+          "code": "COME",
+          "description": "Coklat Merah"
+        },
+        {
+          "code": "COPU",
+          "description": "Coklat Putih"
+        },
+        {
+          "code": "DkBk",
+          "description": "Dark Black"
+        },
+        {
+          "code": "DkBn",
+          "description": "Dark Brown"
+        },
+        {
+          "code": "DkGn",
+          "description": "Dark Green"
+        },
+        {
+          "code": "DkGy",
+          "description": "Dark Grey"
+        },
+        {
+          "code": "DkRd",
+          "description": "Dark Red"
+        },
+        {
+          "code": "DkWh",
+          "description": "Dark White"
+        },
+        {
+          "code": "DkYw",
+          "description": "Dark Yellow"
+        },
+        {
+          "code": "Gn",
+          "description": "Green"
+        },
+        {
+          "code": "GnBk",
+          "description": "Greenish Black"
+        },
+        {
+          "code": "GnBn",
+          "description": "Greenish Brown"
+        },
+        {
+          "code": "GnGy",
+          "description": "Greenish Grey"
+        },
+        {
+          "code": "GnRd",
+          "description": "Greenish Red"
+        },
+        {
+          "code": "GnWh",
+          "description": "Greenish White"
+        },
+        {
+          "code": "GnYw",
+          "description": "Greenish Yellow"
+        },
+        {
+          "code": "Gy",
+          "description": "Grey"
+        },
+        {
+          "code": "GyBk",
+          "description": "Greyish Black"
+        },
+        {
+          "code": "GyBn",
+          "description": "Greyish Brown"
+        },
+        {
+          "code": "GyGn",
+          "description": "Greyish Green"
+        },
+        {
+          "code": "GyRd",
+          "description": "Greyish Red"
+        },
+        {
+          "code": "GyWh",
+          "description": "Greyish White"
+        },
+        {
+          "code": "GyYw",
+          "description": "Greyish Yellow"
+        },
+        {
+          "code": "HI",
+          "description": "Hitam"
+        },
+        {
+          "code": "HICO",
+          "description": "Hitam Coklat"
+        },
+        {
+          "code": "HIKE",
+          "description": "Hitam Abu-abu"
+        },
+        {
+          "code": "HIKU",
+          "description": "Hitam Kuning"
+        },
+        {
+          "code": "HIME",
+          "description": "Hitam Merah"
+        },
+        {
+          "code": "HIPU",
+          "description": "Hitam Putih"
+        },
+        {
+          "code": "HJ",
+          "description": "Hijau"
+        },
+        {
+          "code": "HJCO",
+          "description": "Hijau Coklat"
+        },
+        {
+          "code": "HJKE",
+          "description": "Hijau Abu-Abu"
+        },
+        {
+          "code": "HJKU",
+          "description": "Hijau Kuning"
+        },
+        {
+          "code": "HJME",
+          "description": "Hijau Merah"
+        },
+        {
+          "code": "HJPU",
+          "description": "Hijau Putih"
+        },
+        {
+          "code": "KE",
+          "description": "Abu-Abu"
+        },
+        {
+          "code": "KEBR",
+          "description": "Abu-Abu Biru"
+        },
+        {
+          "code": "KECO",
+          "description": "Abu-Abu Coklat"
+        },
+        {
+          "code": "KEHI",
+          "description": "Abu-Abu Hitam"
+        },
+        {
+          "code": "KEHJ",
+          "description": "Abu-Abu Hijau"
+        },
+        {
+          "code": "KEKU",
+          "description": "Abu-Abu Kuning"
+        },
+        {
+          "code": "KEME",
+          "description": "Abu-Abu Merah"
+        },
+        {
+          "code": "KEMU",
+          "description": "Abu-Abu Muda"
+        },
+        {
+          "code": "KEPU",
+          "description": "Abu-Abu Putih"
+        },
+        {
+          "code": "KETU",
+          "description": "Abu-Abu Tua"
+        },
+        {
+          "code": "KU",
+          "description": "Kuning"
+        },
+        {
+          "code": "KUCO",
+          "description": "Kuning Coklat"
+        },
+        {
+          "code": "KUCOPU",
+          "description": "Kuning Coklat Putih"
+        },
+        {
+          "code": "KUHI",
+          "description": "Kuning Hitam"
+        },
+        {
+          "code": "KUKE",
+          "description": "Kuning Abu-Abu"
+        },
+        {
+          "code": "KUME",
+          "description": "Kuning Merah"
+        },
+        {
+          "code": "KUPU",
+          "description": "Kuning Putih"
+        },
+        {
+          "code": "LtBk",
+          "description": "Light Black"
+        },
+        {
+          "code": "LtBn",
+          "description": "Light Brown"
+        },
+        {
+          "code": "LtGn",
+          "description": "Light Green"
+        },
+        {
+          "code": "LtGy",
+          "description": "Light Grey"
+        },
+        {
+          "code": "LtPp",
+          "description": "Light Purple"
+        },
+        {
+          "code": "LtRd",
+          "description": "Light Red"
+        },
+        {
+          "code": "LtWh",
+          "description": "Light White"
+        },
+        {
+          "code": "LtYw",
+          "description": "Light Yellow"
+        },
+        {
+          "code": "ME",
+          "description": "Merah"
+        },
+        {
+          "code": "MECO",
+          "description": "Merah Coklat"
+        },
+        {
+          "code": "MEHI",
+          "description": "Merah Hitam"
+        },
+        {
+          "code": "MEHJ",
+          "description": "Merah Hijau"
+        },
+        {
+          "code": "MEKE",
+          "description": "Merah Abu-Abu"
+        },
+        {
+          "code": "MEKU",
+          "description": "Merah Kuning"
+        },
+        {
+          "code": "MEPU",
+          "description": "Merah Putih"
+        },
+        {
+          "code": "ND",
+          "description": "No data available"
+        },
+        {
+          "code": "PpBn",
+          "description": "Purplish Brown"
+        },
+        {
+          "code": "PpRd",
+          "description": "Purplish Red"
+        },
+        {
+          "code": "PU",
+          "description": "Putih"
+        },
+        {
+          "code": "PUCO",
+          "description": "Putih Coklat"
+        },
+        {
+          "code": "PUHI",
+          "description": "Putih Hitam"
+        },
+        {
+          "code": "PUHJ",
+          "description": "Putih Hijau"
+        },
+        {
+          "code": "PUKE",
+          "description": "Putih Abu - abu"
+        },
+        {
+          "code": "PUKU",
+          "description": "Putih Kuning"
+        },
+        {
+          "code": "PUME",
+          "description": "Putih Merah"
+        },
+        {
+          "code": "Rd",
+          "description": "Red"
+        },
+        {
+          "code": "RdBk",
+          "description": "Reddish Black"
+        },
+        {
+          "code": "RdBn",
+          "description": "Reddish Brown"
+        },
+        {
+          "code": "RdBn-BkBn",
+          "description": "Redish Brown-Blackish Brown"
+        },
+        {
+          "code": "RdBn-Bn",
+          "description": "Redish Brown-Brown"
+        },
+        {
+          "code": "RdBn-YwBn",
+          "description": "Reddish Brown-Yellowish Brown"
+        },
+        {
+          "code": "RdBn-YwBn-BkBn",
+          "description": "Redish Brown-Yellowish Brown-Blackish Brown"
+        },
+        {
+          "code": "RdBn-YwBn-Bn",
+          "description": "Redish Brown-Yellowish Brown-Brown"
+        },
+        {
+          "code": "RdGn",
+          "description": "Reddish Green"
+        },
+        {
+          "code": "RdGy",
+          "description": "Reddish Grey"
+        },
+        {
+          "code": "RdOr",
+          "description": "Reddish Orange"
+        },
+        {
+          "code": "RdPp",
+          "description": "Reddish Purple"
+        },
+        {
+          "code": "RdWh",
+          "description": "Reddish White"
+        },
+        {
+          "code": "RdYw",
+          "description": "Reddish Yellow"
+        },
+        {
+          "code": "UG",
+          "description": "Ungu"
+        },
+        {
+          "code": "Wh",
+          "description": "White"
+        },
+        {
+          "code": "WhBk",
+          "description": "White Black"
+        },
+        {
+          "code": "WhBn",
+          "description": "White Brown"
+        },
+        {
+          "code": "WhGn",
+          "description": "White Green"
+        },
+        {
+          "code": "WhGy",
+          "description": "White Grey"
+        },
+        {
+          "code": "WhRd",
+          "description": "White Red"
+        },
+        {
+          "code": "WhYw",
+          "description": "White Yellow"
+        },
+        {
+          "code": "Yw",
+          "description": "Yellow"
+        },
+        {
+          "code": "YwBk",
+          "description": "Yellowish Black"
+        },
+        {
+          "code": "YwBn",
+          "description": "Yellowish Brown"
+        },
+        {
+          "code": "YwBn-BkBn",
+          "description": "Yellowish Brown-Blackish Brown"
+        },
+        {
+          "code": "YwBn-BkBn-RdBn",
+          "description": "Yellowish Brown-Blackish Brown-Redish Brown"
+        },
+        {
+          "code": "YwBn-Bn",
+          "description": "Yellowish Brown-Brown"
+        },
+        {
+          "code": "YwBn-RdBn",
+          "description": "Yellowish Brown-Redish Brown"
+        },
+        {
+          "code": "YwBn-RdBn-BkBn",
+          "description": "Yellowish Brown-Redish Brown-Blackish Brown"
+        },
+        {
+          "code": "YwBn-RdBn-Bn",
+          "description": "Yellowish Brown-Redish Brown-Brown"
+        },
+        {
+          "code": "YwGn",
+          "description": "Yellowish Green"
+        },
+        {
+          "code": "YwGy",
+          "description": "Yellowish Grey"
+        },
+        {
+          "code": "YwOr",
+          "description": "Yellowish Orange"
+        },
+        {
+          "code": "YwRd",
+          "description": "Yellowish Red"
+        },
+        {
+          "code": "YwWh",
+          "description": "Yellowish White"
+        }
+      ]
+    },
+    {
+      "id": "coordsys_l2t1",
+      "name": "COORDSYS",
+      "items": [
+        {
+          "code": "UTM",
+          "description": "UTM zone 48S"
+        },
+        {
+          "code": "WGS84_48S",
+          "description": "EPSG:32748 - WGS 84 / UTM zone 48S"
+        }
+      ]
+    },
+    {
+      "id": "core_orientation_d3n8",
+      "name": "CORE_ORIENTATION",
+      "items": [
+        {
+          "code": "N",
+          "description": "No"
+        },
+        {
+          "code": "Y",
+          "description": "Yes"
+        }
+      ]
+    },
+    {
+      "id": "core_size_mmbn",
+      "name": "CORE_SIZE",
+      "items": [
+        {
+          "code": "BQ",
+          "description": "Diameter Core 36.4 mm"
+        },
+        {
+          "code": "HQ",
+          "description": "Diameter Core 63.5 mm"
+        },
+        {
+          "code": "NQ",
+          "description": "Diameter Core 47.6 mm"
+        },
+        {
+          "code": "PQ",
+          "description": "Diameter Core 85 mm"
+        },
+        {
+          "code": "QQ",
+          "description": "Quarter Core"
+        }
+      ]
+    },
+    {
+      "id": "crew_9oec",
+      "name": "CREW",
+      "items": [
+        {
+          "code": "BOXER-RIG1",
+          "description": "Rig 1 - Boxer Drill Rig"
+        },
+        {
+          "code": "BOXER-RIG2",
+          "description": "Rig 2 - Boxer Drill Rig"
+        },
+        {
+          "code": "BOXER-RIG3",
+          "description": "Rig 3 - Boxer Drill Rig"
+        },
+        {
+          "code": "CS1000-RIG1",
+          "description": "Rig 1 - Cristensen CS1000 Drill Rig"
+        },
+        {
+          "code": "CS1000-RIG2",
+          "description": "Rig 2 - Cristensen CS1000 Drill Rig"
+        },
+        {
+          "code": "CS1000-RIG3",
+          "description": "Rig 3 - Cristensen Drill Rig"
+        },
+        {
+          "code": "CS1000-RIG4",
+          "description": "Rig 4 - Cristensen CS1000 Drill Rig"
+        },
+        {
+          "code": "CS1000-RIG5",
+          "description": "Rig 5 - Cristensen CS1000 Drill Rig"
+        },
+        {
+          "code": "DFM-RIG1",
+          "description": "Rig 1 - DFM (Jacro)"
+        },
+        {
+          "code": "DFM-RIG2",
+          "description": "Rig 2 - DFM (Jacro)"
+        },
+        {
+          "code": "DFM-RIG3",
+          "description": "Rig 3 - DFM (Jacro)"
+        },
+        {
+          "code": "DFM-RIG4",
+          "description": "Rig 4 - DFM (Jacro)"
+        },
+        {
+          "code": "DFM-RIG5",
+          "description": "Rig 5 - DFM (Jacro)"
+        },
+        {
+          "code": "JC500-RIG1",
+          "description": "Rig 1 - Jacro 500"
+        },
+        {
+          "code": "JC500-RIG2",
+          "description": "Rig 2 - Jacro 500"
+        },
+        {
+          "code": "JC500-RIG3",
+          "description": "Rig 3 - Jacro 500"
+        },
+        {
+          "code": "JC500-RIG4",
+          "description": "Rig 4 - Jacro 500"
+        },
+        {
+          "code": "JC500-RIG7",
+          "description": "Rig 7 - Jacro 500"
+        },
+        {
+          "code": "LF70-RIG6",
+          "description": "Rig 6 - Longyear LF 70"
+        },
+        {
+          "code": "LF70-RIG7",
+          "description": "Rig 7 - Longyear LF 70"
+        },
+        {
+          "code": "LY38-RIG1",
+          "description": "Rig 1 - Longyear 38"
+        },
+        {
+          "code": "LY38-RIG2",
+          "description": "Rig 2 - Longyear 38"
+        },
+        {
+          "code": "LY38-RIG3",
+          "description": "Rig 3 - Longyear 38"
+        },
+        {
+          "code": "LY38-RIG4",
+          "description": "Rig 4 - Longyear 38"
+        },
+        {
+          "code": "LY38-RIG5",
+          "description": "Rig 5 - Longyear 38"
+        },
+        {
+          "code": "LY44-RIG1",
+          "description": "Rig 1 - Longyear 44"
+        },
+        {
+          "code": "LY44-RIG3",
+          "description": "Rig 3 - Longyear 44"
+        },
+        {
+          "code": "LY44-RIG4",
+          "description": "Rig 4 - Longyear 44"
+        },
+        {
+          "code": "LY44-RIG5",
+          "description": "Rig 5 - Longyear 44"
+        },
+        {
+          "code": "LY44-RIG6",
+          "description": "Rig 6 - Longyear 44"
+        },
+        {
+          "code": "TM_JC500-RIG1",
+          "description": "Rig 1 - Tractor Mounted -  Jacro 500"
+        },
+        {
+          "code": "YBM-RIG3",
+          "description": "Rig 3 - YBM"
+        },
+        {
+          "code": "YBM-RIG6",
+          "description": "Rig 6 - YBM"
+        },
+        {
+          "code": "Zeker",
+          "description": "Zeker"
+        }
+      ]
+    },
+    {
+      "id": "deposit_type_fsf3",
+      "name": "DEPOSIT_TYPE",
+      "items": [
+        {
+          "code": "ALLUVIAL_OFFSHR",
+          "description": "ALLUVIAL OFFSHORE"
+        },
+        {
+          "code": "ALLUVIAL_ONSHR",
+          "description": "ALLUVIAL ONSHORE"
+        },
+        {
+          "code": "PRIMARY",
+          "description": "PRIMARY"
+        }
+      ]
+    },
+    {
+      "id": "field_prep_lchr",
+      "name": "FIELD_PREP",
+      "items": [
+        {
+          "code": "CORELOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "FPREP01",
+          "description": "FPREP01: Mixed and split with shovel"
+        },
+        {
+          "code": "FPREP02",
+          "description": "FPREP02: Grab Sample"
+        },
+        {
+          "code": "FPREP03",
+          "description": "FPREP03: Scoop/Spear Sample"
+        },
+        {
+          "code": "FPREP04",
+          "description": "FPREP04: 3 Tier Riffle Splitter"
+        },
+        {
+          "code": "FPREP05",
+          "description": "FPREP05: 2 Tier Riffle Splitter"
+        },
+        {
+          "code": "FPREP06",
+          "description": "FPREP06: 1/4 Core"
+        },
+        {
+          "code": "FPREP07",
+          "description": "FPREP07: 1/2 Core"
+        },
+        {
+          "code": "FPREP08",
+          "description": "FPREP08: Whole Core"
+        },
+        {
+          "code": "FPREP09",
+          "description": "FPREP09: Core Fillet"
+        },
+        {
+          "code": "ND",
+          "description": "No Data"
+        }
+      ]
+    },
+    {
+      "id": "field_split_method_hdng",
+      "name": "FIELD_SPLIT_METHOD",
+      "items": [
+        {
+          "code": "CS",
+          "description": "Core Saw"
+        },
+        {
+          "code": "MP",
+          "description": "Core Splitter"
+        },
+        {
+          "code": "SC",
+          "description": "Machete"
+        }
+      ]
+    },
+    {
+      "id": "gr_qr_shape_7j2g",
+      "name": "GR_QR_SHAPE",
+      "items": [
+        {
+          "code": "AG",
+          "description": "Angular"
+        },
+        {
+          "code": "AG,RO",
+          "description": "Angular,Rounded"
+        },
+        {
+          "code": "AG,SA",
+          "description": "Angular,Sub Angular"
+        },
+        {
+          "code": "AG,SA,RO,SR",
+          "description": "Angular,Sub Angular,Rounded,Sub Rounded"
+        },
+        {
+          "code": "AG,SA,SR",
+          "description": "Angular,Sub Angular,Sub Rounded"
+        },
+        {
+          "code": "AG,SA-SR",
+          "description": "Angular,Sub Angular - Sub Rounded"
+        },
+        {
+          "code": "AG,SR",
+          "description": "Angular,Sub Rounded"
+        },
+        {
+          "code": "AG,SR,SA",
+          "description": "Angular,Sub Rounded,Sub Angular"
+        },
+        {
+          "code": "AN",
+          "description": "Anhedral"
+        },
+        {
+          "code": "EU",
+          "description": "Euhedral"
+        },
+        {
+          "code": "RO",
+          "description": "Rounded"
+        },
+        {
+          "code": "RO,SA-SR",
+          "description": "Rounded,Sub Angular - Sub Rounded"
+        },
+        {
+          "code": "RO,SR",
+          "description": "Rounded,Sub Rounded"
+        },
+        {
+          "code": "RO,SR,SA-SR",
+          "description": "Rounded,Sub Rounded,Sub Angular - Sub Rounded"
+        },
+        {
+          "code": "SA",
+          "description": "Sub Angular"
+        },
+        {
+          "code": "SA,AG",
+          "description": "Sub Angular,Angular"
+        },
+        {
+          "code": "SA,RO",
+          "description": "Sub Angular,Rounded"
+        },
+        {
+          "code": "SA,RO,SR",
+          "description": "Sub Angular,Rounded,Sub Rounded"
+        },
+        {
+          "code": "SA,SR",
+          "description": "Sub Angular,Sub Rounded"
+        },
+        {
+          "code": "SA,SR,SR-SA",
+          "description": "Sub Angular,Sub Rounded,Sub Rounded - Sub Angular"
+        },
+        {
+          "code": "SASR",
+          "description": "Sub Angular, Sub Rounded"
+        },
+        {
+          "code": "SA-SR",
+          "description": "Sub Angular - Sub Rounded"
+        },
+        {
+          "code": "SA-SR,AG",
+          "description": "Sub Angular - Sub Rounded,Angular"
+        },
+        {
+          "code": "SR",
+          "description": "Sub Rounded"
+        },
+        {
+          "code": "SR,RO",
+          "description": "Sub Rounded,Rounded"
+        },
+        {
+          "code": "SR,SA",
+          "description": "Sub Rounded,Sub Angular"
+        },
+        {
+          "code": "SR,SA-SR",
+          "description": "Sub Rounded,Sub Angular - Sub Rounded"
+        },
+        {
+          "code": "SU",
+          "description": "Subhedral"
+        },
+        {
+          "code": "WR",
+          "description": "Well Rounded"
+        },
+        {
+          "code": "WR,SA-SR",
+          "description": "Well Rounded,Sub Angular-Sub Rounded"
+        },
+        {
+          "code": "SA,SR,WR",
+          "description": "Sub Angular,Sub Rounded,Well Rounded"
+        }
+      ]
+    },
+    {
+      "id": "grain_size_3d60",
+      "name": "GRAIN_SIZE",
+      "items": [
+        {
+          "code": "C",
+          "description": "coarse"
+        },
+        {
+          "code": "F",
+          "description": "fine"
+        },
+        {
+          "code": "FM",
+          "description": "fine to medium"
+        },
+        {
+          "code": "M",
+          "description": "medium"
+        },
+        {
+          "code": "MC",
+          "description": "medium to coarse"
+        },
+        {
+          "code": "VC",
+          "description": "very coarse"
+        },
+        {
+          "code": "VF",
+          "description": "very fine"
+        }
+      ]
+    },
+    {
+      "id": "image_type_oam6",
+      "name": "IMAGE_TYPE",
+      "items": [
+        {
+          "code": "DRY",
+          "description": "Used for Core Tray imagery as it is received before applying water"
+        },
+        {
+          "code": "WET",
+          "description": "Used for Core Tray imagery where water has been applied to accentuate features"
+        }
+      ]
+    },
+    {
+      "id": "imagery_type_phsz",
+      "name": "IMAGERY_TYPE",
+      "items": [
+        {
+          "code": "CORETRAY",
+          "description": "Core Tray image which can be used as an input"
+        }
+      ]
+    },
+    {
+      "id": "iup_27ka",
+      "name": "IUP",
+      "items": [
+        {
+          "code": "1484",
+          "description": "1484"
+        },
+        {
+          "code": "1485_A_1",
+          "description": "1485 A.1"
+        },
+        {
+          "code": "1485_A_2",
+          "description": "1485 A.2"
+        },
+        {
+          "code": "1485_A_3",
+          "description": "1485 A.3"
+        },
+        {
+          "code": "1485_A_4",
+          "description": "1485 A.4"
+        },
+        {
+          "code": "1485_B_1",
+          "description": "1485 B.1"
+        },
+        {
+          "code": "1485_B_2",
+          "description": "1485 B.2"
+        },
+        {
+          "code": "1485_B_3",
+          "description": "1485 B.3"
+        },
+        {
+          "code": "1485_B_4",
+          "description": "1485 B.4"
+        },
+        {
+          "code": "1485_B_5",
+          "description": "1485 B.5"
+        },
+        {
+          "code": "1485_B_6",
+          "description": "1485 B.6"
+        },
+        {
+          "code": "1486",
+          "description": "1486"
+        },
+        {
+          "code": "1487",
+          "description": "1487"
+        },
+        {
+          "code": "1488",
+          "description": "1488"
+        },
+        {
+          "code": "1489",
+          "description": "1489"
+        },
+        {
+          "code": "1490_A",
+          "description": "1490 A"
+        },
+        {
+          "code": "1490_B",
+          "description": "1490 B"
+        },
+        {
+          "code": "1490_C",
+          "description": "1490 C"
+        },
+        {
+          "code": "1490_D",
+          "description": "1490 D"
+        },
+        {
+          "code": "1490_E",
+          "description": "1490 E"
+        },
+        {
+          "code": "1491",
+          "description": "1491"
+        },
+        {
+          "code": "1492",
+          "description": "1492"
+        },
+        {
+          "code": "1493",
+          "description": "1493"
+        },
+        {
+          "code": "1494",
+          "description": "1494"
+        },
+        {
+          "code": "1495",
+          "description": "1495"
+        },
+        {
+          "code": "1496",
+          "description": "1496"
+        },
+        {
+          "code": "1497",
+          "description": "1497"
+        },
+        {
+          "code": "1498",
+          "description": "1498"
+        },
+        {
+          "code": "1499",
+          "description": "1499"
+        },
+        {
+          "code": "1500",
+          "description": "1500"
+        },
+        {
+          "code": "1501",
+          "description": "1501"
+        },
+        {
+          "code": "1502",
+          "description": "1502"
+        },
+        {
+          "code": "1503",
+          "description": "1503"
+        },
+        {
+          "code": "1504",
+          "description": "1504"
+        },
+        {
+          "code": "1505",
+          "description": "1505"
+        },
+        {
+          "code": "1506",
+          "description": "1506"
+        },
+        {
+          "code": "1508",
+          "description": "1508"
+        },
+        {
+          "code": "1509",
+          "description": "1509"
+        },
+        {
+          "code": "1510",
+          "description": "1510"
+        },
+        {
+          "code": "1511",
+          "description": "1511"
+        },
+        {
+          "code": "1512",
+          "description": "1512"
+        },
+        {
+          "code": "1513",
+          "description": "1513"
+        },
+        {
+          "code": "1514",
+          "description": "1514"
+        },
+        {
+          "code": "1515",
+          "description": "1515"
+        },
+        {
+          "code": "1516",
+          "description": "1516"
+        },
+        {
+          "code": "1518_A",
+          "description": "1518 A"
+        },
+        {
+          "code": "1518_B",
+          "description": "1518 B"
+        },
+        {
+          "code": "1519",
+          "description": "1519"
+        },
+        {
+          "code": "1520",
+          "description": "1520"
+        },
+        {
+          "code": "1521",
+          "description": "1521"
+        },
+        {
+          "code": "1522",
+          "description": "1522"
+        },
+        {
+          "code": "1523",
+          "description": "1523"
+        },
+        {
+          "code": "1524",
+          "description": "1524"
+        },
+        {
+          "code": "1525",
+          "description": "1525"
+        },
+        {
+          "code": "1526",
+          "description": "1526"
+        },
+        {
+          "code": "1527",
+          "description": "1527"
+        },
+        {
+          "code": "1528",
+          "description": "1528"
+        },
+        {
+          "code": "1529",
+          "description": "1529"
+        },
+        {
+          "code": "1530",
+          "description": "1530"
+        },
+        {
+          "code": "1531",
+          "description": "1531"
+        },
+        {
+          "code": "1532",
+          "description": "1532"
+        },
+        {
+          "code": "1533",
+          "description": "1533"
+        },
+        {
+          "code": "1534",
+          "description": "1534"
+        },
+        {
+          "code": "1535",
+          "description": "1535"
+        },
+        {
+          "code": "1536",
+          "description": "1536"
+        },
+        {
+          "code": "1537",
+          "description": "1537"
+        },
+        {
+          "code": "1538",
+          "description": "1538"
+        },
+        {
+          "code": "1539_A",
+          "description": "1539 A"
+        },
+        {
+          "code": "1539_B",
+          "description": "1539 B"
+        },
+        {
+          "code": "1539_C",
+          "description": "1539 C"
+        },
+        {
+          "code": "1540",
+          "description": "1540"
+        },
+        {
+          "code": "1541_A",
+          "description": "1541 Blok A"
+        },
+        {
+          "code": "1541_B",
+          "description": "1541 Blok B"
+        },
+        {
+          "code": "1543",
+          "description": "1543"
+        },
+        {
+          "code": "1545",
+          "description": "1545"
+        },
+        {
+          "code": "1546",
+          "description": "1546"
+        },
+        {
+          "code": "1548",
+          "description": "1548"
+        },
+        {
+          "code": "1549",
+          "description": "1549"
+        },
+        {
+          "code": "1551",
+          "description": "1551"
+        },
+        {
+          "code": "1553",
+          "description": "1553"
+        },
+        {
+          "code": "1554",
+          "description": "1554"
+        },
+        {
+          "code": "1555",
+          "description": "1555"
+        },
+        {
+          "code": "1556",
+          "description": "1556"
+        },
+        {
+          "code": "1559",
+          "description": "1559"
+        },
+        {
+          "code": "1560",
+          "description": "1560"
+        },
+        {
+          "code": "1562",
+          "description": "1562"
+        },
+        {
+          "code": "1570",
+          "description": "1570"
+        },
+        {
+          "code": "1575",
+          "description": "1575"
+        },
+        {
+          "code": "1583",
+          "description": "1583"
+        },
+        {
+          "code": "1584",
+          "description": "1584"
+        },
+        {
+          "code": "1601",
+          "description": "1601"
+        },
+        {
+          "code": "1602",
+          "description": "1602"
+        },
+        {
+          "code": "1603",
+          "description": "1603"
+        },
+        {
+          "code": "1605",
+          "description": "1605"
+        },
+        {
+          "code": "618_B",
+          "description": "618 B"
+        },
+        {
+          "code": "618_C",
+          "description": "618 C"
+        },
+        {
+          "code": "618_RIAU",
+          "description": "618/RIAU"
+        },
+        {
+          "code": "621",
+          "description": "DU 621"
+        },
+        {
+          "code": "747_D",
+          "description": "DU 747D"
+        },
+        {
+          "code": "Batu Besi 1",
+          "description": "Batu Besi 1"
+        },
+        {
+          "code": "Batu Besi 2",
+          "description": "Batu Besi 2"
+        },
+        {
+          "code": "KEPRI",
+          "description": "KEPRI"
+        },
+        {
+          "code": "KP Batu Besi",
+          "description": "KP Batu Besi"
+        },
+        {
+          "code": "KP_PERMIS_A",
+          "description": "KP. PERMIS A"
+        },
+        {
+          "code": "KP_PERMIS_B",
+          "description": "KP. PERMIS B"
+        },
+        {
+          "code": "KP_PERMIS_C",
+          "description": "KP. PERMIS C"
+        },
+        {
+          "code": "KP_PERMIS_D",
+          "description": "KP. PERMIS D"
+        },
+        {
+          "code": "NIGERIA",
+          "description": "Nigeria"
+        },
+        {
+          "code": "P0218_1517",
+          "description": "P0218/Eks.1517"
+        },
+        {
+          "code": "P0220_1544",
+          "description": "P0220/ eks. 1544"
+        },
+        {
+          "code": "P0221_1547",
+          "description": "P0221/ eks. 1547"
+        },
+        {
+          "code": "P0222_1507",
+          "description": "P0222/ eks. 1507"
+        },
+        {
+          "code": "P0223_1550",
+          "description": "P0223/ eks. 1550"
+        },
+        {
+          "code": "P0225_1573",
+          "description": "P0225/ eks. 1573"
+        },
+        {
+          "code": "P0226_1574",
+          "description": "P0226/ eks. 1574"
+        },
+        {
+          "code": "P0227_1576_A",
+          "description": "P0227/ eks. 1576 A"
+        },
+        {
+          "code": "P0227_1576_B",
+          "description": "P0227/ eks. 1576 B"
+        },
+        {
+          "code": "P0227_1576_C",
+          "description": "P0227/ eks. 1576 C"
+        },
+        {
+          "code": "P0227_1576_D",
+          "description": "P0227/ eks. 1576 D"
+        },
+        {
+          "code": "P0228_1577",
+          "description": "P0228/ eks.1577"
+        },
+        {
+          "code": "P0230_1578",
+          "description": "P0230/ eks.1578"
+        },
+        {
+          "code": "P0231_1580_A",
+          "description": "P0231/ eks.1580 Blok A"
+        },
+        {
+          "code": "P0231_1580_B",
+          "description": "P0231/ eks.1580 Blok B"
+        },
+        {
+          "code": "P0232_1568_A",
+          "description": "P0232/ eks.1568 A"
+        },
+        {
+          "code": "P0232_1568_B",
+          "description": "P0232/ eks.1568 B"
+        },
+        {
+          "code": "P0232_1568_C_1",
+          "description": "P0232/ eks.1568 C 1"
+        },
+        {
+          "code": "P0232_1568_C_2",
+          "description": "P0232/ eks.1568 C 2"
+        },
+        {
+          "code": "P0264_956",
+          "description": "P0264/ eks. 956"
+        },
+        {
+          "code": "P0265_1561",
+          "description": "P0265/ eks.1561"
+        },
+        {
+          "code": "P0266_1569_A",
+          "description": "P0266/ eks.1569 A"
+        },
+        {
+          "code": "P0266_1569_B",
+          "description": "P0266/ eks.1569 B"
+        },
+        {
+          "code": "P0299_1579",
+          "description": "P0299/ eks.1579"
+        },
+        {
+          "code": "P0320_1609",
+          "description": "P0320/ eks.1609"
+        }
+      ]
+    },
+    {
+      "id": "lab_id_c0o4",
+      "name": "LAB_ID",
+      "items": [
+        {
+          "code": "EXTERNAL",
+          "description": "Eksternal Lab"
+        },
+        {
+          "code": "INTERNAL",
+          "description": "Internal Lab"
+        }
+      ]
+    },
+    {
+      "id": "lithology_0048",
+      "name": "LITHOLOGY",
+      "items": [
+        {
+          "code": "ADA",
+          "description": "Adamelite/ Quartz Monzonite"
+        },
+        {
+          "code": "AGL",
+          "description": "Aglomerate"
+        },
+        {
+          "code": "AGRA",
+          "description": "Aplitic Granite"
+        },
+        {
+          "code": "ALV",
+          "description": "Alluvium"
+        },
+        {
+          "code": "AND",
+          "description": "Andesite"
+        },
+        {
+          "code": "ARK",
+          "description": "Arkose"
+        },
+        {
+          "code": "ARN",
+          "description": "Arenite"
+        },
+        {
+          "code": "BAS",
+          "description": "Basalt"
+        },
+        {
+          "code": "BFP",
+          "description": "Breccia Feeder Pipe"
+        },
+        {
+          "code": "BK",
+          "description": "Bongkah"
+        },
+        {
+          "code": "BRC",
+          "description": "Breccia (sediment)"
+        },
+        {
+          "code": "BS",
+          "description": "Blackshale"
+        },
+        {
+          "code": "BTLP",
+          "description": "Batu Lempung"
+        },
+        {
+          "code": "BTLPKR",
+          "description": "Batu Lempung Keras"
+        },
+        {
+          "code": "BTPS",
+          "description": "Batu Pasir"
+        },
+        {
+          "code": "BTPSKR",
+          "description": "Batu Pasir Keras"
+        },
+        {
+          "code": "CAL",
+          "description": "Calcilutite"
+        },
+        {
+          "code": "CAR",
+          "description": "Calcarenite"
+        },
+        {
+          "code": "CAT",
+          "description": "Cataclastic"
+        },
+        {
+          "code": "CAVEIN",
+          "description": "Calcite Vein"
+        },
+        {
+          "code": "CGL",
+          "description": "Conglomerate"
+        },
+        {
+          "code": "CGRA",
+          "description": "Coarse Grain Granite"
+        },
+        {
+          "code": "CHOR",
+          "description": "Chiastolite Hornfels"
+        },
+        {
+          "code": "CHT",
+          "description": "Chert"
+        },
+        {
+          "code": "CLS",
+          "description": "Claystone"
+        },
+        {
+          "code": "CLY",
+          "description": "Clay"
+        },
+        {
+          "code": "COL",
+          "description": "Colluvium"
+        },
+        {
+          "code": "CORELOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "CUT",
+          "description": "Cutting"
+        },
+        {
+          "code": "CVEIN",
+          "description": "Cassiterite Vein (Lode)"
+        },
+        {
+          "code": "DAC",
+          "description": "Dacite"
+        },
+        {
+          "code": "DIA",
+          "description": "Diabase"
+        },
+        {
+          "code": "DIO",
+          "description": "Diorite"
+        },
+        {
+          "code": "DST",
+          "description": "Dolostone"
+        },
+        {
+          "code": "EDG",
+          "description": "Endogreissen"
+        },
+        {
+          "code": "EXG",
+          "description": "Exogreissen"
+        },
+        {
+          "code": "FBR",
+          "description": "Fault Breccia"
+        },
+        {
+          "code": "FCL",
+          "description": "Ferrogeneous clay"
+        },
+        {
+          "code": "FER",
+          "description": "Ferricrete"
+        },
+        {
+          "code": "FGS",
+          "description": "Ferrogeneous Sediment"
+        },
+        {
+          "code": "FPOR",
+          "description": "Feldspar Porphyry"
+        },
+        {
+          "code": "FSN",
+          "description": "Ferrogeneous sand"
+        },
+        {
+          "code": "FVN",
+          "description": "Gouge with vein"
+        },
+        {
+          "code": "GAB",
+          "description": "Gabbro"
+        },
+        {
+          "code": "GCL",
+          "description": "Grayish clay"
+        },
+        {
+          "code": "GHOR",
+          "description": "Garnet Hornfels"
+        },
+        {
+          "code": "GNE",
+          "description": "Gneiss"
+        },
+        {
+          "code": "GOS",
+          "description": "Gossan"
+        },
+        {
+          "code": "GOU",
+          "description": "Gouge (no vein)"
+        },
+        {
+          "code": "GR",
+          "description": "Granit"
+        },
+        {
+          "code": "GRA",
+          "description": "Granite"
+        },
+        {
+          "code": "GRD",
+          "description": "Granodiorite"
+        },
+        {
+          "code": "GRE",
+          "description": "Greissen"
+        },
+        {
+          "code": "GRLPK",
+          "description": "Granit Lapuk"
+        },
+        {
+          "code": "GRS",
+          "description": "Greisen"
+        },
+        {
+          "code": "GWK",
+          "description": "Greywacke"
+        },
+        {
+          "code": "HBX",
+          "description": "Hydrothermal Breccia"
+        },
+        {
+          "code": "HCL",
+          "description": "Hematitic clay"
+        },
+        {
+          "code": "HCLS",
+          "description": "Hematitic Claystone"
+        },
+        {
+          "code": "HOR",
+          "description": "Hornfels"
+        },
+        {
+          "code": "HSN",
+          "description": "Hematitic sand"
+        },
+        {
+          "code": "HSST",
+          "description": "Hematitic Sandstone"
+        },
+        {
+          "code": "HU",
+          "description": "Humus"
+        },
+        {
+          "code": "HUKRK",
+          "description": "Humus Kerikil"
+        },
+        {
+          "code": "HULP",
+          "description": "Humus Lempung"
+        },
+        {
+          "code": "HULPPHA",
+          "description": "Humus Lempung Pasir Halus"
+        },
+        {
+          "code": "HULPPKA",
+          "description": "Humus Lempung Pasir Kasar"
+        },
+        {
+          "code": "HUPHA",
+          "description": "Humus Pasir Halus"
+        },
+        {
+          "code": "HUPKA",
+          "description": "Humus Pasir Kasar"
+        },
+        {
+          "code": "IBX",
+          "description": "Intrusive Breccia"
+        },
+        {
+          "code": "IST",
+          "description": "Ironstone"
+        },
+        {
+          "code": "KA",
+          "description": "Kayu"
+        },
+        {
+          "code": "KARANG",
+          "description": "Karang"
+        },
+        {
+          "code": "KCL",
+          "description": "Kaolinized clay"
+        },
+        {
+          "code": "KERSIK",
+          "description": "Kersik"
+        },
+        {
+          "code": "KI",
+          "description": "KI"
+        },
+        {
+          "code": "KRA",
+          "description": "Kerakal"
+        },
+        {
+          "code": "KRAKRK",
+          "description": "Kerakal Kerikil"
+        },
+        {
+          "code": "KRAKRKPKAPHA",
+          "description": "Kerakal Kerikil Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "KRAKRKPKAPHALP",
+          "description": "Kerakal Kerikil Pasir Kasar Pasir Halus Lempung"
+        },
+        {
+          "code": "KRALP",
+          "description": "Kerakal Lempung"
+        },
+        {
+          "code": "KRAPHA",
+          "description": "Kerakal Pasir Halus"
+        },
+        {
+          "code": "KRAPHALP",
+          "description": "Kerakal Pasir Halus Lempung"
+        },
+        {
+          "code": "KRAPHAPKAKRKLP",
+          "description": "Kerakal Pasir Halus Pasir Kasar Kerikil Lempung"
+        },
+        {
+          "code": "KRAPKA",
+          "description": "Kerakal Pasir Kasar"
+        },
+        {
+          "code": "KRAPKAKRKPHALP",
+          "description": "Kerakal Pasir Kasar Kerikil Pasir Halus Lempung"
+        },
+        {
+          "code": "KRAPKAPHA",
+          "description": "Kerakal Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "KRAPKAPHAKRKLP",
+          "description": "Kerakal Pasir Kasar Pasir Halus Kerikil Lempung"
+        },
+        {
+          "code": "KRK",
+          "description": "Kerikil"
+        },
+        {
+          "code": "KRKKRA",
+          "description": "Kerikil Kerakal"
+        },
+        {
+          "code": "KRKKRALP",
+          "description": "Kerikil Kerakal Lempung"
+        },
+        {
+          "code": "KRKKRALPPKAPHA",
+          "description": "Kerikil Kerakal Lempung Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "KRKKRAPHA",
+          "description": "Kerikil Kerakal Pasir Halus"
+        },
+        {
+          "code": "KRKKRAPHALP",
+          "description": "Kerikil Kerakal Pasir Halus Lempung"
+        },
+        {
+          "code": "KRKKRAPKA",
+          "description": "Kerikil Kerakal Pasir Kasar"
+        },
+        {
+          "code": "KRKKRAPKAPHALP",
+          "description": "Kerikil Kerakal Pasir Kasar Pasir Halus Lempung"
+        },
+        {
+          "code": "KRKLP",
+          "description": "Kerikil Lempung"
+        },
+        {
+          "code": "KRKLPPHA",
+          "description": "Kerikil Lempung Pasir Halus"
+        },
+        {
+          "code": "KRKPHA",
+          "description": "Kerikil Pasir Halus"
+        },
+        {
+          "code": "KRKPHAKRAPKALP",
+          "description": "Kerikil Pasir Halus Kerakal Pasir Kasar Lempung"
+        },
+        {
+          "code": "KRKPHALP",
+          "description": "Kerikil Pasir Halus Lempung"
+        },
+        {
+          "code": "KRKPHAPKAKRA",
+          "description": "Kerikil Pasir Halus Pasir Kasar Kerakal"
+        },
+        {
+          "code": "KRKPHAPKAKRALP",
+          "description": "Kerikil Pasir Halus Pasir Kasar Kerakal Lempung"
+        },
+        {
+          "code": "KRKPHAPKALP",
+          "description": "Kerikil Pasir Halus Pasir Kasar Lempung"
+        },
+        {
+          "code": "KRKPKA",
+          "description": "Kerikil Pasir Kasar"
+        },
+        {
+          "code": "KRKPKAKRAPHALP",
+          "description": "Kerikil Pasir Kasar Kerakal Pasir Halus Lempung"
+        },
+        {
+          "code": "KRKPKALP",
+          "description": "Kerikil Pasir Kasar Lempung"
+        },
+        {
+          "code": "KRKPKALPPHA",
+          "description": "Kerikil Pasir Kasar Lempung Pasir Halus"
+        },
+        {
+          "code": "KRKPKAPHA",
+          "description": "Kerikil Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "KRKPKAPHAKRA",
+          "description": "Kerikil Pasir Kasar Pasir Halus Kerakal"
+        },
+        {
+          "code": "KRKPKAPHAKRALP",
+          "description": "Kerikil Pasir Kasar Pasir Halus Kerakal Lempung"
+        },
+        {
+          "code": "KRKPKAPHALP",
+          "description": "Kerikil Pasir Kasar Pasir Halus Lempung"
+        },
+        {
+          "code": "KRKPKAPHALPKRA",
+          "description": "Kerikil Pasir Kasar Pasir Halus Lempung Kerakal"
+        },
+        {
+          "code": "KSST",
+          "description": "Kaolinized Sandstone"
+        },
+        {
+          "code": "LCL",
+          "description": "Limonitic clay"
+        },
+        {
+          "code": "LCLS",
+          "description": "Limonitic Claystone"
+        },
+        {
+          "code": "LHOR",
+          "description": "Limonitic Hornfels"
+        },
+        {
+          "code": "LMP",
+          "description": "Lamprophyre"
+        },
+        {
+          "code": "LOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "LP",
+          "description": "Lempung"
+        },
+        {
+          "code": "LPHU",
+          "description": "Lempung Humus"
+        },
+        {
+          "code": "LPKR",
+          "description": "Lempung Keras"
+        },
+        {
+          "code": "LPKRA",
+          "description": "Lempung Kerakal"
+        },
+        {
+          "code": "LPKRAKRKPHA",
+          "description": "Lempung Kerakal Kerikil Pasir Halus"
+        },
+        {
+          "code": "LPKRK",
+          "description": "Lempung Kerikil"
+        },
+        {
+          "code": "LPKRKKRA",
+          "description": "Lempung Kerikil Kerakal"
+        },
+        {
+          "code": "LPKRKKRAPHA",
+          "description": "Lempung Kerikil Kerakal Pasir Halus"
+        },
+        {
+          "code": "LPKRKKRAPHAPKA",
+          "description": "Lempung Kerikil Kerakal Pasir Halus Pasir Kasar"
+        },
+        {
+          "code": "LPKRKKRAPKA",
+          "description": "Lempung Kerikil Kerakal Pasir Kasar"
+        },
+        {
+          "code": "LPKRKKRAPKAPHA",
+          "description": "Lempung Kerikil Kerakal Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "LPKRKPHA",
+          "description": "Lempung Kerikil Pasir Halus"
+        },
+        {
+          "code": "LPKRKPHAPKA",
+          "description": "Lempung Kerikil Pasir Halus Pasir Kasar"
+        },
+        {
+          "code": "LPKRKPHAPKAKRA",
+          "description": "Lempung Kerikil Pasir Halus Pasir Kasar Kerakal"
+        },
+        {
+          "code": "LPKRKPKA",
+          "description": "Lempung Kerikil Pasir Kasar"
+        },
+        {
+          "code": "LPKRKPKALP",
+          "description": "Lempung Kerikil Pasir Kasar Lempung"
+        },
+        {
+          "code": "LPKRKPKAPHA",
+          "description": "Lempung Kerikil Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "LPKRKPKAPHAKRA",
+          "description": "Lempung Kerikil Pasir Kasar Pasir Halus Kerakal"
+        },
+        {
+          "code": "LPLM",
+          "description": "Lempung Lemah"
+        },
+        {
+          "code": "LPLMHU",
+          "description": "Lempung Lemah Humus"
+        },
+        {
+          "code": "LPLMLPLT",
+          "description": "Lempung Lemah Lempung Liat"
+        },
+        {
+          "code": "LPLMPHA",
+          "description": "Lempung Lemah Pasir Halus"
+        },
+        {
+          "code": "LPLMPHAKRK",
+          "description": "Lempung Lemah Pasir Halus Kerikil"
+        },
+        {
+          "code": "LPLMPHAPKA",
+          "description": "Lempung Lemah Pasir Halus Pasir Kasar"
+        },
+        {
+          "code": "LPLMPHAPKAKRK",
+          "description": "Lempung Lemah Pasir Halus Pasir Kasar Kerikil"
+        },
+        {
+          "code": "LPLMPKA",
+          "description": "Lempung Lemah Pasir Kasar"
+        },
+        {
+          "code": "LPLMPKAPHA",
+          "description": "Lempung Lemah Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "LPLMPKAPHAKRA",
+          "description": "Lempung Lemah Pasir Kasar Pasir Halus Kerakal"
+        },
+        {
+          "code": "LPLMPKAPHAKRK",
+          "description": "Lempung Lemah Pasir Kasar Pasir Halus Kerikil"
+        },
+        {
+          "code": "LPLT",
+          "description": "Lempung Liat"
+        },
+        {
+          "code": "LPLTBT",
+          "description": "Lempung Liat Batu"
+        },
+        {
+          "code": "LPLTKRK",
+          "description": "Lempung Liat Kerikil"
+        },
+        {
+          "code": "LPLTKRKKRA",
+          "description": "Lempung Liat Kerikil Kerakal"
+        },
+        {
+          "code": "LPLTLM",
+          "description": "Lempung Liat Lemah"
+        },
+        {
+          "code": "LPLTLPLMPHA",
+          "description": "Lempung Liat Lempung Lemah Pasir Halus"
+        },
+        {
+          "code": "LPLTPHA",
+          "description": "Lempung Liat Pasir Halus"
+        },
+        {
+          "code": "LPLTPHAKRK",
+          "description": "Lempung Liat Pasir Halus Kerikil"
+        },
+        {
+          "code": "LPLTPHAPKA",
+          "description": "Lempung Liat Pasir Halus Pasir Kasar"
+        },
+        {
+          "code": "LPLTPHAPKAKRK",
+          "description": "Lempung Liat Pasir Halus Pasir Kasar Kerikil"
+        },
+        {
+          "code": "LPLTPKA",
+          "description": "Lempung Liat Pasir Kasar"
+        },
+        {
+          "code": "LPLTPKAKRK",
+          "description": "Lempung Liat Pasir Kasar Kerikil"
+        },
+        {
+          "code": "LPLTPKAPHA",
+          "description": "Lempung Liat Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "LPLTPKAPHAKRK",
+          "description": "Lempung Liat Pasir Kasar Pasir Halus Kerikil"
+        },
+        {
+          "code": "LPLU",
+          "description": "Lempung Lumpur"
+        },
+        {
+          "code": "LPPHA",
+          "description": "Lempung Pasir Halus"
+        },
+        {
+          "code": "LPPHAKRA",
+          "description": "Lempung Pasir Halus Kerakal"
+        },
+        {
+          "code": "LPPHAKRAKRK",
+          "description": "Lempung Pasir Halus Kerakal Kerikil"
+        },
+        {
+          "code": "LPPHAKRK",
+          "description": "Lempung Pasir Halus Kerikil"
+        },
+        {
+          "code": "LPPHAKRKKRA",
+          "description": "Lempung Pasir Halus Kerikil Kerakal"
+        },
+        {
+          "code": "LPPHAKRKKRAPKA",
+          "description": "Lempung Pasir Halus Kerikil Kerakal Pasir Kasar"
+        },
+        {
+          "code": "LPPHAKRKPKA",
+          "description": "Lempung Pasir Halus Kerikil Pasir Kasar"
+        },
+        {
+          "code": "LPPHAKRKPKAKRA",
+          "description": "Lempung Pasir Halus Kerikil Pasir Kasar Kerakal"
+        },
+        {
+          "code": "LPPHAPKA",
+          "description": "Lempung Pasir Halus Pasir Kasar"
+        },
+        {
+          "code": "LPPHAPKAKRA",
+          "description": "Lempung Pasir Halus Pasir Kasar Kerakal"
+        },
+        {
+          "code": "LPPHAPKAKRAKRK",
+          "description": "Lempung Pasir Halus Pasir Kasar Kerakal Kerikil"
+        },
+        {
+          "code": "LPPHAPKAKRK",
+          "description": "Lempung Pasir Halus Pasir Kasar Kerikil"
+        },
+        {
+          "code": "LPPHAPKAKRKKRA",
+          "description": "Lempung Pasir Halus Pasir Kasar Kerikil Kerakal"
+        },
+        {
+          "code": "LPPHAPKALP",
+          "description": "Lempung Pasir Halus Pasir Kasar Lempung"
+        },
+        {
+          "code": "LPPHAPKALPKRA",
+          "description": "Lempung Pasir Halus Pasir Kasar Lempung Kerakal"
+        },
+        {
+          "code": "LPPKA",
+          "description": "Lempung Pasir Kasar"
+        },
+        {
+          "code": "LPPKAKRA",
+          "description": "Lempung Pasir Kasar Kerakal"
+        },
+        {
+          "code": "LPPKAKRK",
+          "description": "Lempung Pasir Kasar Kerikil"
+        },
+        {
+          "code": "LPPKAKRKKRA",
+          "description": "Lempung Pasir Kasar Kerikil Kerakal"
+        },
+        {
+          "code": "LPPKAKRKPHA",
+          "description": "Lempung Pasir Kasar Kerikil Pasir Halus"
+        },
+        {
+          "code": "LPPKAKRKPHAKRA",
+          "description": "Lempung Pasir Kasar Kerikil Pasir Halus Kerakal"
+        },
+        {
+          "code": "LPPKAPHA",
+          "description": "Lempung Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "LPPKAPHAKRA",
+          "description": "Lempung Pasir Kasar Pasir Halus Kerakal"
+        },
+        {
+          "code": "LPPKAPHAKRAKRK",
+          "description": "Lempung Pasir Kasar Pasir Halus Kerakal Kerikil"
+        },
+        {
+          "code": "LPPKAPHAKRK",
+          "description": "Lempung Pasir Kasar Pasir Halus Kerikil"
+        },
+        {
+          "code": "LPPKAPHAKRKKRA",
+          "description": "Lempung Pasir Kasar Pasir Halus Kerikil Kerakal"
+        },
+        {
+          "code": "LPPKAPHALPKRA",
+          "description": "Lempung Pasir Kasar Pasir Halus Lempung Kerakal"
+        },
+        {
+          "code": "LPS",
+          "description": "Lapillistone"
+        },
+        {
+          "code": "LSN",
+          "description": "Limonitic sand"
+        },
+        {
+          "code": "LSST",
+          "description": "Limonitic Sandstone"
+        },
+        {
+          "code": "LST",
+          "description": "Limestone"
+        },
+        {
+          "code": "LTE",
+          "description": "Latite"
+        },
+        {
+          "code": "LU",
+          "description": "Lumpur"
+        },
+        {
+          "code": "LUKRK",
+          "description": "Lumpur Kerikil"
+        },
+        {
+          "code": "LULM",
+          "description": "Lumpur Lemah"
+        },
+        {
+          "code": "LUPHA",
+          "description": "Lumpur Pasir Halus"
+        },
+        {
+          "code": "LUPKA",
+          "description": "Lumpur Pasir Kasar"
+        },
+        {
+          "code": "MAR",
+          "description": "Marble"
+        },
+        {
+          "code": "MCL",
+          "description": "Magnetitclay"
+        },
+        {
+          "code": "MCL/MSN",
+          "description": "Magnetite clay / sand"
+        },
+        {
+          "code": "MCLS",
+          "description": "Metaclaystone"
+        },
+        {
+          "code": "MDS",
+          "description": "Mudstone"
+        },
+        {
+          "code": "MGL",
+          "description": "Magnetite Lode"
+        },
+        {
+          "code": "MGRA",
+          "description": "Medium Grain Granite"
+        },
+        {
+          "code": "MNCL",
+          "description": "Manganeese Clay"
+        },
+        {
+          "code": "MNCL/MNSN",
+          "description": "Manganese clay / sand"
+        },
+        {
+          "code": "MNSN",
+          "description": "Manganeese Sand"
+        },
+        {
+          "code": "MOL",
+          "description": "Molasse"
+        },
+        {
+          "code": "MON",
+          "description": "Monzonite"
+        },
+        {
+          "code": "MSN",
+          "description": "Magnetite Sand"
+        },
+        {
+          "code": "MSST",
+          "description": "Metasandstone"
+        },
+        {
+          "code": "MYL",
+          "description": "Mylonite"
+        },
+        {
+          "code": "ND",
+          "description": "Coreloss"
+        },
+        {
+          "code": "OPEN",
+          "description": "Open hole"
+        },
+        {
+          "code": "PBR",
+          "description": "Pyroclastic Breccia"
+        },
+        {
+          "code": "PGRA",
+          "description": "Pegmatite Granite"
+        },
+        {
+          "code": "PHA",
+          "description": "Pasir Halus"
+        },
+        {
+          "code": "PHAHU",
+          "description": "Pasir Halus Humus"
+        },
+        {
+          "code": "PHAKRA",
+          "description": "Pasir Halus Kerakal"
+        },
+        {
+          "code": "PHAKRAKRK",
+          "description": "Pasir Halus Kerakal Kerikil"
+        },
+        {
+          "code": "PHAKRAKRKLP",
+          "description": "Pasir Halus Kerakal Kerikil Lempung"
+        },
+        {
+          "code": "PHAKRAPKAKRKLP",
+          "description": "Pasir Halus Kerakal Pasir Kasar Kerikil Lempung"
+        },
+        {
+          "code": "PHAKRK",
+          "description": "Pasir Halus Kerikil"
+        },
+        {
+          "code": "PHAKRKKRA",
+          "description": "Pasir Halus Kerikil Kerakal"
+        },
+        {
+          "code": "PHAKRKKRALP",
+          "description": "Pasir Halus Kerikil Kerakal Lempung"
+        },
+        {
+          "code": "PHAKRKLP",
+          "description": "PAsir Halus Kerikil Lempung"
+        },
+        {
+          "code": "PHAKRKLPKRA",
+          "description": "Pasir Halus Kerikil Lempung Kerakal"
+        },
+        {
+          "code": "PHAKRKPKAKRALP",
+          "description": "Pasir Halus Kerikil Pasir Kasar Kerakal Lempung"
+        },
+        {
+          "code": "PHAKRKPKAKRKLP",
+          "description": "Pasir Halus Kerikil Pasir Kasar Kerikil Lempung"
+        },
+        {
+          "code": "PHAKRKPKALP",
+          "description": "Pasir Halus Kerikil Pasir Kasar Lempung"
+        },
+        {
+          "code": "PHAKRKPKALPKRA",
+          "description": "Pasir Halus Kerikil Pasir Kasar Lempung Kerakal"
+        },
+        {
+          "code": "PHALP",
+          "description": "Pasir Halus Lempung"
+        },
+        {
+          "code": "PHALPKRAKRK",
+          "description": "Pasir Halus Lempung Kerakal Kerikil"
+        },
+        {
+          "code": "PHALPKRK",
+          "description": "Pasir Halus Lempung Kerikil"
+        },
+        {
+          "code": "PHALPKRKKRA",
+          "description": "Pasir Halus Lempung Kerikil Kerakal"
+        },
+        {
+          "code": "PHALPKRKPKAKRA",
+          "description": "Pasir Halus Lempung Kerikil Pasir Kasar Kerakal"
+        },
+        {
+          "code": "PHALPLM",
+          "description": "Pasir Halus Lempung Lemah"
+        },
+        {
+          "code": "PHALPLT",
+          "description": "Pasir Halus Lempung Lemah"
+        },
+        {
+          "code": "PHALPPKA",
+          "description": "Pasir Halus Lempung Pasir Kasar"
+        },
+        {
+          "code": "PHALPPKAKRK",
+          "description": "Pasir Halus Lempung Pasir Kasar Kerikil"
+        },
+        {
+          "code": "PHALPPKAKRKKRA",
+          "description": "Pasir Halus Lempung Pasir Kasar Kerikil Kerakal"
+        },
+        {
+          "code": "PHALU",
+          "description": "Pasir Halus Lumpur"
+        },
+        {
+          "code": "PHAPKA",
+          "description": "Pasir Halus Pasir Kasar"
+        },
+        {
+          "code": "PHAPKABK",
+          "description": "Pasir Halus Pasir Kasar Bongkah"
+        },
+        {
+          "code": "PHAPKAHU",
+          "description": "Pasir Halus Pasir Kasar Humus"
+        },
+        {
+          "code": "PHAPKAKRA",
+          "description": "Pasir Halus Pasir Kasar Kerakal"
+        },
+        {
+          "code": "PHAPKAKRAKRK",
+          "description": "Pasir Halus Pasir Kasar Kerakal Kerikil"
+        },
+        {
+          "code": "PHAPKAKRAKRKLP",
+          "description": "Pasir Halus Pasir Kasar Kerakal Kerikil Lempung"
+        },
+        {
+          "code": "PHAPKAKRALP",
+          "description": "Pasir Halus Pasir Kasar Kerakal Lempung"
+        },
+        {
+          "code": "PHAPKAKRK",
+          "description": "Pasir Halus Pasir Kasar Kerikil"
+        },
+        {
+          "code": "PHAPKAKRKKRA",
+          "description": "Pasir Halus Pasir Kasar Kerikil Kerakal"
+        },
+        {
+          "code": "PHAPKAKRKKRALP",
+          "description": "Pasir Halus Pasir Kasar Kerikil Kerakal Lempung"
+        },
+        {
+          "code": "PHAPKAKRKLP",
+          "description": "Pasir Halus Pasir Kasar Kerikil Lempung"
+        },
+        {
+          "code": "PHAPKAKRKLPKRA",
+          "description": "Pasir Halus Pasir Kasar Kerikil Lempung Kerakal"
+        },
+        {
+          "code": "PHAPKALP",
+          "description": "Pasir Halus Pasir Kasar Lempung"
+        },
+        {
+          "code": "PHAPKALPKA",
+          "description": "Pasir Halus Pasir Kasar Lempung Kerakal"
+        },
+        {
+          "code": "PHAPKALPKRA",
+          "description": "Pasir Halus Pasir Kasar Lempung Kerakal"
+        },
+        {
+          "code": "PHAPKALPKRAKRK",
+          "description": "Pasir Halus Pasir Kasar Lempung Kerakal Kerikil"
+        },
+        {
+          "code": "PHAPKALPKRK",
+          "description": "Pasir Halus Pasir Kasar Lempung Kerikil"
+        },
+        {
+          "code": "PHAPKALPKRKKRA",
+          "description": "Pasir Halus Pasir Kasar Lempung Kerikil Kerakal"
+        },
+        {
+          "code": "PHAPKALPLM",
+          "description": "Pasir Halus Pasir Kasar Lempung Lemah"
+        },
+        {
+          "code": "PHAPKALPLT",
+          "description": "Pasir Halus Pasir Kasar Lempung Liat"
+        },
+        {
+          "code": "PHOR",
+          "description": "Pyroxene Hornfels"
+        },
+        {
+          "code": "PHY",
+          "description": "Phyllite"
+        },
+        {
+          "code": "PKA",
+          "description": "Pasir Kasar"
+        },
+        {
+          "code": "PKAHU",
+          "description": "Pasir Kasar Humus"
+        },
+        {
+          "code": "PKAKRA",
+          "description": "Pasir Kasar Kerakal"
+        },
+        {
+          "code": "PKAKRAKRK",
+          "description": "Pasir Kasar Kerakal Kerikil"
+        },
+        {
+          "code": "PKAKRAKRKLPPHA",
+          "description": "Pasir Kasar Kerakal Kerikil Lempung Pasir Halus"
+        },
+        {
+          "code": "PKAKRAKRKPHALP",
+          "description": "Pasir Kasar Kerakal Kerikil Pasir Halus Lempung"
+        },
+        {
+          "code": "PKAKRALPKRKPHA",
+          "description": "Pasir Kasar Kerakal Lempung Kerikil Pasir Halus"
+        },
+        {
+          "code": "PKAKRALPPHALP",
+          "description": "Pasir Kasar Kerakal Lempung Pasir Halus Lempung"
+        },
+        {
+          "code": "PKAKRAPHAKRKLP",
+          "description": "Pasir Kasar Kerakal Pasir Halus Kerikil Lempung"
+        },
+        {
+          "code": "PKAKRK",
+          "description": "Pasir Kasar Kerikil"
+        },
+        {
+          "code": "PKAKRKKRA",
+          "description": "Pasir Kasar Kerikil Kerakal"
+        },
+        {
+          "code": "PKAKRKKRALP",
+          "description": "Pasir Kasar Kerikil Kerakal Lempung"
+        },
+        {
+          "code": "PKAKRKKRALPPHA",
+          "description": "Pasir Kasar Kerikil Kerakal Lempung Pasir Halus"
+        },
+        {
+          "code": "PKAKRKKRAPHA",
+          "description": "Pasir Kasar Kerikil Kerakal Pasir Halus"
+        },
+        {
+          "code": "PKAKRKKRAPHALP",
+          "description": "Pasir Kasar Kerikil Kerakal Pasir Halus Lempung"
+        },
+        {
+          "code": "PKAKRKLP",
+          "description": "Pasir Kasar Kerikil Lempung"
+        },
+        {
+          "code": "PKAKRKLPPHA",
+          "description": "Pasir Kasar Kerikil Lempung Pasir Halus"
+        },
+        {
+          "code": "PKAKRKPHA",
+          "description": "Pasir Kasar Kerikil Pasir Halus"
+        },
+        {
+          "code": "PKAKRKPHAKRA",
+          "description": "Pasir Kasar Kerikil Pasir Halus Kerakal"
+        },
+        {
+          "code": "PKAKRKPHAKRALP",
+          "description": "Pasir Kasar Kerikil Pasir Halus Kerakal Lempung"
+        },
+        {
+          "code": "PKAKRKPHALP",
+          "description": "Pasir Kasar Kerikil Pasir Halus Lempung"
+        },
+        {
+          "code": "PKAKRKPHALPKRA",
+          "description": "Pasir Kasar Kerikil Pasir Halus Lempung Kerakal"
+        },
+        {
+          "code": "PKALP",
+          "description": "Pasir Kasar Lempung"
+        },
+        {
+          "code": "PKALPKRA",
+          "description": "Pasir Kasar Lempung Kerakal"
+        },
+        {
+          "code": "PKALPKRK",
+          "description": "Pasir Kasar Lempung Kerikil"
+        },
+        {
+          "code": "PKALPPHA",
+          "description": "Pasir Kasar Lempung Pasir Halus"
+        },
+        {
+          "code": "PKALPPHAKRK",
+          "description": "Pasir Kasar Lempung Pasir Halus Kerikil"
+        },
+        {
+          "code": "PKALPPHAKRKKRA",
+          "description": "Pasir Kasar Lempung Pasir Halus Kerikil Kerakal"
+        },
+        {
+          "code": "PKALU",
+          "description": "Pasir Kasar Lumpur"
+        },
+        {
+          "code": "PKAPHA",
+          "description": "Pasir Kasar Pasir Halus"
+        },
+        {
+          "code": "PKAPHAKRA",
+          "description": "Pasir Kasar Pasir Halus Kerakal"
+        },
+        {
+          "code": "PKAPHAKRAKRK",
+          "description": "Pasir Kasar Pasir Halus Kerakal Kerikil"
+        },
+        {
+          "code": "PKAPHAKRAKRKLP",
+          "description": "Pasir Kasar Pasir Halus Kerakal Kerikil Lempung"
+        },
+        {
+          "code": "PKAPHAKRALP",
+          "description": "Pasir Kasar Pasir Halus Kerakal Lempung"
+        },
+        {
+          "code": "PKAPHAKRK",
+          "description": "Pasir Kasar Pasir Halus Kerikil"
+        },
+        {
+          "code": "PKAPHAKRKKRA",
+          "description": "Pasir Kasar Pasir Halus Kerikil Kerakal"
+        },
+        {
+          "code": "PKAPHAKRKKRALP",
+          "description": "Pasir Kasar Pasir Halus Kerikil Kerakal Lempung"
+        },
+        {
+          "code": "PKAPHAKRKLP",
+          "description": "Pasir Kasar Pasir Halus Kerikil Lempung"
+        },
+        {
+          "code": "PKAPHAKRKLPKRA",
+          "description": "Pasir Kasar Pasir Halus Kerikil Lempung Kerakal"
+        },
+        {
+          "code": "PKAPHALP",
+          "description": "Pasir Kasar Pasir Halus Lempung"
+        },
+        {
+          "code": "PKAPHALPKRA",
+          "description": "Pasir Kasar Pasir Halus Lempung Kerakal"
+        },
+        {
+          "code": "PKAPHALPKRK",
+          "description": "Pasir Kasar Pasir Halus Lempung Kerikil"
+        },
+        {
+          "code": "PKAPHALPKRKKRA",
+          "description": "Pasir Kasar Pasir Halus Lempung Kerikil Kerakal"
+        },
+        {
+          "code": "PKAPHALPLM",
+          "description": "Pasir Kasar Pasir Halus Lempung Lemah"
+        },
+        {
+          "code": "PKAPHALPLT",
+          "description": "Pasir Kasar Pasir Halus Lempung Liat"
+        },
+        {
+          "code": "PVEIN",
+          "description": "Pegmatite Vein"
+        },
+        {
+          "code": "QPOR",
+          "description": "Quartz Porphyry"
+        },
+        {
+          "code": "QSST",
+          "description": "Quartz Sandstone"
+        },
+        {
+          "code": "QVEIN",
+          "description": "Quartz Vein"
+        },
+        {
+          "code": "QZT",
+          "description": "Quartzite"
+        },
+        {
+          "code": "REG",
+          "description": "Regolith"
+        },
+        {
+          "code": "RES",
+          "description": "Residual Soil Unde\ufb01ned"
+        },
+        {
+          "code": "RHOR",
+          "description": "Cordierite Hornfels"
+        },
+        {
+          "code": "RHY",
+          "description": "Rhyolite"
+        },
+        {
+          "code": "RTU",
+          "description": "Rhyolitic Tu\ufb00"
+        },
+        {
+          "code": "SAP",
+          "description": "Saprolite"
+        },
+        {
+          "code": "SCH",
+          "description": "Schist"
+        },
+        {
+          "code": "SCL",
+          "description": "Smectitic clay"
+        },
+        {
+          "code": "SHL",
+          "description": "Shale"
+        },
+        {
+          "code": "SIT",
+          "description": "Siltstone"
+        },
+        {
+          "code": "SKN",
+          "description": "Skarn"
+        },
+        {
+          "code": "SLT",
+          "description": "Slate"
+        },
+        {
+          "code": "SLU",
+          "description": "Sludge"
+        },
+        {
+          "code": "SOIL",
+          "description": "Soil"
+        },
+        {
+          "code": "SOL",
+          "description": "Soil"
+        },
+        {
+          "code": "SST",
+          "description": "Sandstone"
+        },
+        {
+          "code": "SYE",
+          "description": "Syenite"
+        },
+        {
+          "code": "TB",
+          "description": "Tanah Bekas"
+        },
+        {
+          "code": "TON",
+          "description": "Tonalite"
+        },
+        {
+          "code": "TRA",
+          "description": "Trachyte"
+        },
+        {
+          "code": "TSKKA",
+          "description": "TSK Kayu"
+        },
+        {
+          "code": "TUF",
+          "description": "Tu\ufb00"
+        },
+        {
+          "code": "TVEIN",
+          "description": "Tourmaline vein/veinlet"
+        },
+        {
+          "code": "VBR",
+          "description": "Volcanic Breccia"
+        },
+        {
+          "code": "VEIN",
+          "description": "Vein"
+        },
+        {
+          "code": "XVEIN",
+          "description": "Vein Sulphide"
+        }
+      ]
+    },
+    {
+      "id": "location_b8rm",
+      "name": "LOCATION",
+      "items": [
+        {
+          "code": "OFFSHORE",
+          "description": "Offshore"
+        },
+        {
+          "code": "ONSHORE",
+          "description": "Onshore"
+        }
+      ]
+    },
+    {
+      "id": "logging_method_5qi2",
+      "name": "LOGGING_METHOD",
+      "items": [
+        {
+          "code": "FRAME",
+          "description": "By Frame (Rocket Launcher)"
+        },
+        {
+          "code": "NCOL",
+          "description": "No Core Orientation Line"
+        },
+        {
+          "code": "PRO",
+          "description": "Protactor"
+        },
+        {
+          "code": "TAPE",
+          "description": "By Tape Marked (Protactor)"
+        }
+      ]
+    },
+    {
+      "id": "min_comp_ratio_a8zu",
+      "name": "MIN_COMP_RATIO",
+      "items": [
+        {
+          "code": "1",
+          "description": "Minerals are restricted to discontinuity or spot and patchy, less than 10%"
+        },
+        {
+          "code": "2",
+          "description": "Minerals cover about 10%-49% of the interval sample"
+        },
+        {
+          "code": "3",
+          "description": "Minerals cover about 50%-75% of the interval sample"
+        },
+        {
+          "code": "4",
+          "description": "Minerals cover >75% of the interval sample"
+        },
+        {
+          "code": "0",
+          "description": "No mineral content"
+        }
+      ]
+    },
+    {
+      "id": "mine_status_dyfy",
+      "name": "MINE_STATUS",
+      "items": [
+        {
+          "code": "Y",
+          "description": "YES"
+        }
+      ]
+    },
+    {
+      "id": "mineral_50fb",
+      "name": "MINERAL",
+      "items": [
+        {
+          "code": "ALMANDINE",
+          "description": "Almandine"
+        },
+        {
+          "code": "ANATASE",
+          "description": "Anatase"
+        },
+        {
+          "code": "ARSENOPYRITE",
+          "description": "Arsenopyrite"
+        },
+        {
+          "code": "BARITE",
+          "description": "Barite"
+        },
+        {
+          "code": "BIOTITE",
+          "description": "Biotite"
+        },
+        {
+          "code": "CALCITE",
+          "description": "Calcite"
+        },
+        {
+          "code": "CASSITERITE",
+          "description": "Cassiterite"
+        },
+        {
+          "code": "CHALCOPYRITE",
+          "description": "Chalcopyrite"
+        },
+        {
+          "code": "COLTAN",
+          "description": "Columbite-Tantalite"
+        },
+        {
+          "code": "COLUMBIT",
+          "description": "Columbit"
+        },
+        {
+          "code": "CORUNDUM",
+          "description": "Corundum"
+        },
+        {
+          "code": "FELDSPAR",
+          "description": "Feldspar"
+        },
+        {
+          "code": "GALENA",
+          "description": "Galena"
+        },
+        {
+          "code": "GARNET",
+          "description": "Garnet"
+        },
+        {
+          "code": "HEMATITE",
+          "description": "Hematite"
+        },
+        {
+          "code": "ILMENITE",
+          "description": "Ilmenite"
+        },
+        {
+          "code": "K.KERANG",
+          "description": "K.Kerang"
+        },
+        {
+          "code": "LEUCOXENE",
+          "description": "Leucoxene"
+        },
+        {
+          "code": "LIMONITE",
+          "description": "Limonite"
+        },
+        {
+          "code": "LP.PASIR",
+          "description": "Lp.Pasir"
+        },
+        {
+          "code": "MAGNETITE",
+          "description": "Magnetite"
+        },
+        {
+          "code": "METAL",
+          "description": "Metal"
+        },
+        {
+          "code": "MONAZITE",
+          "description": "Monazite"
+        },
+        {
+          "code": "MUSCOVITE",
+          "description": "Muscovite"
+        },
+        {
+          "code": "OKSIDA BESI",
+          "description": "Oksida Besi"
+        },
+        {
+          "code": "Pb.",
+          "description": "Pb."
+        },
+        {
+          "code": "PSILOMELANE",
+          "description": "Psilomelane"
+        },
+        {
+          "code": "PYRIT/MARC.",
+          "description": "Pyrit/Marc."
+        },
+        {
+          "code": "QUARTZ",
+          "description": "Quartz"
+        },
+        {
+          "code": "RUTILE",
+          "description": "Rutile"
+        },
+        {
+          "code": "SIDERITE",
+          "description": "Siderite"
+        },
+        {
+          "code": "SLAG",
+          "description": "Slag"
+        },
+        {
+          "code": "SPHALERYTE",
+          "description": "Sphaleryte"
+        },
+        {
+          "code": "SPINEL",
+          "description": "Spinel"
+        },
+        {
+          "code": "TERAK",
+          "description": "Terak"
+        },
+        {
+          "code": "TOPAZ",
+          "description": "Topaz"
+        },
+        {
+          "code": "TOURMALINE",
+          "description": "Tourmaline"
+        },
+        {
+          "code": "WOLFRAMITE",
+          "description": "Wolframite"
+        },
+        {
+          "code": "XENOTIME",
+          "description": "Xenotime"
+        },
+        {
+          "code": "ZIRCON",
+          "description": "Zircon"
+        }
+      ]
+    },
+    {
+      "id": "mineralization_cva7",
+      "name": "MINERALIZATION",
+      "items": [
+        {
+          "code": "APY",
+          "description": "Arsenopyrite"
+        },
+        {
+          "code": "CAS",
+          "description": "Cassiterite"
+        },
+        {
+          "code": "CPY",
+          "description": "Chalcopyrite"
+        },
+        {
+          "code": "GAL",
+          "description": "Galena"
+        },
+        {
+          "code": "MAL",
+          "description": "Malachite"
+        },
+        {
+          "code": "MN",
+          "description": "Manganite"
+        },
+        {
+          "code": "MOB",
+          "description": "Molybdenite"
+        },
+        {
+          "code": "PY",
+          "description": "Pyrite"
+        },
+        {
+          "code": "PYR",
+          "description": "Pyrhotite"
+        },
+        {
+          "code": "SPH",
+          "description": "Sphalerite"
+        },
+        {
+          "code": "STN",
+          "description": "Stannite"
+        },
+        {
+          "code": "WOL",
+          "description": "Wolframite"
+        }
+      ]
+    },
+    {
+      "id": "minz_style_8drz",
+      "name": "MINZ_STYLE",
+      "items": [
+        {
+          "code": "BX",
+          "description": "Brecciated"
+        },
+        {
+          "code": "BX-VEN",
+          "description": "Dom Brex + Minor Rep"
+        },
+        {
+          "code": "CUT",
+          "description": "Cutting"
+        },
+        {
+          "code": "DIS",
+          "description": "Disseminated"
+        },
+        {
+          "code": "DIS+REP",
+          "description": "Dom Dis + Minor Rep"
+        },
+        {
+          "code": "DIS+VEN",
+          "description": "Dom Dis + Minor Ven"
+        },
+        {
+          "code": "LOSS",
+          "description": "LOSS"
+        },
+        {
+          "code": "REP",
+          "description": "Replacement"
+        },
+        {
+          "code": "REP+DIS",
+          "description": "Dom Rep + Minor Dis"
+        },
+        {
+          "code": "REP+VEN",
+          "description": "Dom Rep + Minor Ven"
+        },
+        {
+          "code": "UM",
+          "description": "Unmineralized"
+        },
+        {
+          "code": "VEN",
+          "description": "Vein/Veinlet"
+        },
+        {
+          "code": "VEN+DIS",
+          "description": "Dom Ven + Minor Dis"
+        },
+        {
+          "code": "VEN+REP",
+          "description": "Dom Ven + MInor Rep"
+        }
+      ]
+    },
+    {
+      "id": "ore_pct_nuib",
+      "name": "ORE_PCT",
+      "items": [
+        {
+          "code": "0.01",
+          "description": "0.01"
+        },
+        {
+          "code": "0.02",
+          "description": "0.02"
+        },
+        {
+          "code": "0.03",
+          "description": "0.03"
+        },
+        {
+          "code": "0.05",
+          "description": "0.0005"
+        },
+        {
+          "code": "0.1",
+          "description": "0.1 to 0.2%"
+        },
+        {
+          "code": "0.2",
+          "description": "0.2 to 0,3%"
+        },
+        {
+          "code": "0.3",
+          "description": "0,3 to 0,4%"
+        },
+        {
+          "code": "0.4",
+          "description": "0,4 to 0,5%"
+        },
+        {
+          "code": "0.5",
+          "description": "0,5 to 1%"
+        },
+        {
+          "code": "1",
+          "description": "1 to 2%"
+        },
+        {
+          "code": "1.5",
+          "description": "1.5"
+        },
+        {
+          "code": "10",
+          "description": "10 to 20%"
+        },
+        {
+          "code": "11",
+          "description": "11"
+        },
+        {
+          "code": "12",
+          "description": "12"
+        },
+        {
+          "code": "13",
+          "description": "13"
+        },
+        {
+          "code": "15",
+          "description": "15"
+        },
+        {
+          "code": "16",
+          "description": "16"
+        },
+        {
+          "code": "17",
+          "description": "17"
+        },
+        {
+          "code": "18",
+          "description": "18"
+        },
+        {
+          "code": "19",
+          "description": "19"
+        },
+        {
+          "code": "2",
+          "description": "2 to 3%"
+        },
+        {
+          "code": "20",
+          "description": "20 to 30%"
+        },
+        {
+          "code": "21",
+          "description": "21"
+        },
+        {
+          "code": "22",
+          "description": "22"
+        },
+        {
+          "code": "23",
+          "description": "23"
+        },
+        {
+          "code": "24",
+          "description": "24"
+        },
+        {
+          "code": "25",
+          "description": "25"
+        },
+        {
+          "code": "26",
+          "description": "26"
+        },
+        {
+          "code": "28",
+          "description": "28"
+        },
+        {
+          "code": "29",
+          "description": "29"
+        },
+        {
+          "code": "3",
+          "description": "3 to 5%"
+        },
+        {
+          "code": "30",
+          "description": "30 to 40%"
+        },
+        {
+          "code": "32",
+          "description": "32"
+        },
+        {
+          "code": "33",
+          "description": "33"
+        },
+        {
+          "code": "35",
+          "description": "35"
+        },
+        {
+          "code": "36",
+          "description": "36"
+        },
+        {
+          "code": "39",
+          "description": "39"
+        },
+        {
+          "code": "4",
+          "description": "4"
+        },
+        {
+          "code": "40",
+          "description": "40 to 50%"
+        },
+        {
+          "code": "41",
+          "description": "41"
+        },
+        {
+          "code": "43",
+          "description": "43"
+        },
+        {
+          "code": "45",
+          "description": "45"
+        },
+        {
+          "code": "5",
+          "description": "5 to 7%"
+        },
+        {
+          "code": "50",
+          "description": "> 50%"
+        },
+        {
+          "code": "55",
+          "description": "55"
+        },
+        {
+          "code": "6",
+          "description": "6"
+        },
+        {
+          "code": "60",
+          "description": "60"
+        },
+        {
+          "code": "65",
+          "description": "65"
+        },
+        {
+          "code": "7",
+          "description": "7 to 10%"
+        },
+        {
+          "code": "70",
+          "description": "70"
+        },
+        {
+          "code": "8",
+          "description": "8"
+        },
+        {
+          "code": "80",
+          "description": "80"
+        },
+        {
+          "code": "9",
+          "description": "9"
+        },
+        {
+          "code": "90",
+          "description": "90"
+        }
+      ]
+    },
+    {
+      "id": "orien_quality_33t9",
+      "name": "ORIEN_QUALITY",
+      "items": [
+        {
+          "code": "F",
+          "description": "Fair"
+        },
+        {
+          "code": "G",
+          "description": "Good"
+        },
+        {
+          "code": "N",
+          "description": "No data"
+        },
+        {
+          "code": "P",
+          "description": "Poor"
+        }
+      ]
+    },
+    {
+      "id": "oxidation_state_v3ho",
+      "name": "OXIDATION_STATE",
+      "items": [
+        {
+          "code": "1",
+          "description": "Trace Oxidation"
+        },
+        {
+          "code": "2",
+          "description": "Weakly Oxidised"
+        },
+        {
+          "code": "3",
+          "description": "Moderately Oxidised"
+        },
+        {
+          "code": "4",
+          "description": "Strongly Oxidised"
+        },
+        {
+          "code": "5",
+          "description": "Complete Oxidation"
+        }
+      ]
+    },
+    {
+      "id": "primary_mineral_c933",
+      "name": "PRIMARY_MINERAL",
+      "items": [
+        {
+          "code": "Ant",
+          "description": "ANATASE"
+        },
+        {
+          "code": "Apy",
+          "description": "ARSENOPYRITE"
+        },
+        {
+          "code": "Cal",
+          "description": "CALCITE"
+        },
+        {
+          "code": "Ccp",
+          "description": "CHALCOPYRITE"
+        },
+        {
+          "code": "Chl",
+          "description": "CHLORITE"
+        },
+        {
+          "code": "Cst",
+          "description": "CASSITERITE"
+        },
+        {
+          "code": "Dol",
+          "description": "DOLOMITE"
+        },
+        {
+          "code": "Epi",
+          "description": "EPIDOTE"
+        },
+        {
+          "code": "Fsp",
+          "description": "FELDSPAR"
+        },
+        {
+          "code": "Gal",
+          "description": "GALENA"
+        },
+        {
+          "code": "Gar",
+          "description": "GARNET"
+        },
+        {
+          "code": "Goe",
+          "description": "GOETHITE"
+        },
+        {
+          "code": "Hem",
+          "description": "HEMATITE"
+        },
+        {
+          "code": "Ill",
+          "description": "ILLITE"
+        },
+        {
+          "code": "Ilm",
+          "description": "ILMENITE"
+        },
+        {
+          "code": "Jar",
+          "description": "JAROSITE"
+        },
+        {
+          "code": "Kao",
+          "description": "KAOLINITE"
+        },
+        {
+          "code": "Lm",
+          "description": "LIMONITE"
+        },
+        {
+          "code": "Mag",
+          "description": "MAGNETITE"
+        },
+        {
+          "code": "Mal",
+          "description": "MALACHITE"
+        },
+        {
+          "code": "Met",
+          "description": "METAL"
+        },
+        {
+          "code": "Mgn",
+          "description": "MANGANESE"
+        },
+        {
+          "code": "Mnz",
+          "description": "MONAZITE"
+        },
+        {
+          "code": "Mus",
+          "description": "MUSCOVITE"
+        },
+        {
+          "code": "Py",
+          "description": "PYRIT/MARC."
+        },
+        {
+          "code": "Pyr",
+          "description": "PYRHOTITE"
+        },
+        {
+          "code": "Qzt",
+          "description": "QUARTZ"
+        },
+        {
+          "code": "Sd",
+          "description": "SIDERITE"
+        },
+        {
+          "code": "Smc",
+          "description": "SMECTITE"
+        },
+        {
+          "code": "Sph",
+          "description": "SPHALERITE"
+        },
+        {
+          "code": "Spl",
+          "description": "SPINEL"
+        },
+        {
+          "code": "Stn",
+          "description": "STANNITE"
+        },
+        {
+          "code": "Tou",
+          "description": "TOURMALINE"
+        },
+        {
+          "code": "Toz",
+          "description": "TOPAZ"
+        },
+        {
+          "code": "Wol",
+          "description": "WOLFRAMITE"
+        },
+        {
+          "code": "Xtm",
+          "description": "XENOTIME"
+        },
+        {
+          "code": "Zrn",
+          "description": "ZIRCON"
+        }
+      ]
+    },
+    {
+      "id": "promote_type_fnf0",
+      "name": "PROMOTE_TYPE",
+      "items": [
+        {
+          "code": "1",
+          "description": "Promote only if new row"
+        },
+        {
+          "code": "2",
+          "description": "Only promote new value if existing is blank"
+        },
+        {
+          "code": "3",
+          "description": "New values overwite existing except nulls"
+        },
+        {
+          "code": "4",
+          "description": "Promote all including nulls"
+        }
+      ]
+    },
+    {
+      "id": "prospect_sd83",
+      "name": "PROSPECT",
+      "items": [
+        {
+          "code": "BABAR",
+          "description": "Bangka Barat"
+        },
+        {
+          "code": "BANGKA",
+          "description": "Bangka Induk"
+        },
+        {
+          "code": "BASEL",
+          "description": "Bangka Selatan"
+        },
+        {
+          "code": "BATENG",
+          "description": "Bangka Tengah"
+        },
+        {
+          "code": "BATUBESI",
+          "description": "Mengkubang Belitung Timur"
+        },
+        {
+          "code": "BELITUNG",
+          "description": "Belitung Barat"
+        },
+        {
+          "code": "BELTIM",
+          "description": "Belitung Timur"
+        },
+        {
+          "code": "BERANG",
+          "description": "Berang Bangka Barat"
+        },
+        {
+          "code": "BUKIT BAJI",
+          "description": "Bukit Baji Paku Bangka Selatan"
+        },
+        {
+          "code": "BUKIT LAYANG",
+          "description": "Bukit Layang Bangka"
+        },
+        {
+          "code": "BUKIT PRED",
+          "description": "Bukit Pred Tempilang Bangka Barat"
+        },
+        {
+          "code": "BUKIT PUYUH",
+          "description": "Bukit Puyuh Tempilang Bangka Barat"
+        },
+        {
+          "code": "BUKIT SENGGIRI",
+          "description": "Bukit Senggiri Tempilang Bangka Barat"
+        },
+        {
+          "code": "JANGKANG",
+          "description": "Jangkang Bangka"
+        },
+        {
+          "code": "KUNDUR",
+          "description": "Kundur"
+        },
+        {
+          "code": "LEMBAH JAMBU",
+          "description": "Lembah Jambu Tempilang Bangka Barat"
+        },
+        {
+          "code": "LINTAS KAB",
+          "description": "Lintas Kabupaten"
+        },
+        {
+          "code": "MASINKO",
+          "description": "Tempilang Bangka Barat"
+        },
+        {
+          "code": "NIGERIA",
+          "description": "Nigeria"
+        },
+        {
+          "code": "PAKU",
+          "description": "Paku Bangka Selatan"
+        },
+        {
+          "code": "PENAGAN",
+          "description": "Penagan Kota Kapur Bangka Tengah"
+        },
+        {
+          "code": "PETAR",
+          "description": "Petar Bangka Barat"
+        },
+        {
+          "code": "RANGGAS",
+          "description": "Ranggas Bangka Selatan"
+        },
+        {
+          "code": "TANJUNG GUNUNG",
+          "description": "Tanjung Gunung Bangka Tengah"
+        },
+        {
+          "code": "TB. TEMPILANG",
+          "description": "Tambang Besar (TB) Tempilang Bangka Barat"
+        },
+        {
+          "code": "TEMPILANG",
+          "description": "Tempilang Bangka Barat"
+        }
+      ]
+    },
+    {
+      "id": "purpose_d1rb",
+      "name": "PURPOSE",
+      "items": [
+        {
+          "code": "CEK BOR",
+          "description": "Verify or confirm specific subsurface information obtained from earlier exploration stages"
+        },
+        {
+          "code": "GEO",
+          "description": "Understand geological conditions"
+        },
+        {
+          "code": "MEAS",
+          "description": "Drilling conducted to obtain high-confidence, detailed data so that a resource can be classified as Measured"
+        },
+        {
+          "code": "PROD",
+          "description": "Support production planning"
+        },
+        {
+          "code": "PROS",
+          "description": "Discovering indications of a potential resource"
+        },
+        {
+          "code": "SHP",
+          "description": "Converting Marginal (SHP) resources"
+        },
+        {
+          "code": "TEST",
+          "description": "Drilling test"
+        }
+      ]
+    },
+    {
+      "id": "qc_type_u013",
+      "name": "QC_TYPE",
+      "items": [
+        {
+          "code": "CHECK",
+          "description": "CHECK"
+        },
+        {
+          "code": "CORELOSS",
+          "description": "CORELOSS"
+        },
+        {
+          "code": "ND",
+          "description": "No Data"
+        },
+        {
+          "code": "NOASSAY",
+          "description": "NOASSAY"
+        },
+        {
+          "code": "ROUTINE",
+          "description": "ROUTINE"
+        },
+        {
+          "code": "STANDARD",
+          "description": "STANDARD"
+        }
+      ]
+    },
+    {
+      "id": "qc_type_std_jvhb",
+      "name": "QC_TYPE_STD",
+      "items": [
+        {
+          "code": "STANDARD",
+          "description": "STANDARD"
+        }
+      ]
+    },
+    {
+      "id": "rig_type_uxgy",
+      "name": "RIG_TYPE",
+      "items": [
+        {
+          "code": "BBB 4 IN",
+          "description": "Bor Bangka Belitung 4 Inchi"
+        },
+        {
+          "code": "BMS",
+          "description": "BMS"
+        },
+        {
+          "code": "BMS-UNDP",
+          "description": "BMS-UNDP"
+        },
+        {
+          "code": "BOR BANGKA",
+          "description": "Bor Bangka"
+        },
+        {
+          "code": "BOR PANDU",
+          "description": "Bor Pandu"
+        },
+        {
+          "code": "BOXER",
+          "description": "BOXER"
+        },
+        {
+          "code": "CPP I",
+          "description": "CPP I"
+        },
+        {
+          "code": "CS1000",
+          "description": "Cristensen CS1000 Drill Rig"
+        },
+        {
+          "code": "DFM",
+          "description": "DFM"
+        },
+        {
+          "code": "DRILL PONTOON",
+          "description": "Pontoon Drill Rig"
+        },
+        {
+          "code": "DRILLING VESSEL",
+          "description": "Vessel Dril Rig"
+        },
+        {
+          "code": "JACRO",
+          "description": "Jacro Drill Rig"
+        },
+        {
+          "code": "LF70",
+          "description": "Longyear LF70 Drill Rig"
+        },
+        {
+          "code": "LY34",
+          "description": "Longyear 34 Drill Rig"
+        },
+        {
+          "code": "LY38",
+          "description": "Longyear 38 Drill Rig"
+        },
+        {
+          "code": "LY44",
+          "description": "Longyear 44 Drill Rig"
+        },
+        {
+          "code": "MEKA BANGKA",
+          "description": "MEKA BANGKA"
+        },
+        {
+          "code": "MP",
+          "description": "Multipurpose Drill Rig"
+        },
+        {
+          "code": "SONIC 301 CST",
+          "description": "SONIC 301 CST"
+        },
+        {
+          "code": "SONIC 302 CST",
+          "description": "SONIC 302 CST"
+        },
+        {
+          "code": "UNDP",
+          "description": "UNDP"
+        },
+        {
+          "code": "YBM",
+          "description": "YBM"
+        },
+        {
+          "code": "YBM6",
+          "description": "YBM6"
+        }
+      ]
+    },
+    {
+      "id": "rock_structure_90k1",
+      "name": "ROCK_STRUCTURE",
+      "items": [
+        {
+          "code": "BA",
+          "description": "Banded"
+        },
+        {
+          "code": "BD",
+          "description": "Bedding"
+        },
+        {
+          "code": "CT",
+          "description": "Cataclastic"
+        },
+        {
+          "code": "FL",
+          "description": "Foliation"
+        },
+        {
+          "code": "LA",
+          "description": "Lamination"
+        },
+        {
+          "code": "MA",
+          "description": "Massive"
+        },
+        {
+          "code": "ND",
+          "description": "No data/Coreloss"
+        },
+        {
+          "code": "NF",
+          "description": "Non Foliation"
+        }
+      ]
+    },
+    {
+      "id": "rock_texture_fg8b",
+      "name": "ROCK_TEXTURE",
+      "items": [
+        {
+          "code": "AP",
+          "description": "Aphanitic"
+        },
+        {
+          "code": "BC",
+          "description": "Brecciated"
+        },
+        {
+          "code": "GB",
+          "description": "Granoblastic"
+        },
+        {
+          "code": "GC",
+          "description": "Gneissic"
+        },
+        {
+          "code": "HC",
+          "description": "Hornfelsic"
+        },
+        {
+          "code": "HF",
+          "description": "Hornfelsic-Banded"
+        },
+        {
+          "code": "MC",
+          "description": "Milonitic"
+        },
+        {
+          "code": "ND",
+          "description": "NoData/Coreloss"
+        },
+        {
+          "code": "PA",
+          "description": "Porphyritic with aphanitic groundmass"
+        },
+        {
+          "code": "PG",
+          "description": "Pegmatitic"
+        },
+        {
+          "code": "PH",
+          "description": "Phaneritic"
+        },
+        {
+          "code": "PL",
+          "description": "Phylitic"
+        },
+        {
+          "code": "PO",
+          "description": "Porphyritic"
+        },
+        {
+          "code": "SC",
+          "description": "Schistose"
+        },
+        {
+          "code": "SL",
+          "description": "Slaty"
+        }
+      ]
+    },
+    {
+      "id": "rock_type_fuu1",
+      "name": "ROCK_TYPE",
+      "items": [
+        {
+          "code": "ALV",
+          "description": "Alluvial"
+        },
+        {
+          "code": "CUT",
+          "description": "Cutting"
+        },
+        {
+          "code": "DY",
+          "description": "Pipe/Dyke/Contact"
+        },
+        {
+          "code": "FL",
+          "description": "Fault"
+        },
+        {
+          "code": "IG",
+          "description": "Igneous"
+        },
+        {
+          "code": "LOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "MES",
+          "description": "Metasomatisme"
+        },
+        {
+          "code": "MN",
+          "description": "Miscellaneous"
+        },
+        {
+          "code": "MT",
+          "description": "Metamorphic"
+        },
+        {
+          "code": "PYR",
+          "description": "Pyroclastic"
+        },
+        {
+          "code": "SD",
+          "description": "Sedimentary"
+        },
+        {
+          "code": "TB",
+          "description": "Tanah Bekas"
+        },
+        {
+          "code": "UC",
+          "description": "Unconsolidated"
+        },
+        {
+          "code": "VN",
+          "description": "Vein"
+        }
+      ]
+    },
+    {
+      "id": "sample_type_ey8n",
+      "name": "SAMPLE_TYPE",
+      "items": [
+        {
+          "code": "BLANK",
+          "description": "QAQC Blank Sample"
+        },
+        {
+          "code": "CDUP",
+          "description": "Coarse Duplicate"
+        },
+        {
+          "code": "CORELOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "DUPL",
+          "description": "Duplicate Sample"
+        },
+        {
+          "code": "FDUP",
+          "description": "Field Duplicate"
+        },
+        {
+          "code": "LDUP",
+          "description": "Lab Duplicate"
+        },
+        {
+          "code": "NOASSAY",
+          "description": "NOASSAY"
+        },
+        {
+          "code": "NS",
+          "description": "No Sampling For Analysis"
+        },
+        {
+          "code": "PDUP",
+          "description": "Pulp Duplicate"
+        },
+        {
+          "code": "ROUTINE",
+          "description": "Routine Sample"
+        },
+        {
+          "code": "STANDARD",
+          "description": "QAQC Standard Sample"
+        }
+      ]
+    },
+    {
+      "id": "sampling_method_zju0",
+      "name": "SAMPLING_METHOD",
+      "items": [
+        {
+          "code": "CORELOSS",
+          "description": "CORELOSS"
+        },
+        {
+          "code": "HCORE",
+          "description": "Half Core"
+        },
+        {
+          "code": "ND",
+          "description": "No Data"
+        },
+        {
+          "code": "NOASSAY",
+          "description": "NOASSAY"
+        },
+        {
+          "code": "QCORE",
+          "description": "Quarter Core"
+        },
+        {
+          "code": "UNK",
+          "description": "UNKNOWN"
+        },
+        {
+          "code": "WCORE",
+          "description": "Whole Core"
+        }
+      ]
+    },
+    {
+      "id": "shift_2y2o",
+      "name": "SHIFT",
+      "items": [
+        {
+          "code": "DS",
+          "description": "Day Shift"
+        },
+        {
+          "code": "NS",
+          "description": "Night Shift"
+        }
+      ]
+    },
+    {
+      "id": "standard_id_p93j",
+      "name": "STANDARD_ID",
+      "items": [
+        {
+          "code": "AMIS19",
+          "description": "AMIS0019"
+        },
+        {
+          "code": "AMIS19X10",
+          "description": "AMIS0019 Diluted 10X"
+        },
+        {
+          "code": "AMIS19X10.43",
+          "description": "AMIS0019 Diluted 10.43X"
+        },
+        {
+          "code": "AMIS19X10.95",
+          "description": "AMIS19 Diluted 10.95X"
+        },
+        {
+          "code": "AMIS19X100",
+          "description": "AMIS0019 Diluted 100X"
+        },
+        {
+          "code": "AMIS19X104.3",
+          "description": "AMIS0019 Diluted 104.3X"
+        },
+        {
+          "code": "AMIS19X105",
+          "description": "AMIS0019 Diluted 105X"
+        },
+        {
+          "code": "AMIS19X109.5",
+          "description": "AMIS0019 Diluted 109.5X"
+        },
+        {
+          "code": "AMIS19X3",
+          "description": "AMIS0019 Diluted 3X"
+        },
+        {
+          "code": "AMIS19X40.86",
+          "description": "AMIS0019 Diluted 40.86X"
+        },
+        {
+          "code": "AMIS19X5",
+          "description": "AMIS0019 Diluted 5X"
+        },
+        {
+          "code": "AMIS20",
+          "description": "AMIS0020"
+        },
+        {
+          "code": "AMIS20X10",
+          "description": "AMIS0020 Diluted 10X"
+        },
+        {
+          "code": "AMIS20X2",
+          "description": "AMIS0020 Diluted 2X"
+        },
+        {
+          "code": "AMIS20X20",
+          "description": "AMIS0020 Diluted 20X"
+        },
+        {
+          "code": "AMIS20X3",
+          "description": "AMIS0020 Diluted 3X"
+        },
+        {
+          "code": "AMIS20X30",
+          "description": "AMIS0020 Diluted 30X"
+        },
+        {
+          "code": "AMIS20X5",
+          "description": "AMIS0020 Diluted 5X"
+        },
+        {
+          "code": "AMIS20X5.67",
+          "description": "AMIS20 Diluted 5.67X"
+        },
+        {
+          "code": "AMIS20X50",
+          "description": "AMIS0020 Diluted 50X"
+        },
+        {
+          "code": "AMIS20X6.18",
+          "description": "AMIS20 Diluted 6.18X"
+        },
+        {
+          "code": "AMIS20X8",
+          "description": "AMIS20 Diluted 8X"
+        },
+        {
+          "code": "AMIS20X8.24",
+          "description": "AMIS20 Diluted 8.24X"
+        },
+        {
+          "code": "AMIS20X9.07",
+          "description": "AMIS0020 Diluted 9.07X"
+        },
+        {
+          "code": "AMIS20X9.1",
+          "description": "AMIS20 Diluted 9.1X"
+        },
+        {
+          "code": "AMIS20X9.38",
+          "description": "AMIS20 Diluted 9.38X"
+        },
+        {
+          "code": "AMIS21",
+          "description": "AMIS0021"
+        },
+        {
+          "code": "AMIS21X10",
+          "description": "AMIS0021 Diluted 10X"
+        },
+        {
+          "code": "AMIS21X2",
+          "description": "AMIS0021 Diluted 2X"
+        },
+        {
+          "code": "AMIS21X20",
+          "description": "AMIS0021 Diluted 20X"
+        },
+        {
+          "code": "AMIS21X3",
+          "description": "AMIS0021 Diluted 3X"
+        },
+        {
+          "code": "AMIS301",
+          "description": "AMIS301"
+        },
+        {
+          "code": "AMIS348",
+          "description": "AMIS348"
+        },
+        {
+          "code": "AMIS348X2",
+          "description": "AMIS348 Diluted 2X"
+        },
+        {
+          "code": "BCS355",
+          "description": "BCS355"
+        },
+        {
+          "code": "BCS355X100",
+          "description": "BCS 355 Diluted 100X"
+        },
+        {
+          "code": "BCS355X150",
+          "description": "BCS 355 Diluted 150X"
+        },
+        {
+          "code": "BCS355X20",
+          "description": "BCS 355 Diluted 20X"
+        },
+        {
+          "code": "BCS355X200",
+          "description": "BCS 355 Diluted 200X"
+        },
+        {
+          "code": "BCS355X50",
+          "description": "BCS 355 Diluted 50X"
+        },
+        {
+          "code": "BCS355X75",
+          "description": "BCS 355 Diluted 75X"
+        },
+        {
+          "code": "BLANK",
+          "description": "BLANK"
+        },
+        {
+          "code": "BLANKGEO",
+          "description": "Blank standard from geologist"
+        },
+        {
+          "code": "BLANKLAB",
+          "description": "Blank standard from laboratory"
+        },
+        {
+          "code": "GBM908-14",
+          "description": "GBM908-14"
+        },
+        {
+          "code": "GBM996-7",
+          "description": "GBM996-7"
+        },
+        {
+          "code": "GBM997-6",
+          "description": "GBM997-6"
+        },
+        {
+          "code": "NCSDC73322",
+          "description": "NCSDC73322"
+        },
+        {
+          "code": "NCSDC73323",
+          "description": "NCSDC73323"
+        },
+        {
+          "code": "NI_LTRT35",
+          "description": "NI_LTRT35"
+        },
+        {
+          "code": "NI_LTRT41",
+          "description": "NI_LTRT41"
+        },
+        {
+          "code": "OREAS140",
+          "description": "Certified Reference Material OREAS 140"
+        },
+        {
+          "code": "OREAS140X13.5",
+          "description": "OREAS 140 Diluted 13.5X"
+        },
+        {
+          "code": "OREAS140X14",
+          "description": "OREAS140 Diluted 14X"
+        },
+        {
+          "code": "OREAS140X4.2",
+          "description": "OREAS140 Diluted 4.2X"
+        },
+        {
+          "code": "OREAS140X6",
+          "description": "OREAS140 Diluted 6"
+        },
+        {
+          "code": "OREAS141",
+          "description": "Certified Reference Material OREAS 141"
+        },
+        {
+          "code": "OREAS141X18",
+          "description": "OREAS 141 Diluted 18X"
+        },
+        {
+          "code": "OREAS141X23.82",
+          "description": "OREAS 141 Diluted 23.82X"
+        },
+        {
+          "code": "OREAS141X24.28",
+          "description": "OREAS 141 Diluted 24.28X"
+        },
+        {
+          "code": "OREAS141X3",
+          "description": "OREAS 141 Diluted 3X"
+        },
+        {
+          "code": "OREAS141X6.01",
+          "description": "OREAS141 Diluted 6.01X"
+        },
+        {
+          "code": "OREAS141X6.312",
+          "description": "OREAS141 Diluted 6.312X"
+        },
+        {
+          "code": "OREAS141X6.321",
+          "description": "OREAS141 Diluted 6.321X"
+        },
+        {
+          "code": "OREAS141X63",
+          "description": "OREAS 141 Diluted 63X"
+        },
+        {
+          "code": "OREAS141X63.12",
+          "description": "OREAS141 Diluted 63.12X"
+        },
+        {
+          "code": "OREAS141X70.13",
+          "description": "OREAS141 Diluted 70.13X"
+        },
+        {
+          "code": "OREAS142",
+          "description": "CRM OREAS 142"
+        },
+        {
+          "code": "OREAS142X10.8",
+          "description": "OREAS142 Diluted 10.8X"
+        },
+        {
+          "code": "OREAS142X100",
+          "description": "OREAS 142 Diluted 100X"
+        },
+        {
+          "code": "OREAS142X100.9",
+          "description": "OREAS142 Diluted 100.9X"
+        },
+        {
+          "code": "OREAS142X2.1",
+          "description": "OREAS142 Diluted 2.1X"
+        },
+        {
+          "code": "OREAS142X2.3",
+          "description": "OREAS142 Diluted 2.3X"
+        },
+        {
+          "code": "OREAS142X2.6",
+          "description": "OREAS142 Diluted 2.6X"
+        },
+        {
+          "code": "OREAS142X2.9",
+          "description": "OREAS142 Diluted 2.9X"
+        },
+        {
+          "code": "OREAS142X25.5",
+          "description": "OREAS142 Diluted 25.5"
+        },
+        {
+          "code": "OREAS142X27",
+          "description": "OREAS 142 Diluted 27X"
+        },
+        {
+          "code": "OREAS142X3",
+          "description": "OREAS142 Diluted 3X"
+        },
+        {
+          "code": "OREAS142X41",
+          "description": "OREAS 142 Diluted 41X"
+        },
+        {
+          "code": "OREAS142X42",
+          "description": "OREAS 142 Diluted 42X"
+        },
+        {
+          "code": "OREAS142X5.7",
+          "description": "OREAS142 Diluted 5.7X"
+        },
+        {
+          "code": "OREAS142X6",
+          "description": "OREAS142 Diluted 6X"
+        },
+        {
+          "code": "OREAS142X9.5",
+          "description": "OREAS142 Diluted 9.5X"
+        },
+        {
+          "code": "OREAS142X98.2",
+          "description": "OREAS142 Diluted 98.2X"
+        },
+        {
+          "code": "OREAS149X2",
+          "description": "Certified Reference Material 149 Diluted 2X"
+        },
+        {
+          "code": "OREAS503B",
+          "description": "OREAS 503B"
+        },
+        {
+          "code": "STD",
+          "description": "Dummy CRM Data"
+        },
+        {
+          "code": "STSD-3",
+          "description": "STSD-3"
+        }
+      ]
+    },
+    {
+      "id": "stickiness_5h69",
+      "name": "STICKINESS",
+      "items": [
+        {
+          "code": "Non_Sticky",
+          "description": "Non Sticky"
+        },
+        {
+          "code": "Slightly_Sticky",
+          "description": "Slightly Sticky"
+        },
+        {
+          "code": "Very_Sticky",
+          "description": "Very Sticky"
+        }
+      ]
+    },
+    {
+      "id": "strength_8o8a",
+      "name": "STRENGTH",
+      "items": [
+        {
+          "code": "CL",
+          "description": "Coreloss"
+        },
+        {
+          "code": "ND",
+          "description": "NO DATA"
+        },
+        {
+          "code": "R0",
+          "description": "Extremely Weak"
+        },
+        {
+          "code": "R1",
+          "description": "Very Weak"
+        },
+        {
+          "code": "R2",
+          "description": "Weak"
+        },
+        {
+          "code": "R3",
+          "description": "Medium Strong"
+        },
+        {
+          "code": "R4",
+          "description": "Strong"
+        },
+        {
+          "code": "R5",
+          "description": "Very Strong"
+        },
+        {
+          "code": "R6",
+          "description": "Extremely Strong"
+        }
+      ]
+    },
+    {
+      "id": "structure_type_fba1",
+      "name": "STRUCTURE_TYPE",
+      "items": [
+        {
+          "code": "BED",
+          "description": "Bedding / Layering / Dominant Vein Banding"
+        },
+        {
+          "code": "CON",
+          "description": "Contact (Lithologic / Structural)"
+        },
+        {
+          "code": "FLT",
+          "description": "Fault"
+        },
+        {
+          "code": "FOL",
+          "description": "Foliation Minerals"
+        },
+        {
+          "code": "GOU",
+          "description": "Contact gouge"
+        },
+        {
+          "code": "HFZ",
+          "description": "Highly Fracture Zone (no. shearing)"
+        },
+        {
+          "code": "SHR",
+          "description": "Shear (Pseudo-ductile, Restricted to clay rich rocks)"
+        },
+        {
+          "code": "VEIN",
+          "description": "Vein"
+        },
+        {
+          "code": "VEN",
+          "description": "Single Vein (Vein >= 1cm)"
+        },
+        {
+          "code": "VES",
+          "description": "Veinlet System"
+        }
+      ]
+    },
+    {
+      "id": "survey_method_wwes",
+      "name": "SURVEY_METHOD",
+      "items": [
+        {
+          "code": "DGPS",
+          "description": "Differential Global Positioning System"
+        },
+        {
+          "code": "GPS",
+          "description": "Global Positioning System"
+        },
+        {
+          "code": "GPSPS",
+          "description": "GPS Static Processing"
+        },
+        {
+          "code": "GPSRTK",
+          "description": "GPS Realtime Kinematic"
+        },
+        {
+          "code": "Poly/TCM",
+          "description": "Polygon/Tachimetri"
+        },
+        {
+          "code": "SDT",
+          "description": "Sipat Datar"
+        },
+        {
+          "code": "SM",
+          "description": "Silang Ke Muka"
+        },
+        {
+          "code": "St/Poly",
+          "description": "Static/Polygon"
+        },
+        {
+          "code": "TCM",
+          "description": "Tachimetri"
+        },
+        {
+          "code": "TCM/TS",
+          "description": "Tachimetri/Total Station"
+        },
+        {
+          "code": "THEO",
+          "description": "Theodolite"
+        },
+        {
+          "code": "UNKNOWN",
+          "description": "UNKNOWN"
+        },
+        {
+          "code": "HHELD",
+          "description": "Handled"
+        }
+      ]
+    },
+    {
+      "id": "survey_type_0kpm",
+      "name": "SURVEY_TYPE",
+      "items": [
+        {
+          "code": "ETRSL",
+          "description": "Extra-Terrestrial"
+        },
+        {
+          "code": "ND",
+          "description": "No Data"
+        },
+        {
+          "code": "PLANNED",
+          "description": "Planned Location or orientation"
+        },
+        {
+          "code": "SURVEYED",
+          "description": "Accurate Survey"
+        },
+        {
+          "code": "TRSL",
+          "description": "Terrestrial"
+        },
+        {
+          "code": "UNKNOWN",
+          "description": "Unknown"
+        }
+      ]
+    },
+    {
+      "id": "validation_type_1pab",
+      "name": "VALIDATION_TYPE",
+      "items": [
+        {
+          "code": "D",
+          "description": "Depth Validation Rule"
+        },
+        {
+          "code": "E",
+          "description": "Empty not permitted"
+        },
+        {
+          "code": "K",
+          "description": "Foreign Key Match Required"
+        },
+        {
+          "code": "L",
+          "description": "Lookup in Category"
+        },
+        {
+          "code": "R",
+          "description": "Range Check"
+        }
+      ]
+    },
+    {
+      "id": "vein_style_61rv",
+      "name": "VEIN_STYLE",
+      "items": [
+        {
+          "code": "LOSS",
+          "description": "Coreloss"
+        },
+        {
+          "code": "ND",
+          "description": "No Data"
+        },
+        {
+          "code": "NOVEIN",
+          "description": "No vein"
+        },
+        {
+          "code": "SVES",
+          "description": "Single vein system"
+        },
+        {
+          "code": "SVLS",
+          "description": "Single veinlet system"
+        },
+        {
+          "code": "SWMV",
+          "description": "Dom Swv + Min Ven/Veinlet"
+        },
+        {
+          "code": "SWSV",
+          "description": "Dom Swv + Single Ven/Veinlet"
+        },
+        {
+          "code": "SWV",
+          "description": "Stockwork system"
+        },
+        {
+          "code": "VES",
+          "description": "Vein systems"
+        },
+        {
+          "code": "VLS",
+          "description": "Veinlet systems"
+        },
+        {
+          "code": "VVS",
+          "description": "Vein & Veinlet systems"
+        }
+      ]
+    },
+    {
+      "id": "vein_texture_5rs9",
+      "name": "VEIN_TEXTURE",
+      "items": [
+        {
+          "code": "CL",
+          "description": "Colloform"
+        },
+        {
+          "code": "CM",
+          "description": "Comb"
+        },
+        {
+          "code": "CR",
+          "description": "Crustiform"
+        },
+        {
+          "code": "DT",
+          "description": "Dog toothed"
+        },
+        {
+          "code": "MO",
+          "description": "Moss"
+        },
+        {
+          "code": "MS",
+          "description": "Massive"
+        },
+        {
+          "code": "NOVEIN",
+          "description": "No vein"
+        },
+        {
+          "code": "SC",
+          "description": "Saccharoidal"
+        },
+        {
+          "code": "VG",
+          "description": "Vuggy"
+        }
+      ]
+    },
+    {
+      "id": "vein_type_l1q5",
+      "name": "VEIN_TYPE",
+      "items": [
+        {
+          "code": "CAVEIN",
+          "description": "Carbonate vein (Cal/Dol)"
+        },
+        {
+          "code": "CCVEIN",
+          "description": "Clay+cassiterite vein/veinlet"
+        },
+        {
+          "code": "CLVEIN",
+          "description": "Clay vein/veinlet"
+        },
+        {
+          "code": "CSVEIN",
+          "description": "Chlorite+Sulphide Vein/Veinlet"
+        },
+        {
+          "code": "CVEIN",
+          "description": "Cassiterite vein/veinlet"
+        },
+        {
+          "code": "FVEIN",
+          "description": "Oxide vein/veinlet (Fe-Ox-Al-Ox+MnO"
+        },
+        {
+          "code": "GAVEIN",
+          "description": "Garnet Vein"
+        },
+        {
+          "code": "MUVEIN",
+          "description": "Muscovite vein"
+        },
+        {
+          "code": "MVEIN",
+          "description": "Magnetite (\u00b1Hem\u00b1Epd\u00b1Chl) vein/ veinlet"
+        },
+        {
+          "code": "NOVEIN",
+          "description": "No vein"
+        },
+        {
+          "code": "PVEIN",
+          "description": "Pegmatite vein"
+        },
+        {
+          "code": "QCSVEIN",
+          "description": "Quartz clay cassiterite vein/veinlet"
+        },
+        {
+          "code": "QMCVEIN",
+          "description": "Quartz muscovite cassiterite vein"
+        },
+        {
+          "code": "QMVEIN",
+          "description": "Quartz muscovite vein"
+        },
+        {
+          "code": "QMWCVEIN",
+          "description": "Quartz muscovite wolfram cassiterite vein"
+        },
+        {
+          "code": "QSVEIN",
+          "description": "Quartz cassiterite vein/veinlet"
+        },
+        {
+          "code": "QTSVEIN",
+          "description": "Quartz  tourmaline cassiterite vein/veinlet"
+        },
+        {
+          "code": "QTVEIN",
+          "description": "Quartz tourmaline vein/veinlet"
+        },
+        {
+          "code": "QVEIN",
+          "description": "Quartz vein/veinlet"
+        },
+        {
+          "code": "TSVEIN",
+          "description": "Tourmaline cassiterite vein/veinlet"
+        },
+        {
+          "code": "TVEIN",
+          "description": "Tourmaline vein/veinlet"
+        },
+        {
+          "code": "WVEIN",
+          "description": "Wolframite vein/veinlet"
+        },
+        {
+          "code": "XVEIN",
+          "description": "Complex vein (Qtz -Sulphides+Sn+W)"
+        }
+      ]
+    },
+    {
+      "id": "weathering_eurk",
+      "name": "WEATHERING",
+      "items": [
+        {
+          "code": "CW",
+          "description": "Completely Weathered"
+        },
+        {
+          "code": "HW",
+          "description": "Highly Weathered"
+        },
+        {
+          "code": "LO",
+          "description": "Coreloss"
+        },
+        {
+          "code": "MW",
+          "description": "Moderately Weathered"
+        },
+        {
+          "code": "ND",
+          "description": "No Data"
+        },
+        {
+          "code": "SW",
+          "description": "Slightly Weathered"
+        },
+        {
+          "code": "UW",
+          "description": "Unweathered"
+        }
+      ]
+    }
+  ],
+  "configs": [
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "IUP",
+          "columnName": "IUP",
+          "validation": {
+            "lookup": {
+              "libraryId": "iup_27ka",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "LOCATION",
+          "columnName": "LOCATION",
+          "validation": {
+            "lookup": {
+              "libraryId": "location_b8rm",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PROSPECT",
+          "columnName": "PROSPECT",
+          "validation": {
+            "lookup": {
+              "libraryId": "prospect_sd83",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DEPOSIT_TYPE",
+          "columnName": "DEPOSIT_TYPE",
+          "validation": {
+            "lookup": {
+              "libraryId": "deposit_type_fsf3",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CREW",
+          "columnName": "CREW",
+          "validation": {
+            "lookup": {
+              "libraryId": "crew_9oec",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PURPOSE",
+          "columnName": "PURPOSE",
+          "validation": {
+            "lookup": {
+              "libraryId": "purpose_d1rb",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DATE_STARTED",
+          "columnName": "DATE_STARTED",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DATE_COMPLETED",
+          "columnName": "DATE_COMPLETED",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "END_DEPTH",
+          "columnName": "END_DEPTH",
+          "validation": {
+            "range": {
+              "max": 1000,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ANALYSIS_METHOD",
+          "columnName": "ANALYSIS_METHOD",
+          "validation": {
+            "lookup": {
+              "libraryId": "analysis_method_nq3d",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "RIG_TYPE",
+          "columnName": "RIG_TYPE",
+          "validation": {
+            "lookup": {
+              "libraryId": "rig_type_uxgy",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "WELLSITE_GEOS",
+          "columnName": "WELLSITE_GEOS",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CONTRACTOR",
+          "columnName": "CONTRACTOR",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "COLLAR"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "INSTANCE",
+          "columnName": "INSTANCE",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "RANKING",
+          "columnName": "RANKING",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "READING_NO",
+          "columnName": "READING_NO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH",
+          "columnName": "DEPTH",
+          "validation": {
+            "range": {
+              "max": 1000,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DIRECTION",
+          "columnName": "DIRECTION",
+          "validation": {
+            "range": {
+              "max": 360,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "INCLINATION",
+          "columnName": "INCLINATION",
+          "validation": {
+            "range": {
+              "max": 0,
+              "min": -90,
+              "strict": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "SURVEY"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_FROM",
+          "columnName": "DEPTH_FROM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_TO",
+          "columnName": "DEPTH_TO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ROCK_TYPE",
+          "columnName": "ROCK_TYPE",
+          "validation": {
+            "lookup": {
+              "libraryId": "rock_type_fuu1",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "LITHOLOGY",
+          "columnName": "LITHOLOGY",
+          "validation": {
+            "lookup": {
+              "libraryId": "lithology_0048",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "COLOUR",
+          "columnName": "COLOUR",
+          "validation": {
+            "lookup": {
+              "libraryId": "colour_68c3",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "GRAIN_SIZE",
+          "columnName": "GRAIN_SIZE",
+          "validation": {
+            "lookup": {
+              "libraryId": "grain_size_3d60",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "GRAIN_SHAPE",
+          "columnName": "GRAIN_SHAPE",
+          "validation": {
+            "lookup": {
+              "libraryId": "gr_qr_shape_7j2g",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "RECOVERY_M",
+          "columnName": "RECOVERY_M",
+          "validation": {
+            "range": {
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "LOGGER",
+          "columnName": "LOGGER",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "TEXTURE",
+          "columnName": "TEXTURE",
+          "validation": {
+            "lookup": {
+              "libraryId": "rock_texture_fg8b",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "STRUCTURE",
+          "columnName": "STRUCTURE",
+          "validation": {
+            "lookup": {
+              "libraryId": "rock_structure_90k1",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "LITHOLOGY"
+    },
+    {
+      "columns": [],
+      "tableType": "ASSAY"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_FROM",
+          "columnName": "DEPTH_FROM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_TO",
+          "columnName": "DEPTH_TO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MIN_STYLE",
+          "columnName": "MIN_STYLE",
+          "validation": {
+            "lookup": {
+              "libraryId": "minz_style_8drz",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "APY_PCT",
+          "columnName": "APY_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CAS_PCT",
+          "columnName": "CAS_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CPY_PCT",
+          "columnName": "CPY_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "GAL_PCT",
+          "columnName": "GAL_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MAL_PCT",
+          "columnName": "MAL_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MN_PCT",
+          "columnName": "MN_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MOB_PCT",
+          "columnName": "MOB_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PY_PCT",
+          "columnName": "PY_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PYM_PCT",
+          "columnName": "PYM_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PYR_PCT",
+          "columnName": "PYR_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SPH_PCT",
+          "columnName": "SPH_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "STN_PCT",
+          "columnName": "STN_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "WOL_PCT",
+          "columnName": "WOL_PCT",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "MINERALIZATION"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_FROM",
+          "columnName": "DEPTH_FROM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_TO",
+          "columnName": "DEPTH_TO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "OXIDATION_STATE",
+          "columnName": "OXIDATION_STATE",
+          "validation": {
+            "lookup": {
+              "libraryId": "oxidation_state_v3ho",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "HEMATITE",
+          "columnName": "HEMATITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "GOETHITE",
+          "columnName": "GOETHITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "JAROSITE",
+          "columnName": "JAROSITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "LIMONITE",
+          "columnName": "LIMONITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "OXIDATION"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH",
+          "columnName": "DEPTH",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DEFECT_SET_NAME",
+          "columnName": "DEFECT_SET_NAME",
+          "validation": {
+            "lookup": {
+              "libraryId": "structure_type_fba1",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEFECT_COUNT",
+          "columnName": "DEFECT_COUNT",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DEFECT_TYPE",
+          "columnName": "DEFECT_TYPE",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_type_l1q5",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "ALPHA",
+          "columnName": "ALPHA",
+          "validation": {
+            "range": {
+              "max": 90,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "BETA",
+          "columnName": "BETA",
+          "validation": {
+            "range": {
+              "max": 360,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "GAMMA",
+          "columnName": "GAMMA",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DIP",
+          "columnName": "DIP",
+          "validation": {
+            "range": {
+              "max": 90,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DIP_DIRECTION",
+          "columnName": "DIP_DIRECTION",
+          "validation": {
+            "range": {
+              "max": 360,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "STRIKE",
+          "columnName": "STRIKE",
+          "validation": {
+            "range": {
+              "max": 360,
+              "min": 0,
+              "strict": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "INFILL_TYPE",
+          "columnName": "INFILL_TYPE",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_type_l1q5",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "INFILL_TEXTURE",
+          "columnName": "INFILL_TEXTURE",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_texture_5rs9",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "INFILL_THICKNESS",
+          "columnName": "INFILL_THICKNESS",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "INFILL_MIN1",
+          "columnName": "INFILL_MIN1",
+          "validation": {
+            "lookup": {
+              "libraryId": "primary_mineral_c933",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ORIENTATION_MARK",
+          "columnName": "ORIENTATION_MARK",
+          "validation": {
+            "lookup": {
+              "libraryId": "core_orientation_d3n8",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ORIENTATION_MARK_CONFIDENCE",
+          "columnName": "ORIENTATION_MARK_CONFIDENCE",
+          "validation": {
+            "lookup": {
+              "libraryId": "orien_quality_33t9",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ORIENTATION_TOOL",
+          "columnName": "ORIENTATION_TOOL",
+          "validation": {
+            "lookup": {
+              "libraryId": "logging_method_5qi2",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "LOGGED_BY",
+          "columnName": "LOGGED_BY",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "GEOTECH"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_FROM",
+          "columnName": "DEPTH_FROM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_TO",
+          "columnName": "DEPTH_TO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "BIT_SIZE",
+          "columnName": "BIT_SIZE",
+          "validation": {
+            "lookup": {
+              "libraryId": "core_size_mmbn",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "RECOVERY_M",
+          "columnName": "RECOVERY_M",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "RQD_10CM",
+          "columnName": "RQD_10CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "WEATHERING",
+          "columnName": "WEATHERING",
+          "validation": {
+            "lookup": {
+              "libraryId": "weathering_eurk",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "STRENGTH",
+          "columnName": "STRENGTH",
+          "validation": {
+            "lookup": {
+              "libraryId": "strength_8o8a",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "STICK_UP",
+          "columnName": "STICK_UP",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CORE_LOSS_FROM",
+          "columnName": "CORE_LOSS_FROM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CORE_LOSS_TO",
+          "columnName": "CORE_LOSS_TO",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SHIFT",
+          "columnName": "SHIFT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CORE_TECHNICIAN",
+          "columnName": "CORE_TECHNICIAN",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "RQD"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_FROM",
+          "columnName": "DEPTH_FROM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_TO",
+          "columnName": "DEPTH_TO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_STYLE",
+          "columnName": "VEIN_STYLE",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_style_61rv",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_TYPE_1",
+          "columnName": "VEIN_TYPE_1",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_type_l1q5",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_TEXTURE_1",
+          "columnName": "VEIN_TEXTURE_1",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_texture_5rs9",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_PCT_1",
+          "columnName": "VEIN_PCT_1",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_TYPE_2",
+          "columnName": "VEIN_TYPE_2",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_type_l1q5",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_TEXTURE_2",
+          "columnName": "VEIN_TEXTURE_2",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_texture_5rs9",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_PCT_2",
+          "columnName": "VEIN_PCT_2",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_TYPE_3",
+          "columnName": "VEIN_TYPE_3",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_type_l1q5",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_TEXTURE_3",
+          "columnName": "VEIN_TEXTURE_3",
+          "validation": {
+            "lookup": {
+              "libraryId": "vein_texture_5rs9",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "VEIN_PCT_3",
+          "columnName": "VEIN_PCT_3",
+          "validation": {
+            "lookup": {
+              "libraryId": "ore_pct_nuib",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "VEIN"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_FROM",
+          "columnName": "DEPTH_FROM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH_TO",
+          "columnName": "DEPTH_TO",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ALT_INTENSTY",
+          "columnName": "ALT_INTENSTY",
+          "validation": {
+            "lookup": {
+              "libraryId": "alt_int_m4jx",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ALT_GROUP",
+          "columnName": "ALT_GROUP",
+          "validation": {
+            "lookup": {
+              "libraryId": "alt_group_bb2q",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CHLORITE",
+          "columnName": "CHLORITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "EPIDOTE",
+          "columnName": "EPIDOTE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CALCITE",
+          "columnName": "CALCITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SMECTITE",
+          "columnName": "SMECTITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SERICITE",
+          "columnName": "SERICITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "KAOLINITE",
+          "columnName": "KAOLINITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ILLITE",
+          "columnName": "ILLITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "FLUORITE",
+          "columnName": "FLUORITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "TOPAZ",
+          "columnName": "TOPAZ",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "TOURMALINE",
+          "columnName": "TOURMALINE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MUSCOVITE",
+          "columnName": "MUSCOVITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SILICA_ALTERATION",
+          "columnName": "SILICA_ALTERATION",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "GARNET",
+          "columnName": "GARNET",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "CLINOPYROXENE",
+          "columnName": "CLINOPYROXENE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MAGNETITE",
+          "columnName": "MAGNETITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "K_FELDSPAR",
+          "columnName": "K_FELDSPAR",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SEC_BIOTITE",
+          "columnName": "SEC_BIOTITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "ALUNITE",
+          "columnName": "ALUNITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PHYROPYLLITE",
+          "columnName": "PHYROPYLLITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SILIMANITE",
+          "columnName": "SILIMANITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MICROCLINE",
+          "columnName": "MICROCLINE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "PLOGOPITE",
+          "columnName": "PLOGOPITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "LEPIDOLITE",
+          "columnName": "LEPIDOLITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DICKITE",
+          "columnName": "DICKITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "DIOPSIDE",
+          "columnName": "DIOPSIDE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "WOLLASTONITE",
+          "columnName": "WOLLASTONITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "HEDENBERGITE",
+          "columnName": "HEDENBERGITE",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "QTZ",
+          "columnName": "QTZ",
+          "validation": {
+            "lookup": {
+              "libraryId": "min_comp_ratio_a8zu",
+              "caseSensitive": false
+            }
+          },
+          "isMandatory": false,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "ALTERATION"
+    },
+    {
+      "columns": [
+        {
+          "type": "string",
+          "label": "PROJECT",
+          "columnName": "PROJECT",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SITE_ID",
+          "columnName": "SITE_ID",
+          "validation": {
+            "isKeyReference": true
+          },
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DEPTH",
+          "columnName": "DEPTH",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "LENGTH_CM",
+          "columnName": "LENGTH_CM",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "SAMPLE_ID",
+          "columnName": "SAMPLE_ID",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "MEASURED_DATE",
+          "columnName": "MEASURED_DATE",
+          "validation": {},
+          "isMandatory": true,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "string",
+          "label": "WRAPPED_METHOD",
+          "columnName": "WRAPPED_METHOD",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "DRY_WEIGHT_GR",
+          "columnName": "DRY_WEIGHT_GR",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "WRAPPED_DRY_WEIGHT_GR",
+          "columnName": "WRAPPED_DRY_WEIGHT_GR",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "WET_WEIGHT_GR",
+          "columnName": "WET_WEIGHT_GR",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "WRAPPED_WET_WEIGHT_GR",
+          "columnName": "WRAPPED_WET_WEIGHT_GR",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CALIPER_L1_CM",
+          "columnName": "CALIPER_L1_CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CALIPER_L2_CM",
+          "columnName": "CALIPER_L2_CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CALIPER_L3_CM",
+          "columnName": "CALIPER_L3_CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CALIPER_D1_CM",
+          "columnName": "CALIPER_D1_CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CALIPER_D2_CM",
+          "columnName": "CALIPER_D2_CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        },
+        {
+          "type": "float",
+          "label": "CALIPER_D3_CM",
+          "columnName": "CALIPER_D3_CM",
+          "validation": {},
+          "isMandatory": false,
+          "isSchemaRequired": true
+        }
+      ],
+      "tableType": "DENSITY"
+    }
+  ]
+}
