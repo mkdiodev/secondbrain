@@ -57,6 +57,7 @@ class ChatRuntimeTests(unittest.TestCase):
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
             (root / "keep.md").write_text("keep", encoding="utf-8")
+            (root / "survey.xlsx").write_bytes(b"excel-ish")
             (root / "assets").mkdir()
             (root / "assets" / "logo.png").write_text("png-ish", encoding="utf-8")
             (root / "empty-folder").mkdir()
@@ -65,8 +66,8 @@ class ChatRuntimeTests(unittest.TestCase):
 
             runtime = ChatRuntime(self._config(root))
             state = runtime.state()
-            self.assertEqual(state["recent_files"], ["keep.md"])
-            self.assertEqual(state["workspace_files"], ["keep.md"])
+            self.assertEqual(state["recent_files"], ["assets/logo.png", "keep.md", "survey.xlsx"])
+            self.assertEqual(state["workspace_files"], ["assets/logo.png", "keep.md", "survey.xlsx"])
             entries = {(item["path"], item["type"]) for item in state["workspace_entries"]}
             self.assertIn(("assets", "directory"), entries)
             self.assertIn(("assets/logo.png", "file"), entries)
@@ -82,10 +83,11 @@ class ChatRuntimeTests(unittest.TestCase):
             root = Path(tmp)
             (root / "alpha.md").write_text("alpha", encoding="utf-8")
             (root / "beta.md").write_text("beta", encoding="utf-8")
+            (root / "survey.xlsx").write_bytes(b"excel-ish")
             llm = FakeLLM(
                 [
                     '{"tool":"list_files","path":"."}',
-                    "I found alpha.md and beta.md.",
+                    "I found alpha.md, beta.md, and survey.xlsx.",
                 ]
             )
 
@@ -95,6 +97,7 @@ class ChatRuntimeTests(unittest.TestCase):
             self.assertEqual(result["kind"], "tool-chat")
             self.assertEqual(result["tools"][0]["tool"], "list_files")
             self.assertIn("alpha.md", result["reply"])
+            self.assertIn("survey.xlsx", llm.calls[1][-1]["content"])
             self.assertEqual(len(llm.calls), 2)
 
     def test_agent_tool_loop_reads_files_from_natural_language(self) -> None:
@@ -118,15 +121,15 @@ class ChatRuntimeTests(unittest.TestCase):
     def test_agent_tool_loop_validates_drillhole_file_from_natural_language(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
+            (root / "collar.csv").write_text("site_id,end_depth\nD001,100\n", encoding="utf-8")
             (root / "lithology.csv").write_text(
                 "project,site_id,depth_from,depth_to,rock_type,lithology,recovery_m,logger\n"
-                "P,DH001,0,10,BAD,QV,10,AD\n",
+                "P,D001,0,120,BAD,QV,10,AD\n",
                 encoding="utf-8",
             )
             llm = FakeLLM(
                 [
-                    '{"tool":"validate_drillhole","inputs":{"lithology":"lithology.csv"}}',
-                    "The lithology file has an invalid code.",
+                    '{"tool":"validate_drillhole","inputs":{"collar":"collar.csv","lithology":"lithology.csv"}}',
                 ]
             )
 
@@ -135,8 +138,75 @@ class ChatRuntimeTests(unittest.TestCase):
 
             self.assertEqual(result["kind"], "tool-chat")
             self.assertEqual(result["tools"][0]["tool"], "validate_drillhole")
-            self.assertIn("Invalid Code", llm.calls[1][-1]["content"])
-            self.assertEqual(len(llm.calls), 2)
+            self.assertIn("## Ringkasan", result["reply"])
+            self.assertIn("| Nama File | SITE_ID/HOLE_ID | Tipe Error | Kolom | Nilai/Penyebab |", result["reply"])
+            self.assertIn("lithology.csv", result["reply"])
+            self.assertIn("D001", result["reply"])
+            self.assertIn("DEPTH_TO", result["reply"])
+            self.assertIn("Invalid Code", result["reply"])
+            self.assertEqual(len(llm.calls), 0)
+
+    def test_agent_tool_loop_infers_drillhole_roles_from_folder(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            data = root / "data"
+            data.mkdir()
+            (data / "GB_SITE.csv").write_text("site_id,end_depth\nD001,100\n", encoding="utf-8")
+            (data / "GB_LITHOLOGY.csv").write_text(
+                "project,site_id,depth_from,depth_to,rock_type,lithology,recovery_m,logger\n"
+                "P,D001,0,120,BAD,QV,10,AD\n",
+                encoding="utf-8",
+            )
+            llm = FakeLLM([])
+
+            runtime = ChatRuntime(self._config(root), llm=llm)
+            result = runtime.handle_message("validasi lithology di folder data")
+
+            self.assertEqual(result["kind"], "tool-chat")
+            self.assertEqual(result["tools"][0]["tool"], "validate_drillhole")
+            self.assertEqual(
+                result["tools"][0]["args"]["inputs"],
+                {"lithology": "data/GB_LITHOLOGY.csv", "collar": "data/GB_SITE.csv"},
+            )
+            self.assertIn("data/GB_LITHOLOGY.csv", result["reply"])
+            self.assertEqual(len(llm.calls), 0)
+
+    def test_agent_tool_loop_uses_editable_drillhole_role_aliases(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            data = root / "data"
+            guidance = root / "drillhole_validation"
+            data.mkdir()
+            guidance.mkdir()
+            (guidance / "default.md").write_text(
+                "# Drillhole Validation Role Inference\n\n"
+                "## Intent Aliases\n\n"
+                "- validasi = validate_drillhole\n\n"
+                "## File Role Aliases\n\n"
+                "- collar_custom = collar\n"
+                "- geologi = lithology\n\n"
+                "## Required Companion Files\n\n"
+                "- lithology requires collar\n",
+                encoding="utf-8",
+            )
+            (data / "collar_custom.csv").write_text("site_id,end_depth\nD001,100\n", encoding="utf-8")
+            (data / "geologi.csv").write_text(
+                "project,site_id,depth_from,depth_to,rock_type,lithology,recovery_m,logger\n"
+                "P,D001,0,120,BAD,QV,10,AD\n",
+                encoding="utf-8",
+            )
+            llm = FakeLLM([])
+
+            runtime = ChatRuntime(self._config(root), llm=llm)
+            result = runtime.handle_message("validasi geologi di folder data")
+
+            self.assertEqual(result["kind"], "tool-chat")
+            self.assertEqual(result["tools"][0]["tool"], "validate_drillhole")
+            self.assertEqual(
+                result["tools"][0]["args"]["inputs"],
+                {"collar": "data/collar_custom.csv", "lithology": "data/geologi.csv"},
+            )
+            self.assertEqual(len(llm.calls), 0)
 
     def test_normal_chat_skips_tool_planning(self) -> None:
         with TemporaryDirectory() as tmp:

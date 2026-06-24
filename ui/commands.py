@@ -7,6 +7,7 @@ import shlex
 from collections.abc import Callable
 from typing import Any
 
+from .dh_format import format_drillhole_summary
 from .workspace import WorkspaceService
 
 
@@ -158,9 +159,10 @@ class CommandRouter:
                 for profile in profiles:
                     status = "configured" if profile["configured"] else "missing connection env"
                     scopes = ", ".join(profile["objects"] or profile["schemas"] or ["dbo"])
+                    schema_file = f" schema_file={profile['schema_file']}" if profile.get("schema_file") else ""
                     lines.append(
                         f"- {profile['name']} ({status}) env={profile['connection_env']} "
-                        f"scope={scopes} max_rows={profile['max_rows']} timeout={profile['timeout_seconds']}s"
+                        f"scope={scopes}{schema_file} max_rows={profile['max_rows']} timeout={profile['timeout_seconds']}s"
                     )
                 reply = "\n".join(lines)
             self.record_exchange(message, reply)
@@ -170,7 +172,12 @@ class CommandRouter:
             profile, rest = self._parse_sql_profile_and_text(parts[2:])
             refresh = "--refresh" in rest.split()
             schema = sql.get_schema(profile, refresh=refresh)
-            reply = f"SQL schema cache for profile '{profile}':\n\n{schema.summary()}"
+            source = "schema file" if sql.profiles[profile].schema_file else "database"
+            reply = (
+                f"SQL schema for profile '{profile}' ({source}):\n\n"
+                f"{schema.compact_summary()}\n\n"
+                "This compact preview is stored in chat history. The full schema remains available to the SQL tool."
+            )
             self.record_exchange(message, reply)
             return {"reply": reply, "kind": "sql"}
 
@@ -181,7 +188,13 @@ class CommandRouter:
             result = sql.run(query, profile_name=profile)
             reply = self._format_sql_result(result)
             self.record_exchange(message, reply)
-            return {"reply": reply, "kind": "sql", "sql": result.sql, "rows": result.rows}
+            return {
+                "reply": reply,
+                "kind": "sql",
+                "sql": result.sql,
+                "rows": result.rows,
+                "sql_result": self._sql_result_payload(result, profile=profile, question=query),
+            }
 
         if action == "explain":
             profile, question = self._parse_sql_profile_and_text(parts[2:])
@@ -199,7 +212,13 @@ class CommandRouter:
             result = sql.ask(question, profile_name=profile)
             reply = self._format_sql_result(result)
             self.record_exchange(message, reply)
-            return {"reply": reply, "kind": "sql", "sql": result.sql, "rows": result.rows}
+            return {
+                "reply": reply,
+                "kind": "sql",
+                "sql": result.sql,
+                "rows": result.rows,
+                "sql_result": self._sql_result_payload(result, profile=profile, question=question),
+            }
 
         return {
             "error": (
@@ -239,6 +258,18 @@ class CommandRouter:
             lines.append(f"... {result.row_count - 20} more rows")
         return "\n".join(lines)
 
+    @staticmethod
+    def _sql_result_payload(result: Any, *, profile: str, question: str) -> dict[str, Any]:
+        return {
+            "profile": profile,
+            "question": question,
+            "sql": result.sql,
+            "columns": result.columns or (list(result.rows[0].keys()) if result.rows else []),
+            "rows": result.rows,
+            "row_count": result.row_count,
+            "truncated": getattr(result, "truncated", False),
+        }
+
     def _handle_drillhole(self, parts: list[str], message: str, dh: Any) -> dict[str, Any]:
         if len(parts) < 2:
             return {
@@ -276,7 +307,7 @@ class CommandRouter:
                 config_path=parsed.get("config"),
                 out_path=parsed.get("out"),
             )
-            reply = self._format_drillhole_summary(summary)
+            reply = format_drillhole_summary(summary)
             self.record_exchange(message, reply)
             return {
                 "reply": reply,
@@ -331,23 +362,3 @@ class CommandRouter:
             raise ValueError("Usage: /dh validate --collar <file> [--survey <file>] [--lithology <file>] [--assay <file>] [--config <file>] [--out <file>]")
         return parsed
 
-    @staticmethod
-    def _format_drillhole_summary(summary: Any) -> str:
-        lines = [
-            "Drillhole validation complete.",
-            "",
-            f"Critical errors: {summary.total_errors}",
-            f"Warnings: {summary.total_warnings}",
-        ]
-        if summary.report_path:
-            lines.append(f"Report: {summary.report_path}")
-        if summary.errors:
-            lines.extend(["", "Top findings:"])
-            for error in summary.errors[:8]:
-                location = f"{error.table} {error.site_id}"
-                if error.column:
-                    location = f"{location} {error.column}"
-                lines.append(f"- [{error.severity}] {location}: {error.message}")
-        else:
-            lines.extend(["", "No validation issues found."])
-        return "\n".join(lines)

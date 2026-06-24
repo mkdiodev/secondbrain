@@ -6,7 +6,8 @@ import asyncio
 import json
 import os
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, Protocol
 
 from secondbrain.llm_client import LocalLLMClient
@@ -33,12 +34,21 @@ class SqlServerProfile:
     objects: tuple[str, ...] = ()
     max_rows: int = 100
     timeout_seconds: int = 20
+    schema_file: str | None = None
+
+
+@dataclass(frozen=True)
+class SqlQueryGuidance:
+    table_priority: tuple[str, ...] = ()
+    identifier_aliases: dict[str, str] = field(default_factory=dict)
+    column_aliases: dict[str, str] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
 class SqlSchema:
     profile: str
     columns: tuple[SqlColumn, ...]
+    guidance: SqlQueryGuidance = field(default_factory=SqlQueryGuidance)
 
     @property
     def tables(self) -> dict[str, list[SqlColumn]]:
@@ -52,12 +62,32 @@ class SqlSchema:
         if not self.columns:
             return "No schema metadata cached."
         lines: list[str] = []
-        for index, (table, columns) in enumerate(sorted(self.tables.items())):
+        for index, (table, columns) in enumerate(self.tables.items()):
             if index >= max_tables:
                 lines.append(f"... {len(self.tables) - max_tables} more tables/views")
                 break
             col_text = ", ".join(f"{col.column} {col.data_type}" for col in columns)
             lines.append(f"{table}: {col_text}")
+        return "\n".join(lines)
+
+    def compact_summary(self, *, max_tables: int = 12, max_columns: int = 8) -> str:
+        if not self.columns:
+            return "Tables/views: 0\nNo schema metadata cached."
+        lines = [
+            f"Tables/views: {len(self.tables)}",
+            f"Columns: {len(self.columns)}",
+            "",
+            "Preview:",
+        ]
+        for index, (table, columns) in enumerate(self.tables.items()):
+            if index >= max_tables:
+                lines.append(f"... {len(self.tables) - max_tables} more tables/views")
+                break
+            visible = columns[:max_columns]
+            col_text = ", ".join(f"{col.column} {col.data_type}" for col in visible)
+            if len(columns) > max_columns:
+                col_text += f", ... {len(columns) - max_columns} more columns"
+            lines.append(f"- {table}: {col_text}")
         return "\n".join(lines)
 
 
@@ -216,6 +246,7 @@ class SqlServerSkill:
                 "objects": list(profile.objects),
                 "max_rows": profile.max_rows,
                 "timeout_seconds": profile.timeout_seconds,
+                "schema_file": profile.schema_file,
                 "configured": bool(os.environ.get(profile.connection_env)),
             }
             for profile in self.profiles.values()
@@ -225,10 +256,15 @@ class SqlServerSkill:
         profile = self._profile(profile_name)
         if not refresh and profile.name in self._schema_cache:
             return self._schema_cache[profile.name]
-        connection = self._connection(profile)
-        columns = self.adapter.fetch_schema(connection, profile)
+        schema_file_payload = self._schema_file_payload(profile)
+        guidance = SqlQueryGuidance()
+        if schema_file_payload is None:
+            connection = self._connection(profile)
+            columns = self.adapter.fetch_schema(connection, profile)
+        else:
+            columns, guidance = schema_file_payload
         filtered = tuple(column for column in columns if self._column_allowed(column, profile))
-        schema = SqlSchema(profile=profile.name, columns=filtered)
+        schema = SqlSchema(profile=profile.name, columns=filtered, guidance=guidance)
         self._schema_cache[profile.name] = schema
         return schema
 
@@ -251,6 +287,52 @@ class SqlServerSkill:
     def ask(self, question: str, *, profile_name: str = "default") -> SqlQueryResult:
         sql = self.explain(question, profile_name=profile_name)
         return self.run(sql, profile_name=profile_name)
+
+    def lookup_record(self, question: str, *, profile_name: str = "default") -> SqlQueryResult | None:
+        profile = self._profile(profile_name)
+        schema = self.get_schema(profile.name)
+        multi_lookup = _parse_guided_multi_lookup(question, schema)
+        if multi_lookup is not None:
+            identifier_column, identifier_value, requests = multi_lookup
+            merged_row: dict[str, Any] = {}
+            sql_parts: list[str] = []
+            for table_name, target_columns in requests:
+                schema_name, _, object_name = table_name.partition(".")
+                select_columns = ", ".join(f"[{column}]" for column in target_columns)
+                sql = (
+                    f"SELECT TOP (1) {select_columns} "
+                    f"FROM [{schema_name}].[{object_name}] "
+                    f"WHERE [{identifier_column}] = {_sql_string_literal(identifier_value)}"
+                )
+                result = self.run(sql, profile_name=profile.name)
+                sql_parts.append(result.sql)
+                if result.rows:
+                    for column in target_columns:
+                        key = f"{object_name}.{column}"
+                        merged_row[key] = result.rows[0].get(column)
+                else:
+                    for column in target_columns:
+                        key = f"{object_name}.{column}"
+                        merged_row[key] = None
+            columns = list(merged_row)
+            return SqlQueryResult(
+                columns=columns,
+                rows=[merged_row] if merged_row else [],
+                sql="\n".join(sql_parts),
+                row_count=1 if merged_row else 0,
+                truncated=False,
+            )
+        lookup = _parse_guided_lookup(question, schema)
+        if lookup is None:
+            return None
+        table_name, identifier_column, identifier_value, target_column = lookup
+        schema_name, _, object_name = table_name.partition(".")
+        sql = (
+            f"SELECT TOP (1) [{target_column}] "
+            f"FROM [{schema_name}].[{object_name}] "
+            f"WHERE [{identifier_column}] = {_sql_string_literal(identifier_value)}"
+        )
+        return self.run(sql, profile_name=profile.name)
 
     def validate_sql(self, sql: str, *, profile: SqlServerProfile, schema: SqlSchema) -> str:
         candidate = _strip_sql_fences(sql)
@@ -275,7 +357,8 @@ class SqlServerSkill:
                 raise SqlSafetyError(f"Table is not in the cached schema whitelist: {table}")
 
         _validate_columns(candidate, schema, tables)
-        return _ensure_top_limit(candidate, profile.max_rows)
+        limited = _ensure_top_limit(candidate, profile.max_rows)
+        return _quote_known_table_references(limited, schema)
 
     def _generate_sql(self, question: str, *, profile_name: str) -> str:
         if self.llm is None:
@@ -293,7 +376,7 @@ class SqlServerSkill:
                 "- Prefer fully qualified schema.table names.",
                 "",
                 "Schema:",
-                schema.summary(),
+                schema.compact_summary(max_tables=16, max_columns=12),
                 "",
                 f"User question: {question}",
             ]
@@ -324,6 +407,17 @@ class SqlServerSkill:
         return connection
 
     @staticmethod
+    def _schema_file_payload(profile: SqlServerProfile) -> tuple[list[SqlColumn], SqlQueryGuidance] | None:
+        if not profile.schema_file:
+            return None
+        path = Path(profile.schema_file).expanduser()
+        if not path.is_absolute():
+            path = Path.cwd() / path
+        if not path.exists():
+            return None
+        return _parse_schema_file(path)
+
+    @staticmethod
     def _column_allowed(column: SqlColumn, profile: SqlServerProfile) -> bool:
         schema = column.schema.lower()
         table = f"{column.schema}.{column.table}".lower()
@@ -343,6 +437,7 @@ def _profiles_from_env() -> dict[str, SqlServerProfile]:
                     name="default",
                     connection_env="SECOND_BRAIN_SQL_DEFAULT_CONNECTION",
                     schemas=("dbo",),
+                    schema_file=os.environ.get("SECOND_BRAIN_SQL_DEFAULT_SCHEMA_FILE") or None,
                 )
             }
         return {}
@@ -371,8 +466,283 @@ def _profiles_from_env() -> dict[str, SqlServerProfile]:
             objects=tuple(str(value) for value in item.get("objects", [])),
             max_rows=max_rows,
             timeout_seconds=timeout_seconds,
+            schema_file=str(item.get("schema_file") or "").strip() or None,
         )
     return profiles
+
+
+def _parse_schema_file(path: Path) -> tuple[list[SqlColumn], SqlQueryGuidance]:
+    columns: list[SqlColumn] = []
+    table_priority: list[str] = []
+    identifier_aliases: dict[str, str] = {}
+    column_aliases: dict[str, str] = {}
+    current_schema = "dbo"
+    current_table = ""
+    section = ""
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        heading = re.match(r"^#{1,6}\s+(.+?)\s*$", line)
+        if heading:
+            heading_text = heading.group(1).strip()
+            lower_heading = heading_text.lower()
+            if lower_heading in {"query guidance", "guidance"}:
+                current_table = ""
+                section = "guidance"
+                continue
+            if lower_heading in {"table priority", "default lookup table priority"}:
+                current_table = ""
+                section = "table_priority"
+                continue
+            if lower_heading in {"identifier aliases", "identifier alias"}:
+                current_table = ""
+                section = "identifier_aliases"
+                continue
+            if lower_heading in {"column aliases", "column alias"}:
+                current_table = ""
+                section = "column_aliases"
+                continue
+            table_name = _schema_file_table_name(heading_text)
+            if table_name:
+                current_schema, current_table = table_name
+                section = "columns"
+            continue
+        lower_label = line.rstrip(":").strip().lower()
+        if lower_label in {"table priority", "default lookup table priority"}:
+            current_table = ""
+            section = "table_priority"
+            continue
+        if lower_label in {"identifier aliases", "identifier alias"}:
+            current_table = ""
+            section = "identifier_aliases"
+            continue
+        if lower_label in {"column aliases", "column alias"}:
+            current_table = ""
+            section = "column_aliases"
+            continue
+        guidance_item = re.match(r"^\s*(?:[-*]|\d+\.)\s+(.+)$", line)
+        if section in {"table_priority", "identifier_aliases", "column_aliases"} and guidance_item:
+            item = guidance_item.group(1).strip()
+            if section == "table_priority":
+                table = re.sub(r"^\d+\.\s*", "", item).strip()
+                parsed_table = _schema_file_table_name(table)
+                if parsed_table:
+                    table_priority.append(".".join(parsed_table))
+            elif section == "identifier_aliases":
+                alias = _schema_file_alias(item)
+                if alias:
+                    identifier_aliases[alias[0]] = alias[1]
+            elif section == "column_aliases":
+                alias = _schema_file_alias(item)
+                if alias:
+                    column_aliases[alias[0]] = alias[1]
+            continue
+        inline_table = re.match(r"^((?:\[[^\]]+\]|\w+)\.(?:\[[^\]]+\]|\w+))\s*:\s*(.+)$", line)
+        if inline_table:
+            schema, table = _schema_file_table_name(inline_table.group(1)) or ("dbo", "")
+            for item in inline_table.group(2).split(","):
+                column = _schema_file_column(item)
+                if column:
+                    columns.append(SqlColumn(schema=schema, table=table, column=column[0], data_type=column[1]))
+            continue
+        if current_table and section == "columns" and line.startswith(("-", "*")):
+            column = _schema_file_column(line[1:])
+            if column:
+                columns.append(
+                    SqlColumn(
+                        schema=current_schema,
+                        table=current_table,
+                        column=column[0],
+                        data_type=column[1],
+                    )
+                )
+    return columns, SqlQueryGuidance(
+        table_priority=tuple(table_priority),
+        identifier_aliases=identifier_aliases,
+        column_aliases=column_aliases,
+    )
+
+
+def _schema_file_table_name(value: str) -> tuple[str, str] | None:
+    cleaned = _normalize_identifier(value.strip().strip("`"))
+    if cleaned.lower().startswith("sqlschema:"):
+        return None
+    if "." not in cleaned:
+        return None
+    schema, table = cleaned.split(".", 1)
+    if not schema or not table:
+        return None
+    return schema, table
+
+
+def _schema_file_column(value: str) -> tuple[str, str] | None:
+    cleaned = value.strip()
+    if not cleaned or cleaned.lower() == "columns:":
+        return None
+    cleaned = re.sub(r"^\s*[-*]\s+", "", cleaned)
+    cleaned = cleaned.strip()
+    if cleaned.startswith("["):
+        match = re.match(r"^(\[[^\]]+\])\s*(.*)$", cleaned)
+    elif cleaned.startswith("`"):
+        match = re.match(r"^`([^`]+)`\s*(.*)$", cleaned)
+    else:
+        match = re.match(r"^(\S+)\s*(.*)$", cleaned)
+    if not match:
+        return None
+    column = _normalize_identifier(match.group(1).strip())
+    if not column or column.lower() in {"columns", "column"}:
+        return None
+    data_type = match.group(2).strip(" :-") or "unknown"
+    return column, data_type
+
+
+def _schema_file_alias(value: str) -> tuple[str, str] | None:
+    match = re.match(r"^(.+?)\s*(?:=|->|:)\s*`?(\[[^\]]+\]|\w+)`?\s*$", value.strip())
+    if not match:
+        return None
+    alias = _normalize_phrase(match.group(1))
+    column = _normalize_identifier(match.group(2))
+    if not alias or not column:
+        return None
+    return alias, column
+
+
+def _parse_guided_lookup(question: str, schema: SqlSchema) -> tuple[str, str, str, str] | None:
+    text = _normalize_phrase(question)
+    target_column = _match_requested_column(text, schema)
+    identifier = _match_identifier(question, schema)
+    if target_column is None or identifier is None:
+        return None
+    identifier_column, identifier_value = identifier
+    table = _choose_lookup_table(schema, identifier_column, target_column)
+    if table is None:
+        return None
+    return table, identifier_column, identifier_value, target_column
+
+
+def _parse_guided_multi_lookup(question: str, schema: SqlSchema) -> tuple[str, str, list[tuple[str, list[str]]]] | None:
+    identifier = _match_identifier(question, schema)
+    if identifier is None:
+        return None
+    table_mentions = _mentioned_tables(question, schema)
+    if len(table_mentions) < 2:
+        return None
+    identifier_column, identifier_value = identifier
+    requests: list[tuple[str, list[str]]] = []
+    for index, (table, start) in enumerate(table_mentions):
+        segment_start = table_mentions[index - 1][1] if index > 0 else 0
+        end = table_mentions[index + 1][1] if index + 1 < len(table_mentions) else len(question)
+        segment = question[segment_start:end]
+        columns = _requested_columns_for_table(segment, table, schema)
+        if columns:
+            table_columns = {column.column.lower() for column in schema.tables[table]}
+            if identifier_column.lower() in table_columns:
+                requests.append((table, columns))
+    return (identifier_column, identifier_value, requests) if len(requests) >= 2 else None
+
+
+def _match_requested_column(text: str, schema: SqlSchema) -> str | None:
+    aliases: dict[str, str] = {}
+    aliases.update({key: value for key, value in schema.guidance.column_aliases.items()})
+    for column in schema.columns:
+        aliases.setdefault(_normalize_phrase(column.column), column.column)
+        aliases.setdefault(_normalize_phrase(column.column.replace("_", " ")), column.column)
+    for alias, column in sorted(aliases.items(), key=lambda item: len(item[0]), reverse=True):
+        if _phrase_in_text(alias, text):
+            return column
+    return None
+
+
+def _requested_columns_for_table(text: str, table: str, schema: SqlSchema) -> list[str]:
+    normalized = _normalize_phrase(text)
+    table_columns = {column.column.lower(): column.column for column in schema.tables[table]}
+    requested: list[str] = []
+    aliases: dict[str, str] = {}
+    aliases.update(schema.guidance.column_aliases)
+    for column in schema.tables[table]:
+        aliases.setdefault(_normalize_phrase(column.column), column.column)
+        aliases.setdefault(_normalize_phrase(column.column.replace("_", " ")), column.column)
+    for alias, column in sorted(aliases.items(), key=lambda item: len(item[0]), reverse=True):
+        if column.lower() not in table_columns:
+            continue
+        if _phrase_in_text(alias, normalized) and column not in requested:
+            requested.append(column)
+    return requested
+
+
+def _mentioned_tables(question: str, schema: SqlSchema) -> list[tuple[str, int]]:
+    mentions: list[tuple[str, int]] = []
+    lowered = question.lower()
+    for table in schema.tables:
+        _schema_name, _, object_name = table.partition(".")
+        candidates = {
+            table.lower(),
+            object_name.lower(),
+            object_name.lower().replace("_", " "),
+        }
+        positions: list[int] = []
+        for candidate in candidates:
+            if not candidate:
+                continue
+            pattern = re.compile(rf"(?<![\w]){re.escape(candidate)}(?![\w])", flags=re.IGNORECASE)
+            positions.extend(match.start() for match in pattern.finditer(lowered))
+        if positions:
+            mentions.append((table, min(positions)))
+    return sorted(mentions, key=lambda item: item[1])
+
+
+def _match_identifier(text: str, schema: SqlSchema) -> tuple[str, str] | None:
+    aliases = {
+        "site_id": "SITE_ID",
+        "site id": "SITE_ID",
+        "hole_id": "SITE_ID",
+        "hole id": "SITE_ID",
+    }
+    aliases.update(schema.guidance.identifier_aliases)
+    for alias, column in sorted(aliases.items(), key=lambda item: len(item[0]), reverse=True):
+        value = _value_after_alias(text, alias)
+        if value:
+            return column, value
+    return None
+
+
+def _choose_lookup_table(schema: SqlSchema, identifier_column: str, target_column: str) -> str | None:
+    table_columns = {
+        table: {column.column.lower() for column in columns}
+        for table, columns in schema.tables.items()
+    }
+    priority = [table for table in schema.guidance.table_priority if table in table_columns]
+    remaining = [table for table in schema.tables if table not in priority]
+    for table in priority + remaining:
+        columns = table_columns[table]
+        if identifier_column.lower() in columns and target_column.lower() in columns:
+            return table
+    return None
+
+
+def _value_after_alias(text: str, alias: str) -> str | None:
+    pattern = re.compile(
+        rf"(?:^|\b){re.escape(_normalize_phrase(alias))}\b\s*(?:=|:|adalah|is)?\s*'?(?P<value>[\w./-]+)'?",
+        flags=re.IGNORECASE,
+    )
+    match = pattern.search(text)
+    if not match:
+        return None
+    value = match.group("value").strip("'\" ")
+    return value or None
+
+
+def _phrase_in_text(phrase: str, text: str) -> bool:
+    return re.search(rf"(?:^|\b){re.escape(_normalize_phrase(phrase))}(?:\b|$)", text, flags=re.IGNORECASE) is not None
+
+
+def _normalize_phrase(value: str) -> str:
+    return re.sub(r"\s+", " ", value.strip().lower())
+
+
+def _sql_string_literal(value: str) -> str:
+    return "'" + value.replace("'", "''") + "'"
 
 
 def _strip_sql_fences(sql: str) -> str:
@@ -422,15 +792,22 @@ def _validate_columns(sql: str, schema: SqlSchema, tables: list[str]) -> None:
         for column in _extract_select_columns(sql):
             if column == "*":
                 continue
-            owner, _, name = column.partition(".")
-            if name and owner.lower() in aliases:
+            parts = column.split(".")
+            if len(parts) >= 3:
+                table = ".".join(parts[:-1]).lower()
+                name = parts[-1]
+                if name.lower() not in table_columns.get(table, set()):
+                    raise SqlSafetyError(f"Column is not in cached schema: {column}")
+            elif len(parts) == 2 and parts[0].lower() in aliases:
+                owner, name = parts
                 table = aliases[owner.lower()].lower()
                 if name.lower() not in table_columns.get(table, set()):
                     raise SqlSafetyError(f"Column is not in cached schema: {column}")
-            elif name:
+            elif len(parts) == 2:
+                _owner, name = parts
                 if name.lower() not in allowed:
                     raise SqlSafetyError(f"Column is not in cached schema: {column}")
-            elif owner.lower() not in allowed:
+            elif parts[0].lower() not in allowed:
                 raise SqlSafetyError(f"Column is not in cached schema: {column}")
 
 
@@ -484,3 +861,15 @@ def _ensure_top_limit(sql: str, max_rows: int) -> str:
             flags=re.IGNORECASE,
         )
     return re.sub(r"\bSELECT\b", f"SELECT TOP ({max_rows})", sql, count=1, flags=re.IGNORECASE)
+
+
+def _quote_known_table_references(sql: str, schema: SqlSchema) -> str:
+    quoted = sql
+    for table in sorted(schema.tables, key=len, reverse=True):
+        schema_name, _, table_name = table.partition(".")
+        if not schema_name or not table_name:
+            continue
+        replacement = f"[{schema_name}].[{table_name}]"
+        pattern = re.compile(rf"(?<![\]\w]){re.escape(table)}(?!\w)", flags=re.IGNORECASE)
+        quoted = pattern.sub(replacement, quoted)
+    return quoted

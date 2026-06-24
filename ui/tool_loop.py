@@ -5,11 +5,13 @@ from __future__ import annotations
 import asyncio
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 
 from secondbrain.llm_client import LocalLLMClient
 
+from .dh_format import format_drillhole_summary
+from .dh_routing import infer_drillhole_validation_action
 from .workspace import WorkspaceResources, WorkspaceService
 
 
@@ -26,7 +28,8 @@ TOOL_INTENT_PATTERN = re.compile(
     r"list|show|read|open|lihat|baca|daftar|tampilkan|cari|search|find|file|folder|"
     r"workspace|directory|direktori|validate|validasi|validator|drillhole|collar|survey|"
     r"lithology|assay|mineralization|oxidation|geotech|rqd|vein|alteration|density|xlsx|csv|"
-    r"sql|database|db|query|tabel|table|kolom|column|server"
+    r"sql|database|db|query|tabel|table|kolom|column|server|site_id|hole_id|end_depth|depth|"
+    r"lubang|lobang|kedalaman|elevasi|koordinat"
     r")\b",
     re.IGNORECASE,
 )
@@ -37,6 +40,7 @@ class ToolObservation:
     tool: str
     args: dict[str, Any]
     content: str
+    metadata: dict[str, Any] = field(default_factory=dict)
 
 
 class AgentToolLoop:
@@ -60,11 +64,43 @@ class AgentToolLoop:
             return None
 
         resources = self.workspace.resources
-        action = self._plan_action(message, resources)
+        action = infer_drillhole_validation_action(
+            message,
+            workspace=str(resources.mm.workspace),
+            workspace_files=self.workspace.workspace_files(limit=1000),
+        ) or self._plan_action(message, resources)
         if action["tool"] == "none":
             return None
+        action = dict(action)
+        action["_user_message"] = message
 
         observation = self._execute_action(action)
+        if observation.tool == "validate_drillhole":
+            return {
+                "reply": observation.content,
+                "kind": "tool-chat",
+                "summary": observation.metadata.get("summary"),
+                "tools": [
+                    {
+                        "tool": observation.tool,
+                        "args": observation.args,
+                    }
+                ],
+            }
+        if observation.tool == "query_sql_server":
+            direct_reply = self._direct_sql_reply(message, observation)
+            if direct_reply is not None:
+                return {
+                    "reply": direct_reply,
+                    "kind": "tool-chat",
+                    "sql_result": observation.metadata.get("sql_result"),
+                    "tools": [
+                        {
+                            "tool": observation.tool,
+                            "args": observation.args,
+                        }
+                    ],
+                }
         reply = self._final_reply(
             message,
             system_prompt=system_prompt,
@@ -74,6 +110,7 @@ class AgentToolLoop:
         return {
             "reply": reply,
             "kind": "tool-chat",
+            "sql_result": observation.metadata.get("sql_result") if observation.tool == "query_sql_server" else None,
             "tools": [
                 {
                     "tool": observation.tool,
@@ -103,6 +140,8 @@ class AgentToolLoop:
                 "- Do not create validation report files from natural language; report writing requires an explicit /dh command.",
                 "- SQL Server queries are read-only and must use the SQL tool; never invent database results yourself.",
                 "- Use query_sql_server only when the user explicitly asks about SQL, database, tables, or database records.",
+                "- Also use query_sql_server when the user asks for a value by database-like fields such as SITE_ID, HOLE_ID, END_DEPTH, DEPTH_FROM, or DEPTH_TO.",
+                "- If a user asks 'berapa <column> dari <id column> <value>', treat it as a database record lookup.",
                 "- If the user asks to modify non-validation files, choose none.",
                 "- Paths must be workspace-relative.",
                 "- For validate_drillhole, infer table names from words or filenames such as collar, survey, lithology, assay, mineralization, oxidation, geotech, rqd, vein, alteration, density.",
@@ -123,6 +162,8 @@ class AgentToolLoop:
             )
         )
         action = self._parse_action(raw)
+        if action["tool"] == "none" and self._looks_like_sql_record_lookup(message) and resources.sql_skill.profiles:
+            return {"tool": "query_sql_server", "profile": "default", "question": message}
         if action["tool"] not in READ_ONLY_TOOLS:
             return {"tool": "none"}
         if action["tool"] == "read_file" and not str(action.get("path") or "").strip():
@@ -174,24 +215,46 @@ class AgentToolLoop:
             return ToolObservation(tool=tool, args={"query": query}, content=content)
 
         if tool == "validate_drillhole":
+            validation_error = str(action.get("_validation_error") or "").strip()
+            if validation_error:
+                return ToolObservation(
+                    tool=tool,
+                    args={"inputs": action.get("inputs") or {}},
+                    content=validation_error,
+                )
             inputs = {
                 str(table): str(path)
                 for table, path in (action.get("inputs") or {}).items()
                 if str(table).strip() and str(path).strip()
             }
             summary = resources.dh_skill.validate(inputs)
-            content = self._format_validation_summary(summary)
-            return ToolObservation(tool=tool, args={"inputs": inputs}, content=content)
+            content = format_drillhole_summary(summary)
+            return ToolObservation(
+                tool=tool,
+                args={"inputs": inputs},
+                content=content,
+                metadata={"summary": summary.to_dict()},
+            )
 
         if tool == "query_sql_server":
             profile = str(action.get("profile") or "default").strip()
             question = str(action.get("question") or "").strip()
-            result = resources.sql_skill.ask(question, profile_name=profile)
+            user_message = str(action.get("_user_message") or question).strip()
+            result = resources.sql_skill.lookup_record(user_message, profile_name=profile)
+            if result is None:
+                result = resources.sql_skill.ask(question, profile_name=profile)
             content = self._format_sql_result(result)
+            sql_result = self._sql_result_payload(result, profile=profile, question=question)
             return ToolObservation(
                 tool=tool,
-                args={"profile": profile, "question": question},
+                args={
+                    "profile": profile,
+                    "question": question,
+                    "columns": result.columns,
+                    "rows": result.rows,
+                },
                 content=content,
+                metadata={"sql_result": sql_result},
             )
 
         return ToolObservation(tool="none", args={}, content="")
@@ -247,6 +310,14 @@ class AgentToolLoop:
         return data
 
     @staticmethod
+    def _looks_like_sql_record_lookup(message: str) -> bool:
+        text = message.lower()
+        has_identifier = re.search(r"\b(site_id|hole_id)\b", text) is not None
+        has_requested_field = re.search(r"\b(end_depth|depth_from|depth_to|easting|northing|elevation|project|iup)\b", text) is not None
+        has_lookup_word = re.search(r"\b(berapa|apa|tampilkan|show|nilai|value)\b", text) is not None
+        return has_identifier and has_requested_field and has_lookup_word
+
+    @staticmethod
     def _optional_int(value: Any) -> int | None:
         if value is None:
             return None
@@ -255,27 +326,6 @@ class AgentToolLoop:
         except (TypeError, ValueError):
             return None
         return parsed if parsed > 0 else None
-
-    @staticmethod
-    def _format_validation_summary(summary: Any) -> str:
-        lines = [
-            "Drillhole validation result:",
-            f"Critical errors: {summary.total_errors}",
-            f"Warnings: {summary.total_warnings}",
-        ]
-        if not summary.errors:
-            lines.append("No validation issues found.")
-            return "\n".join(lines)
-
-        lines.append("Findings:")
-        for error in summary.errors[:12]:
-            location = f"{error.table} {error.site_id}"
-            if error.column:
-                location = f"{location} {error.column}"
-            lines.append(f"- [{error.severity}] {location}: {error.message}")
-        if len(summary.errors) > 12:
-            lines.append(f"...and {len(summary.errors) - 12} more findings.")
-        return "\n".join(lines)
 
     @staticmethod
     def _format_sql_result(result: Any) -> str:
@@ -295,3 +345,42 @@ class AgentToolLoop:
         if result.row_count > 20:
             lines.append(f"... {result.row_count - 20} more rows")
         return "\n".join(lines)
+
+    @staticmethod
+    def _sql_result_payload(result: Any, *, profile: str, question: str) -> dict[str, Any]:
+        return {
+            "profile": profile,
+            "question": question,
+            "sql": result.sql,
+            "columns": result.columns or (list(result.rows[0].keys()) if result.rows else []),
+            "rows": result.rows,
+            "row_count": result.row_count,
+            "truncated": getattr(result, "truncated", False),
+        }
+
+    @staticmethod
+    def _direct_sql_reply(message: str, observation: ToolObservation) -> str | None:
+        columns = observation.args.get("columns") or []
+        rows = observation.args.get("rows") or []
+        if len(rows) != 1:
+            return None
+        site_match = re.search(r"\b(site_id|hole_id|lubang|lobang)\b\s*(?:=|adalah|is|:)?\s*'?([\w/-]+)'?", message, re.IGNORECASE)
+        if len(columns) > 1:
+            heading = "Hasil query"
+            if site_match:
+                heading = f"Hasil query untuk {site_match.group(1).lower()} {site_match.group(2)}"
+            lines = [f"{heading}:"]
+            for column in columns:
+                lines.append(f"- {column}: {rows[0].get(column)}")
+            return "\n".join(lines)
+        if len(columns) != 1:
+            return None
+        column = str(columns[0])
+        value = rows[0].get(column)
+        if value is None:
+            return None
+        if site_match:
+            id_label = site_match.group(1).lower()
+            site_id = site_match.group(2)
+            return f"{column.lower()} dari {id_label} {site_id} adalah {value}"
+        return f"{column} adalah {value}"

@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import fnmatch
+import os
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -13,12 +15,19 @@ EXCLUDED_PATH_PARTS = {
     ".mypy_cache",
     ".pytest_cache",
     ".ruff_cache",
+    ".secondbrain",
     ".tox",
     ".venv",
     "__pycache__",
     "env",
     "node_modules",
     "venv",
+}
+
+EXCLUDED_FILE_NAMES = {
+    "heartbeat_debug.json",
+    "heartbeat_debug.log",
+    "memory.db",
 }
 
 
@@ -47,6 +56,10 @@ def _excluded_part(path: Path) -> str | None:
         if part in EXCLUDED_PATH_PARTS:
             return part
     return None
+
+
+def _is_excluded_listing_path(path: Path) -> bool:
+    return bool(_excluded_part(path) or path.name in EXCLUDED_FILE_NAMES)
 
 
 def ensure_workspace_root_allowed(workspace: str | Path) -> Path:
@@ -167,25 +180,31 @@ def move_file_within_workspace(
 def list_files_within_workspace(
     workspace: str | Path,
     *,
-    pattern: str = "*.md",
+    pattern: str = "*",
     include_hidden: bool = True,
 ) -> list[Path]:
     """List matching files below the workspace root."""
     root = ensure_workspace_root_allowed(workspace)
     files: list[Path] = []
-    for path in root.rglob(pattern):
-        if not path.is_file():
-            continue
-        rel = path.relative_to(root)
-        if _excluded_part(rel):
-            continue
-        if not include_hidden and any(part.startswith(".") for part in rel.parts):
-            continue
-        try:
-            path.relative_to(root)
-        except ValueError:
-            continue
-        files.append(path)
+    for dirpath, dirnames, filenames in os.walk(root):
+        current = Path(dirpath)
+        rel_dir = current.relative_to(root)
+        dirnames[:] = [
+            name
+            for name in dirnames
+            if not _is_excluded_listing_path(rel_dir / name)
+            and (include_hidden or not name.startswith("."))
+        ]
+        for name in filenames:
+            if not fnmatch.fnmatch(name, pattern):
+                continue
+            path = current / name
+            rel = path.relative_to(root)
+            if _is_excluded_listing_path(rel):
+                continue
+            if not include_hidden and any(part.startswith(".") for part in rel.parts):
+                continue
+            files.append(path)
     return sorted(files)
 
 
@@ -198,21 +217,43 @@ def list_entries_within_workspace(
     """List files and directories below the workspace root."""
     root = ensure_workspace_root_allowed(workspace)
     entries: list[WorkspaceEntry] = []
-    for path in root.rglob("*"):
-        rel = path.relative_to(root)
-        if _excluded_part(rel):
-            continue
-        if not include_hidden and any(part.startswith(".") for part in rel.parts):
-            continue
-        if not path.is_file() and not path.is_dir():
-            continue
-        entries.append(
-            WorkspaceEntry(
-                path=rel.as_posix(),
-                name=path.name,
-                type="directory" if path.is_dir() else "file",
+    for dirpath, dirnames, filenames in os.walk(root):
+        current = Path(dirpath)
+        rel_dir = current.relative_to(root)
+        kept_dirs: list[str] = []
+        for name in dirnames:
+            rel = rel_dir / name
+            if _is_excluded_listing_path(rel):
+                continue
+            if not include_hidden and name.startswith("."):
+                continue
+            kept_dirs.append(name)
+            entries.append(
+                WorkspaceEntry(
+                    path=rel.as_posix(),
+                    name=name,
+                    type="directory",
+                )
             )
-        )
-        if len(entries) >= limit:
-            break
+            if len(entries) >= limit:
+                dirnames[:] = []
+                return sorted(entries, key=lambda item: (item.path.count("/"), item.type != "directory", item.path.lower()))
+        dirnames[:] = kept_dirs
+
+        for name in filenames:
+            rel = rel_dir / name
+            if _is_excluded_listing_path(rel):
+                continue
+            if not include_hidden and any(part.startswith(".") for part in rel.parts):
+                continue
+            entries.append(
+                WorkspaceEntry(
+                    path=rel.as_posix(),
+                    name=name,
+                    type="file",
+                )
+            )
+            if len(entries) >= limit:
+                dirnames[:] = []
+                return sorted(entries, key=lambda item: (item.path.count("/"), item.type != "directory", item.path.lower()))
     return sorted(entries, key=lambda item: (item.path.count("/"), item.type != "directory", item.path.lower()))

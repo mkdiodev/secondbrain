@@ -25,6 +25,16 @@ class FileSystemSkillTests(unittest.TestCase):
             self.assertIn(("image.png", "file"), entries)
             self.assertIn(("empty", "directory"), entries)
 
+    def test_list_includes_excel_files_by_default(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "collar.xlsx").write_bytes(b"excel-ish")
+            (root / "notes.md").write_text("note", encoding="utf-8")
+
+            fs = FileSystemSkill(root)
+
+            self.assertEqual(fs.list("."), ["collar.xlsx", "notes.md"])
+
     def test_write_append_copy_move_update_search_index(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)

@@ -64,7 +64,7 @@ class FileSystemSkill:
                 self.mm.index_file(path)
         return path
 
-    def list(self, rel_path: str = ".", *, pattern: str = "*.md") -> list[str]:
+    def list(self, rel_path: str = ".", *, pattern: str = "*") -> list[str]:
         base = self.workspace / rel_path
         target_root = base.resolve()
         try:

@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Callable
 from urllib.error import URLError
 from urllib.request import urlopen
@@ -20,6 +21,25 @@ class LLMEndpoint:
 LLMDetector = Callable[[list[LLMEndpoint]], LLMEndpoint | None]
 
 
+def load_local_env() -> None:
+    """Load a local .env file for UI, SQL, and LLM settings."""
+    try:
+        from dotenv import load_dotenv
+    except ImportError:
+        return
+    candidates = [
+        Path.cwd() / ".env",
+        Path(__file__).resolve().parents[1] / ".env",
+    ]
+    seen: set[Path] = set()
+    for candidate in candidates:
+        resolved = candidate.resolve()
+        if resolved in seen or not resolved.exists():
+            continue
+        seen.add(resolved)
+        load_dotenv(dotenv_path=resolved, override=False)
+
+
 @dataclass(frozen=True)
 class UIConfig:
     workspace: str
@@ -31,6 +51,7 @@ class UIConfig:
 
     @classmethod
     def from_env(cls, *, detector: LLMDetector | None = None) -> "UIConfig":
+        load_local_env()
         endpoint = resolve_llm_endpoint(detector=detector)
         return cls(
             workspace=os.environ.get("SECONDBRAIN_WORKSPACE", ".").strip() or ".",

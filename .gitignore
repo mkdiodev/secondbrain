@@ -26,8 +26,11 @@ heartbeat_debug.log
 heartbeat_debug.json
 
 memory.db
+memory.db-*
 memory/
 documents/
+data/
+execute_app.txt
 
 openclaw-reference/
 

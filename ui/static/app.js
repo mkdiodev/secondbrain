@@ -80,13 +80,266 @@
     messagesEl.scrollTop = messagesEl.scrollHeight;
   }
 
-  function addMessage(role, content, cls = "") {
+  function addMessage(role, content, cls = "", payload = null) {
     const bubble = document.createElement("div");
     bubble.className = `message ${role}${cls ? " " + cls : ""}`;
-    bubble.textContent = content;
+    const sqlResult = payload?.sql_result || parseSqlResultMarkdown(content);
+    const validationSummary = payload?.summary || parseDhValidationMarkdown(content);
+    if (role === "assistant" && sqlResult) {
+      bubble.classList.add("sql-result-message");
+      renderSqlResult(bubble, sqlResult);
+    } else if (role === "assistant" && validationSummary) {
+      bubble.classList.add("dh-validation-message");
+      renderDhValidationResult(bubble, validationSummary, content);
+    } else {
+      bubble.textContent = content;
+    }
     messagesEl.appendChild(bubble);
     scrollToBottom();
     return bubble;
+  }
+
+  function renderSqlResult(container, result) {
+    container.textContent = "";
+    const columns = Array.isArray(result.columns) ? result.columns : inferSqlColumns(result.rows || []);
+    const rows = Array.isArray(result.rows) ? result.rows : [];
+    const rowCount = Number(result.row_count ?? result.rowCount ?? rows.length);
+
+    const header = el("div", "sql-result-header");
+    const titleWrap = el("div", "sql-result-title");
+    titleWrap.appendChild(el("div", "eyebrow", "SQL Server"));
+    titleWrap.appendChild(el("h3", "", "Query Result Grid"));
+    const status = el("span", "sql-result-status", `${rowCount} row${rowCount === 1 ? "" : "s"} • ${columns.length} columns`);
+    header.appendChild(titleWrap);
+    header.appendChild(status);
+    container.appendChild(header);
+
+    const meta = el("div", "sql-result-meta");
+    if (result.profile) meta.appendChild(sqlMetaChip("Profile", result.profile));
+    if (result.truncated) meta.appendChild(sqlMetaChip("Status", "Truncated"));
+    if (result.question) meta.appendChild(sqlMetaChip("Request", result.question));
+    if (meta.children.length) container.appendChild(meta);
+
+    if (result.sql) {
+      const sqlBlock = el("details", "sql-query-block");
+      sqlBlock.open = false;
+      sqlBlock.appendChild(el("summary", "", "SQL yang dieksekusi"));
+      sqlBlock.appendChild(el("pre", "", result.sql));
+      container.appendChild(sqlBlock);
+    }
+
+    if (!columns.length) {
+      container.appendChild(el("div", "sql-empty-state", "Query selesai, tetapi tidak ada kolom pada result set."));
+      return;
+    }
+
+    const wrap = el("div", "sql-grid-wrap");
+    const table = el("table", "sql-result-table");
+    const thead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    columns.forEach((column) => {
+      headRow.appendChild(el("th", "", column));
+    });
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    if (!rows.length) {
+      const row = document.createElement("tr");
+      const cell = el("td", "sql-no-rows", "Tidak ada row yang dikembalikan.");
+      cell.colSpan = columns.length;
+      row.appendChild(cell);
+      tbody.appendChild(row);
+    } else {
+      rows.forEach((record) => {
+        const row = document.createElement("tr");
+        columns.forEach((column) => {
+          row.appendChild(el("td", "", formatSqlCell(record?.[column])));
+        });
+        tbody.appendChild(row);
+      });
+    }
+    table.appendChild(tbody);
+    wrap.appendChild(table);
+    container.appendChild(wrap);
+  }
+
+  function sqlMetaChip(label, value) {
+    const chip = el("span", "sql-meta-chip");
+    chip.appendChild(el("span", "", `${label}:`));
+    chip.appendChild(el("strong", "", String(value)));
+    return chip;
+  }
+
+  function inferSqlColumns(rows) {
+    const seen = new Set();
+    rows.forEach((row) => {
+      Object.keys(row || {}).forEach((key) => seen.add(key));
+    });
+    return Array.from(seen);
+  }
+
+  function formatSqlCell(value) {
+    if (value === null) return "NULL";
+    if (value === undefined) return "";
+    return String(value);
+  }
+
+  function parseSqlResultMarkdown(content) {
+    const text = String(content || "");
+    if (!text.includes("SQL Server query")) return null;
+    const lines = text.split(/\r?\n/);
+    const rowLine = lines.find((line) => /^Rows:\s*/i.test(line.trim()));
+    const rowCount = rowLine ? Number(rowLine.split(":", 2)[1].trim()) || 0 : 0;
+    const sqlFenceStart = lines.findIndex((line) => line.trim().startsWith("```sql"));
+    let sql = "";
+    if (sqlFenceStart >= 0) {
+      const sqlFenceEnd = lines.findIndex((line, index) => index > sqlFenceStart && line.trim() === "```");
+      sql = lines.slice(sqlFenceStart + 1, sqlFenceEnd >= 0 ? sqlFenceEnd : undefined).join("\n");
+    } else {
+      const inlineSql = lines.find((line) => /^SQL:\s*/i.test(line.trim()));
+      sql = inlineSql ? inlineSql.replace(/^SQL:\s*/i, "").trim() : "";
+    }
+    const tableLineIndex = lines.findIndex((line, index) => {
+      const next = lines[index + 1] || "";
+      return line.includes("|") && next.includes("---");
+    });
+    if (tableLineIndex < 0) {
+      return { sql, columns: [], rows: [], row_count: rowCount };
+    }
+    const columns = lines[tableLineIndex].split("|").map((cell) => cell.trim()).filter(Boolean);
+    const rows = [];
+    for (let index = tableLineIndex + 2; index < lines.length; index += 1) {
+      const line = lines[index];
+      if (!line.includes("|") || line.startsWith("...")) break;
+      const values = line.split("|").map((cell) => cell.trim());
+      const row = {};
+      columns.forEach((column, columnIndex) => {
+        row[column] = values[columnIndex] ?? "";
+      });
+      rows.push(row);
+    }
+    return { sql, columns, rows, row_count: rowCount || rows.length };
+  }
+
+  function renderDhValidationResult(container, summary, fallbackText = "") {
+    container.textContent = "";
+    const errors = Array.isArray(summary.errors) ? summary.errors : [];
+    const totalErrors = Number(summary.totalErrors ?? summary.total_errors ?? 0);
+    const totalWarnings = Number(summary.totalWarnings ?? summary.total_warnings ?? 0);
+    const totalFindings = totalErrors + totalWarnings;
+
+    const header = el("div", "dh-result-header");
+    const titleWrap = el("div", "dh-result-title");
+    titleWrap.appendChild(el("div", "eyebrow", "Drillhole validation"));
+    titleWrap.appendChild(el("h3", "", "Hasil Validasi Drillhole"));
+    const status = el("span", `dh-result-status ${totalFindings ? "has-findings" : "clean"}`);
+    status.textContent = totalFindings ? `${totalFindings} temuan` : "Tidak ada error";
+    header.appendChild(titleWrap);
+    header.appendChild(status);
+    container.appendChild(header);
+
+    const stats = el("div", "dh-summary-grid");
+    stats.appendChild(dhSummaryCard("Critical errors", totalErrors, "critical"));
+    stats.appendChild(dhSummaryCard("Warnings", totalWarnings, "warning"));
+    stats.appendChild(dhSummaryCard("Total error/warning", totalFindings, "total"));
+    container.appendChild(stats);
+
+    if (summary.reportPath || summary.report_path) {
+      const report = el("div", "dh-report-path");
+      report.textContent = `Report: ${summary.reportPath || summary.report_path}`;
+      container.appendChild(report);
+    }
+
+    if (!errors.length) {
+      container.appendChild(el("div", "dh-empty-state", "Tidak ada error validasi pada file yang diperiksa."));
+      return;
+    }
+
+    const tableWrap = el("div", "dh-error-table-wrap");
+    const table = el("table", "dh-error-table");
+    const thead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    ["Severity", "Nama File", "SITE_ID/HOLE_ID", "Tipe Error", "Kolom", "Nilai/Penyebab"].forEach((label) => {
+      headRow.appendChild(el("th", "", label));
+    });
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    errors.forEach((error) => {
+      const row = document.createElement("tr");
+      const severity = String(error.severity || "").toUpperCase();
+      const badgeCell = document.createElement("td");
+      badgeCell.appendChild(el("span", `dh-severity ${severity === "WARNING" ? "warning" : "critical"}`, severity || "ERROR"));
+      row.appendChild(badgeCell);
+      row.appendChild(el("td", "dh-file-cell", error.fileName || error.file_name || error.table || "-"));
+      row.appendChild(el("td", "dh-site-cell", error.siteId || error.site_id || "-"));
+      row.appendChild(el("td", "", dhErrorType(error)));
+      row.appendChild(el("td", "dh-column-cell", error.column || "-"));
+      row.appendChild(el("td", "dh-cause-cell", dhErrorCause(error.message || "")));
+      tbody.appendChild(row);
+    });
+    table.appendChild(tbody);
+    tableWrap.appendChild(table);
+    container.appendChild(tableWrap);
+
+    if (fallbackText && !summary.errors) {
+      container.appendChild(el("pre", "dh-fallback", fallbackText));
+    }
+  }
+
+  function dhSummaryCard(label, value, kind) {
+    const card = el("div", `dh-summary-card ${kind}`);
+    card.appendChild(el("span", "dh-summary-label", label));
+    card.appendChild(el("strong", "dh-summary-value", String(value)));
+    return card;
+  }
+
+  function dhErrorType(error) {
+    const message = String(error.message || "");
+    if (message.includes(":")) return message.split(":", 1)[0].trim();
+    return error.type || "-";
+  }
+
+  function dhErrorCause(message) {
+    const text = String(message || "");
+    if (text.includes(":")) return text.slice(text.indexOf(":") + 1).trim() || "-";
+    return text || "-";
+  }
+
+  function parseDhValidationMarkdown(content) {
+    if (!content || !content.includes("Hasil Validasi Drillhole")) return null;
+    const lines = String(content).split(/\r?\n/);
+    const summary = { totalErrors: 0, totalWarnings: 0, errors: [] };
+    lines.forEach((line) => {
+      const cells = markdownCells(line);
+      if (cells.length === 2) {
+        if (/critical errors/i.test(cells[0])) summary.totalErrors = Number(cells[1]) || 0;
+        if (/warnings/i.test(cells[0])) summary.totalWarnings = Number(cells[1]) || 0;
+      }
+      if (cells.length >= 5 && !/nama file/i.test(cells[0]) && !/^---/.test(cells[0])) {
+        summary.errors.push({
+          fileName: cells[0],
+          siteId: cells[1],
+          type: cells[2],
+          column: cells[3],
+          message: `${cells[2]}: ${cells.slice(4).join(" | ")}`,
+          severity: "CRITICAL",
+        });
+      }
+    });
+    if (!summary.totalErrors && summary.errors.length) summary.totalErrors = summary.errors.length;
+    return summary;
+  }
+
+  function markdownCells(line) {
+    const trimmed = String(line || "").trim();
+    if (!trimmed.startsWith("|") || !trimmed.endsWith("|")) return [];
+    return trimmed
+      .slice(1, -1)
+      .split(/(?<!\\)\|/)
+      .map((cell) => cell.replace(/\\\|/g, "|").trim());
   }
 
   function el(tag, className = "", text = "") {
@@ -618,7 +871,7 @@
         throw new Error(data.error || "Request failed");
       }
       const reply = data.reply || "";
-      addMessage("assistant", reply);
+      addMessage("assistant", reply, data.kind === "dh-validation" ? "dh-validation-message" : "", data);
       await refreshState();
       if (data.kind === "workspace-switch") {
         await loadHistory();

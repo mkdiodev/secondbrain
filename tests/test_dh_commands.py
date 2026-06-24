@@ -51,8 +51,15 @@ class DrillholeCommandTests(unittest.TestCase):
             self.assertEqual(result["kind"], "dh-validation")
             self.assertEqual(result["report_path"], "reports/dh-report.json")
             self.assertGreaterEqual(result["summary"]["totalErrors"], 1)
+            self.assertIn("## Ringkasan", result["reply"])
+            self.assertIn("| Nama File | SITE_ID/HOLE_ID | Tipe Error | Kolom | Nilai/Penyebab |", result["reply"])
+            self.assertIn("assay.csv", result["reply"])
+            self.assertIn("DH001", result["reply"])
+            self.assertIn("DEPTH_TO", result["reply"])
+            self.assertIn("Depth Exceeded", result["reply"])
             payload = json.loads((root / "reports" / "dh-report.json").read_text(encoding="utf-8"))
             self.assertEqual(payload["totalErrors"], result["summary"]["totalErrors"])
+            self.assertIn("assay.csv", {error["fileName"] for error in payload["errors"]})
 
     def test_dh_validate_rejects_output_path_outside_workspace(self) -> None:
         with TemporaryDirectory() as tmp:

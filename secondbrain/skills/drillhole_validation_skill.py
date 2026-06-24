@@ -11,7 +11,7 @@ import io
 import json
 import os
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any
 
@@ -61,6 +61,7 @@ class ValidationError:
     severity: str
     type: str
     column: str | None = None
+    file_name: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -72,6 +73,7 @@ class ValidationError:
             "message": self.message,
             "severity": self.severity,
             "type": self.type,
+            "fileName": self.file_name,
         }
 
 
@@ -144,6 +146,11 @@ class DrillholeValidationSkill:
         configs = _normalize_configs(config.get("configs", []))
         libraries = config.get("libraries", [])
         data = self._load_tables(inputs)
+        table_files = {
+            _table_type(table_name): rel_path
+            for table_name, rel_path in inputs.items()
+            if _table_type(table_name) in TABLE_TYPES
+        }
 
         errors: list[ValidationError] = []
         collars = data.get("COLLAR", [])
@@ -170,6 +177,11 @@ class DrillholeValidationSkill:
                 errors.extend(_validate_integrity(collars, rows, table_type))
                 errors.extend(_validate_eoh(collars, rows, table_type))
             errors.extend(_validate_intervals(rows, table_type))
+
+        errors = [
+            replace(error, file_name=table_files.get(error.table, error.table))
+            for error in errors
+        ]
 
         summary = ValidationSummary(
             total_errors=sum(1 for error in errors if error.severity == "CRITICAL"),
