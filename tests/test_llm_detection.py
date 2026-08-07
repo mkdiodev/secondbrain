@@ -67,10 +67,10 @@ class LLMDetectionTests(unittest.TestCase):
         self.assertEqual(sql.profiles["default"].connection_env, "SECOND_BRAIN_SQL_DEFAULT_CONNECTION")
 
     def test_ui_config_loads_project_dotenv_even_when_cwd_differs(self) -> None:
-        env_path = Path(r"D:\CodexProject\secondbrain\.env")
-        original = env_path.read_text(encoding="utf-8") if env_path.exists() else None
-        with TemporaryDirectory() as tmp:
-            other_cwd = Path(tmp)
+        with TemporaryDirectory() as project_tmp, TemporaryDirectory() as cwd_tmp:
+            project_root = Path(project_tmp)
+            other_cwd = Path(cwd_tmp)
+            env_path = project_root / ".env"
             env_path.write_text(
                 "\n".join(
                     [
@@ -83,15 +83,13 @@ class LLMDetectionTests(unittest.TestCase):
             old_cwd = Path.cwd()
             try:
                 os.chdir(other_cwd)
-                with patch.dict(os.environ, {}, clear=True):
+                with patch("ui.config.PROJECT_ROOT", project_root), patch.dict(
+                    os.environ, {}, clear=True
+                ):
                     config = UIConfig.from_env(detector=lambda candidates: None)
                     sql = SqlServerSkill.from_env()
             finally:
                 os.chdir(old_cwd)
-                if original is None:
-                    env_path.unlink(missing_ok=True)
-                else:
-                    env_path.write_text(original, encoding="utf-8")
 
         self.assertEqual(config.port, 4555)
         self.assertIn("default", sql.profiles)

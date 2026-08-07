@@ -52,6 +52,9 @@ class VoiceTests(unittest.TestCase):
             {
                 "SECONDBRAIN_STT_MODEL": "tiny",
                 "SECONDBRAIN_STT_LANGUAGE": "id",
+                "SECONDBRAIN_STT_BEAM_SIZE": "9",
+                "SECONDBRAIN_STT_INITIAL_PROMPT": "Percakapan dalam bahasa Indonesia.",
+                "SECONDBRAIN_STT_HOTWORDS": "litologi collar assay",
             },
             clear=False,
         ), patch.object(voice, "get_stt_model", return_value=fake_model):
@@ -66,6 +69,26 @@ class VoiceTests(unittest.TestCase):
         self.assertIsNotNone(storage.saved_path)
         self.assertFalse(Path(storage.saved_path).exists())
         self.assertEqual(fake_model.kwargs_seen["vad_filter"], True)
+        self.assertEqual(fake_model.kwargs_seen["language"], "id")
+        self.assertEqual(fake_model.kwargs_seen["beam_size"], 9)
+        self.assertEqual(fake_model.kwargs_seen["temperature"], 0.0)
+        self.assertIn("bahasa Indonesia", fake_model.kwargs_seen["initial_prompt"])
+        self.assertIn("litologi", fake_model.kwargs_seen["hotwords"])
+        self.assertEqual(
+            fake_model.kwargs_seen["vad_parameters"]["min_silence_duration_ms"],
+            500,
+        )
+
+    def test_indonesian_language_alias_and_transcript_spacing(self) -> None:
+        from secondbrain.voice import normalize_language, normalize_transcript
+
+        self.assertEqual(normalize_language("id-ID"), "id")
+        self.assertEqual(normalize_language("Bahasa Indonesia"), "id")
+        self.assertIsNone(normalize_language("auto"))
+        self.assertEqual(
+            normalize_transcript("  halo   dunia  , apa kabar ? "),
+            "halo dunia, apa kabar?",
+        )
 
     def test_voice_endpoint_requires_audio(self) -> None:
         with TemporaryDirectory() as tmp:
@@ -89,6 +112,9 @@ class VoiceTests(unittest.TestCase):
 
         self.assertIn("MediaRecorder", js)
         self.assertIn("/api/voice/transcribe", js)
+        self.assertIn("noiseSuppression: true", js)
+        self.assertIn("echoCancellation: true", js)
+        self.assertIn("audioBitsPerSecond: 128000", js)
         self.assertNotIn("SpeechRecognition", js)
         self.assertNotIn("webkitSpeechRecognition", js)
 

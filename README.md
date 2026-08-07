@@ -121,21 +121,31 @@ Environment:
 
 ```bash
 SECONDBRAIN_STT_ENGINE=faster-whisper
-SECONDBRAIN_STT_MODEL=small
+SECONDBRAIN_STT_MODEL=medium
 SECONDBRAIN_STT_DEVICE=cpu
 SECONDBRAIN_STT_COMPUTE_TYPE=int8
 SECONDBRAIN_STT_LANGUAGE=id
 SECONDBRAIN_STT_MAX_SECONDS=60
+SECONDBRAIN_STT_BEAM_SIZE=8
+SECONDBRAIN_STT_PATIENCE=1.2
 ```
 
 Install/update dependencies with `pip install -r requirements.txt`.
 
 Recommended models:
 
-- CPU biasa: `small` + `int8`
+- Akurasi bahasa Indonesia: `medium` + `int8` (default)
+- CPU biasa atau RAM terbatas: `small` + `int8`
 - CPU lemah: `base` + `int8`
 - GPU NVIDIA: `medium` or `large-v3`
 - Bahasa Indonesia: use multilingual models, not `.en` models
+
+The browser requests mono audio with echo cancellation, noise suppression, and automatic gain
+control. The backend fixes the language to Indonesian by default, preserves short word boundaries
+with tuned VAD, and uses Indonesian/domain hints. Customize vocabulary with
+`SECONDBRAIN_STT_INITIAL_PROMPT` and `SECONDBRAIN_STT_HOTWORDS`; this is useful for names, mining
+terms, table names, and abbreviations that Whisper often mishears. Restart the app after changing
+these settings.
 
 The first transcription may download the selected model into the local model cache if it is not
 already available.

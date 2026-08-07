@@ -301,11 +301,14 @@ export LM_STUDIO_MODEL=your-loaded-model-id</code></pre>
                   </div>
                   <div class="help-card">
                     <h4>STT configuration</h4>
-                    <pre><code>SECONDBRAIN_STT_MODEL=small
+                    <pre><code>SECONDBRAIN_STT_MODEL=medium
 SECONDBRAIN_STT_DEVICE=cpu
 SECONDBRAIN_STT_COMPUTE_TYPE=int8
 SECONDBRAIN_STT_LANGUAGE=id
-SECONDBRAIN_STT_MAX_SECONDS=60</code></pre>
+SECONDBRAIN_STT_MAX_SECONDS=60
+SECONDBRAIN_STT_BEAM_SIZE=8
+SECONDBRAIN_STT_PATIENCE=1.2</code></pre>
+                    <p>Add names and technical terms to <code>SECONDBRAIN_STT_HOTWORDS</code>, then restart the app. Use <code>small</code> instead of <code>medium</code> on lower-memory CPUs.</p>
                   </div>
                 </div>
                 <div class="example-list">

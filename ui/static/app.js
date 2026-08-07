@@ -896,6 +896,21 @@
     return Boolean(navigator.mediaDevices?.getUserMedia && window.MediaRecorder);
   }
 
+  function preferredVoiceMimeType() {
+    const candidates = [
+      "audio/webm;codecs=opus",
+      "audio/ogg;codecs=opus",
+      "audio/mp4",
+    ];
+    return candidates.find((type) => MediaRecorder.isTypeSupported(type)) || "";
+  }
+
+  function voiceFileExtension(mimeType) {
+    if (mimeType.includes("ogg")) return "ogg";
+    if (mimeType.includes("mp4")) return "m4a";
+    return "webm";
+  }
+
   function updateVoiceButtonState() {
     micButton.disabled = busy || isTranscribing || !voiceSupported();
     micButton.classList.toggle("is-recording", isRecording);
@@ -934,9 +949,20 @@
     }
 
     try {
-      voiceStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      voiceStream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          channelCount: { ideal: 1 },
+          sampleRate: { ideal: 48000 },
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+      });
       voiceChunks = [];
-      voiceRecorder = new MediaRecorder(voiceStream);
+      const mimeType = preferredVoiceMimeType();
+      const recorderOptions = { audioBitsPerSecond: 128000 };
+      if (mimeType) recorderOptions.mimeType = mimeType;
+      voiceRecorder = new MediaRecorder(voiceStream, recorderOptions);
       voiceRecorder.ondataavailable = (event) => {
         if (event.data && event.data.size > 0) {
           voiceChunks.push(event.data);
@@ -985,7 +1011,7 @@
         return;
       }
       const formData = new FormData();
-      formData.append("audio", blob, "dictation.webm");
+      formData.append("audio", blob, `dictation.${voiceFileExtension(mimeType)}`);
 
       const response = await fetch("/api/voice/transcribe", {
         method: "POST",

@@ -19,6 +19,7 @@ class LLMEndpoint:
 
 
 LLMDetector = Callable[[list[LLMEndpoint]], LLMEndpoint | None]
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def load_local_env() -> None:
@@ -29,7 +30,7 @@ def load_local_env() -> None:
         return
     candidates = [
         Path.cwd() / ".env",
-        Path(__file__).resolve().parents[1] / ".env",
+        PROJECT_ROOT / ".env",
     ]
     seen: set[Path] = set()
     for candidate in candidates:
